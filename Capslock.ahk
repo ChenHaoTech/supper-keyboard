@@ -102,22 +102,89 @@ CapsLock & q::
 	return
 	
 CapsLock & t::
-	Send,^{c}!{0}^{v}
+	Send,^{c}!0^{v}
+	return
 
 CapsLock & x::
-	Send,^+{c}!{b}^{v}
+	Send,^{c}!b^{v}
+	return
 
+CapsLock & '::
+		Send,^{c}{`"}{`"}{Left}^{v}	
+		
+; window active hot key		
+CapsLock & 1::
+	if WinExist("ahk_exe C:\Program Files\Mozilla Firefox\firefox.exe")
+		IfWinActive
+			WinMinimize
+		else
+			WinActivate , ahk_exe C:\Program Files\Mozilla Firefox\firefox.exe	
+	return
 
+CapsLock & 2::
+	if WinExist("ahk_exe C:\Program Files (x86)\XMind\XMind.exe")
+		IfWinActive
+			WinMinimize
+		else
+			WinActivate , ahk_exe C:\Program Files (x86)\XMind\XMind.exe
+	return
 
+;~ ! & CapsLock & 2::
+	;~ if WinExist("ahk_exe C:\Program Files (x86)\XMind\XMind.exe")
+		;~ IfWinActive
+			;~ WinMinimize
+		;~ else
+			;~ WinActivate , ahk_exe C:\Program Files (x86)\XMind\XMind.exe
+	;~ return
+	
+CapsLock & 4::
+	if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
+		IfWinActive
+			WinMinimize
+		else
+			WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
+	return
+
+CapsLock & 5::
+	if WinExist("ahk_exe C:\Windows\explorer.exe")
+		IfWinActive
+			WinMinimize
+		else
+			WinActivate , ahk_exe C:\Windows\explorer.exe
+	return
+
+;~ CapsLock & 4::
+	;~ if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
+		;~ IfWinActive
+			;~ WinMinimize
+		;~ else
+			;~ WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
+	;~ return
+	
+	
+
+; add perfix $ make tab key can not reverse
+$Tab::
+	if WinExist("ahk_exe C:\Program Files\mindmaster\MindMaster.exe")
+		IfWinActive
+			Send,^{Enter}
+		IfWinNotActive
+			Send,{Tab}
+			return
+	IfWinNotExist ahk_exe C:\Program Files\mindmaster\MindMaster.exe
+		Send,{Tab}
+		return
 	
 	
 	
-	
-	
-	
-	
-	
-	
+;hot string convert
+:*:()::(){left}
+:*:[]::[]{left}
+:*:""::""{left}
+:*:''::''{left}
+:*:<>::<>{left}
+:*:{}::{{}{}}{left}
+:*:````::{``}{``}{left}
 	
 	
 	
