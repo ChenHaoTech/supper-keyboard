@@ -104,7 +104,8 @@ CapsLock & q::
 CapsLock & t::
 	Send,^{c}!{0}^{v}
 
-
+CapsLock & x::
+	Send,^+{c}!{b}^{v}
 
 
 
