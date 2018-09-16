@@ -102,20 +102,6 @@ CapsLock & j::
 CapsLock & l::
 	Send,+{right}
 	return
-
-
-
-CapsLock & {::
-	Send,^{c}{{}{}}{left}^{v}
-	return
-	
-CapsLock & }::
-	Send,^{c}{[}{]}{left}^{v}
-	return
-	
-CapsLock & BackSpace::
-	Send,{End}+{Home}{BackSpace}
-	return
 	
 CapsLock & t::
 	Send,^{c}!0^{v}
@@ -124,11 +110,45 @@ CapsLock & t::
 CapsLock & q::
 	Send,^{c}!b^{v}
 	return
+	
+CapsLock & BackSpace::
+	Send,{End}+{Home}{BackSpace}
+	return
+
+CapsLock & y::
+	Send,{up 5}
+	return
+
+CapsLock & b::
+	Send, {down 5}
+	return
+
+;====================================================| charactor complete |====================================================
+
+CapsLock & {::
+	Send,^{c}{{}{}}{left}^{v}
+	return
+	
+CapsLock & }::
+	Send,^{c}{[}{]}{left}^{v}
+	return
+
 
 CapsLock & '::
 		Send,^{c}{`"}{`"}{Left}^{v}	
+		return
 		
 ;========================================================== window active hot key		===========================================================
+
+CapsLock & -::
+	Send ,^{w}
+	return
+	
+CapsLock & =::
+	Send, ^+{t}
+	return
+
+
 CapsLock & 1::
 	if WinExist("ahk_exe C:\Program Files\Mozilla Firefox\firefox.exe")
 		IfWinActive
@@ -177,13 +197,10 @@ CapsLock & 5::
 			;~ WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
 	;~ return
 	
-;======================================tab===================================
-
-;~ tab & w::
-	;~ Send ^{w}
-	;~ return
 
 
+
+;====================================================| special configulation |====================================================
 ; add perfix $ make tab key can not reverse
 $Tab::
 	if WinExist("ahk_exe C:\Program Files\mindmaster\MindMaster.exe")
@@ -198,6 +215,24 @@ $Tab::
 
 
 
+; in xmind
+$F2::
+	if winExist( "ahk_exe C:\Program Files (x86)\XMind\XMind.exe")
+		ifwinActive
+			Send , {F2}{Right}
+		IfWinNotActive 
+			Send , {F2}
+	IfWinNotExist ahk_exe C:\Program Files (x86)\XMind\XMind.exe
+		Send, {F2}
+	return
+
+;space configuration
+$+Space::
+	Send, {PGUP}
+	return
+CapsLock & Space::
+	Send,{PGDN}
+	return
 
 
 ;============================================================hot string convert===========================================================
@@ -208,8 +243,4 @@ $Tab::
 :*:<>::<>{left}
 :*:{}::{{}{}}{left}
 :*:````::{``}{``}{left}
-:*:===::===========================================================
-	
-	
-	
-	
+:*:===::====================================================|  |===================================================={Left 54}
