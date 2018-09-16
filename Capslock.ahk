@@ -6,6 +6,7 @@
 ;#NoTrayIcon ; 不显示托盘图标
 SetCapsLockState, AlwaysOff ; set caplock key always off
 
+;====================================CapsLock========================================
 CapsLock::
   	send , {Esc}
   	return
@@ -86,26 +87,22 @@ CapsLock & Space::
 	return
 
 CapsLock & {::
-	Send,{{}{}}{left}
+	Send,^{c}{{}{}}{left}^{v}
 	return
 	
 CapsLock & }::
-	Send,{[}{]}{left}
+	Send,^{c}{[}{]}{left}^{v}
 	return
 	
 CapsLock & BackSpace::
 	Send,{End}+{Home}{BackSpace}
-	return
-
-CapsLock & q::
-	Send,!{b}
 	return
 	
 CapsLock & t::
 	Send,^{c}!0^{v}
 	return
 
-CapsLock & x::
+CapsLock & q::
 	Send,^{c}!b^{v}
 	return
 
@@ -129,7 +126,7 @@ CapsLock & 2::
 			WinActivate , ahk_exe C:\Program Files (x86)\XMind\XMind.exe
 	return
 
-;~ ! & CapsLock & 2::
+;~ ! & CapsLock & 3::
 	;~ if WinExist("ahk_exe C:\Program Files (x86)\XMind\XMind.exe")
 		;~ IfWinActive
 			;~ WinMinimize
@@ -161,7 +158,12 @@ CapsLock & 5::
 			;~ WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
 	;~ return
 	
-	
+;======================================tab===================================
+
+;~ tab & w::
+	;~ Send ^{w}
+	;~ return
+
 
 ; add perfix $ make tab key can not reverse
 $Tab::
@@ -174,9 +176,29 @@ $Tab::
 	IfWinNotExist ahk_exe C:\Program Files\mindmaster\MindMaster.exe
 		Send,{Tab}
 		return
-	
-	
-	
+;===================================space=====================================
+~S pace & c::
+	Send ,^{c}
+	return
+
+~Space & v::
+	Send ,^{v}
+	return
+	 
+~Space & w::
+	Send, ^{w}
+	return
+~Space & l::
+	Send, ^{l}
+	return
+
+~Space & s::
+	Send, ^{s}
+	return
+
+~Space & e::
+	Send, ^{e}
+
 ;hot string convert
 :*:()::(){left}
 :*:[]::[]{left}
