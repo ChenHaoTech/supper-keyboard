@@ -1,7 +1,6 @@
 ; reference link : https://www.zhihu.com/question/19645501/answer/39906404
 ; make caplock convert esc to fit vi editor
-
-
+SendMode Input
 #SingleInstance force ;强制单进程
 ;#NoTrayIcon ; 不显示托盘图标
 SetCapsLockState, AlwaysOff ; set caplock key always off
@@ -70,9 +69,6 @@ CapsLock & o::
 	Send,+{end}
 	return
 	
-CapsLock & z::
-	Send, !{z}
-	return
 	
 CapsLock & i::
 	Send, +{up}
@@ -82,9 +78,32 @@ CapsLock & k::
 	Send, +{down}
 	return
 	
-CapsLock & Space::
-	Send,{enter}
+CapsLock & z::
+	Send, ^{z}
 	return
+
+CapsLock & c::
+	Send ^{c}
+	return
+	
+		
+CapsLock & v::
+	Send ^{v}
+	return
+
+CapsLock & x::
+	send,^{x}
+	return
+
+CapsLock & j::
+	Send ,+{left}
+	return
+
+CapsLock & l::
+	Send,+{right}
+	return
+
+
 
 CapsLock & {::
 	Send,^{c}{{}{}}{left}^{v}
@@ -109,7 +128,7 @@ CapsLock & q::
 CapsLock & '::
 		Send,^{c}{`"}{`"}{Left}^{v}	
 		
-; window active hot key		
+;========================================================== window active hot key		===========================================================
 CapsLock & 1::
 	if WinExist("ahk_exe C:\Program Files\Mozilla Firefox\firefox.exe")
 		IfWinActive
@@ -176,30 +195,12 @@ $Tab::
 	IfWinNotExist ahk_exe C:\Program Files\mindmaster\MindMaster.exe
 		Send,{Tab}
 		return
-;===================================space=====================================
-~S pace & c::
-	Send ,^{c}
-	return
 
-~Space & v::
-	Send ,^{v}
-	return
-	 
-~Space & w::
-	Send, ^{w}
-	return
-~Space & l::
-	Send, ^{l}
-	return
 
-~Space & s::
-	Send, ^{s}
-	return
 
-~Space & e::
-	Send, ^{e}
 
-;hot string convert
+
+;============================================================hot string convert===========================================================
 :*:()::(){left}
 :*:[]::[]{left}
 :*:""::""{left}
@@ -207,7 +208,7 @@ $Tab::
 :*:<>::<>{left}
 :*:{}::{{}{}}{left}
 :*:````::{``}{``}{left}
-	
+:*:===::===========================================================
 	
 	
 	
