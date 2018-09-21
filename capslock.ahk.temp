@@ -119,34 +119,28 @@ CapsLock & BackSpace::
 		;~ IfWinActive
 			;~ Send, ^{k}
 			;~ return
-	;~ todo:
-		;~ WinExist get uniqueId
-		;~ what is wintitle
-		;~ what id wintext
-		;~ ensure cmder_id or cmder_other_id
-			;~ on cmder.linux_class_shell ctrl+k
-			;~ on powershell the original is ok
-	;~ study method:
-		;~ # use qq group chat
-		;~ # use tieba post problem
-		;~ # just read help file
-	;~ Process,Exist,C:\Program Files\cmder\vendor\conemu-maximus5\ConEmu\wsl\wslbridge.exe
-	;~ MsgBox ErrorLevel%ErrorLevel%
-	;~ if (%ErrorLevel% = 0){
-		;~ IfWinActive ahk_pid %ErrorLevel%
-			;~ Send, ^{k}
-			;~ return
-		;~ IfWinNotActive ahk_pid %ErrorLevel%
-			;~ MsgBox ajdh
-		;~ return
-	;~ }	
+	todo:
+		WinExist get uniqueId
+		what is wintitle
+		what id wintext
+		ensure cmder_id or cmder_other_id
+			on cmder.linux_class_shell ctrl+k
+			on powershell the original is ok
+	study method:
+		# use qq group chat
+		# use tieba post problem
+		# just read help file
+	Process,Exist,C:\Program Files\cmder\vendor\conemu-maximus5\ConEmu\wsl\wslbridge.exe
+	MsgBox ErrorLevel%ErrorLevel%
+	if (%ErrorLevel% = 0){
+		IfWinActive ahk_pid %ErrorLevel%
+			Send, ^{k}
+			return
+		IfWinNotActive ahk_pid %ErrorLevel%
+			MsgBox ajdh
+		return
+	}	
 	Send,{End}+{Home}{BackSpace}
-	;send,{Home}^{k}
-	return
-CapsLock & `::
-	Send, ^{c}!{space}^{v}{enter}
-	return
-
 CapsLock & y::
 	Send,{up 5}
 	return
@@ -190,11 +184,11 @@ CapsLock & 1::
 	return
 
 CapsLock & 2::
-	if WinExist("ahk_exe C:\Program Files\mindmaster\MindMaster.exe")
+	if WinExist("ahk_exe C:\Program Files (x86)\XMind\XMind.exe")
 		IfWinActive
 			WinMinimize
 		else
-			WinActivate , ahk_exe C:\Program Files\mindmaster\MindMaster.exe
+			WinActivate , ahk_exe C:\Program Files (x86)\XMind\XMind.exe
 	return
 
 ;~ ! & CapsLock & 3::
@@ -264,17 +258,10 @@ $+Space::
 	return
 CapsLock & Space::
 	Send,{PGDN}
-	return	
-	
-	
-CapsLock & m::
-	Send,+^!{a}
 	return
 
-CapsLock & \::
-	Send , +^!{o}
-	return
-;============================================================hot string convert===========================================MMM================
+
+;============================================================hot string convert===========================================================
 :*:()::(){left}
 :*:[]::[]{left}
 :*:""::""{left}
@@ -283,60 +270,3 @@ CapsLock & \::
 :*:{}::{{}{}}{left}
 :*:````::{``}{``}{left}
 :*:===::====================================================|  |===================================================={Left 54}
-
-
-;====================================================| stop script |====================================================
-CapsLock & F1::
-	Suspend
-	;Pause 
-	return
-	
-	
-	
-	
-		
-;====================================================| number convert special charactor|====================================================
-NumLock & u::
-	send,{1}
-	return
-NumLock & i::
-	send,{2}
-	return
-NumLock & o::
-	send,{3}
-	return
-NumLock & j::
-	send,{4}
-	return
-NumLock & k::
-	send,{5}
-	return
-NumLock & l::
-	send,{6}
-	return
-NumLock & n::
-	send,{7}
-	return
-NumLock & m::
-	send,{8}
-	return
-NumLock & ,::
-	send,{9}
-	return
-NumLock & Space::
-	send,{0}
-	return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
