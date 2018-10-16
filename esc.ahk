@@ -1,122 +1,120 @@
-
 ; reference link : https://www.zhihu.com/question/19645501/answer/39906404
 ; make caplock convert esc to fit vi editor
 SendMode Input
 #SingleInstance force ;强制单进程
 ;#NoTrayIcon ; 不显示托盘图标
-SetCapsLockState, AlwaysOff ; set caplock key always off
 
-;====================================CapsLock========================================
-CapsLock::
+;====================================esc========================================
+esc::
   	send , {Esc}
   	return
 
-CapsLock & e::
+esc & e::
 	Send , {up}
 	return
 	
-CapsLock & d::
+esc & d::
 	Send , {Down}
 	return 
 	
-CapsLock & s::
+esc & s::
 	Send , {Left}
 	return
 
-CapsLock & f::
+esc & f::
 	Send , {right}
 	return
 	
-CapsLock & h::
+esc & h::
 	Send,^+{Left}
 	return
 
-CapsLock & n::
+esc & n::
 	Send,^+{Right}
 	return
 	
-CapsLock & p::
+esc & p::
 	Send,{Home}
 	return
 
-CapsLock & `;::
+esc & `;::
 	Send,{End}
 	return
 
-CapsLock & a::
+esc & a::
 	Send, ^{left}
 	return
 	
-CapsLock & g::
+esc & g::
 	Send, ^{right}
 	return
 
-CapsLock & w::
+esc & w::
 	Send, {Backspace}
 	return
 	
-CapsLock & r::
+esc & r::
 	Send, {delete}
 	return
 
-CapsLock & Enter::
+esc & Enter::
 	Send,{end}{enter}
 
-CapsLock & u::
+esc & u::
 	Send,+{home}
 	return
 
-CapsLock & o::
+esc & o::
 	Send,+{end}
 	return
 	
 	
-CapsLock & i::
+esc & i::
 	Send, +{up}
 	return
 
-CapsLock & k::
+esc & k::
 	Send, +{down}
 	return
 	
-CapsLock & z::
+esc & z::
 	Send, ^{z}
 	return
 
-CapsLock & c::
+esc & c::
 	Send ^{c}
 	return
 	
 		
-CapsLock & v::
+esc & v::
 	Send ^{v}
 	return
 
-CapsLock & x::
+esc & x::
 	send,^{x}
 	return
 
-CapsLock & j::
+esc & j::
 	Send ,+{left}
 	return
 
-CapsLock & l::
+esc & l::
 	Send,+{right}
 	return
 	
-CapsLock & t::
+esc & t::
 	Send,^{c}!{0}
 	Sleep,1
 	send, ^{a}{BackSpace}^{v}
 	return
 
-CapsLock & q::
+esc & q::
 	Send,^{c}
 	Sleep, 1
 	Send,!g^{v}
 	return
 	
-CapsLock & BackSpace::
+esc & BackSpace::
 	;~ SetTitleMatchMode, 2
 	;~ WinGet, id, List, shell
 	;~ IfWinActive, ahk_id %id%
@@ -148,45 +146,45 @@ CapsLock & BackSpace::
 	Send,{End}+{Home}{BackSpace}
 	;send,{Home}^{k}
 	return
-CapsLock & `::
+esc & `::
 	Send, ^{c}!{space}^{v}{enter}
 	return
 
-CapsLock & y::
+esc & y::
 	Send,{up 5}
 	return
 
-CapsLock & b::
+esc & b::
 	Send, {down 5}
 	return
 
 ;====================================================| charactor complete |====================================================
 
-CapsLock & {::
+esc & {::
 	Send,^{c}{{}{}}{left}^{v}
 	return
 	
-CapsLock & }::
+esc & }::
 	Send,^{c}{[}{]}{left}^{v}
 	return
 
 
-CapsLock & '::
+esc & '::
 		Send,^{c}{`"}{`"}{Left}^{v}	
 		return
 		
 ;========================================================== window active hot key		===========================================================
 
-CapsLock & -::
+esc & -::
 	Send ,^+{Tab}
 	return
 	
-CapsLock & =::
+esc & =::
 	Send, ^{Tab}
 	return
 
 
-CapsLock & 1::
+esc & 1::
 	if WinExist("ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 		IfWinActive
 			WinMinimize
@@ -196,7 +194,7 @@ CapsLock & 1::
 		run ,C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
 	return
 
-CapsLock & 2::
+esc & 2::
 	if WinExist("ahk_exe C:\Program Files\mindmaster\MindMaster.exe")
 		IfWinActive
 			WinMinimize
@@ -204,7 +202,7 @@ CapsLock & 2::
 			WinActivate , ahk_exe C:\Program Files\mindmaster\MindMaster.exe
 	return
 
-CapsLock & 3::
+esc & 3::
 	if WinExist("ahk_exe C:\Users\26306\AppData\Local\atom\atom.exe")
 		IfWinActive
 			WinMinimize
@@ -212,7 +210,7 @@ CapsLock & 3::
 			WinActivate , ahk_exe C:\Users\26306\AppData\Local\atom\atom.exe
 	return
 	
-CapsLock & 4::
+esc & 4::
 	if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
 		IfWinActive
 			WinMinimize
@@ -220,7 +218,7 @@ CapsLock & 4::
 			WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
 	return
 
-CapsLock & 5::
+esc & 5::
 	if WinExist("ahk_exe C:\Windows\explorer.exe")
 		IfWinActive
 			WinMinimize
@@ -228,7 +226,7 @@ CapsLock & 5::
 			WinActivate , ahk_exe C:\Windows\explorer.exe
 	return
 
-;~ CapsLock & 4::
+;~ esc & 4::
 	;~ if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
 		;~ IfWinActive
 			;~ WinMinimize
@@ -265,20 +263,15 @@ $F2::
 		Send, {F2}
 	return
 
-;space configuration
-$+Space::
-	Send, {PGUP}
+esc & Space::
+	Send,{Enter}
 	return
-CapsLock & Space::
-	Send,{PGDN}
-	return	
-	
-	
-CapsLock & m::
+
+esc & m::
 	Send,+^!{a}
 	return
 
-CapsLock & \::
+esc & \::
 	Send , +^!{o}
 	return
 ;============================================================hot string convert===========================================MMM================
@@ -291,50 +284,14 @@ CapsLock & \::
 :*:3#::{#}{#}{#}
 :*:4#::{#}{#}{#}{#}
 :*:5#::{#}{#}{#}{#}{#}
-:*:es_help::-highlight -w -path-column -name
 ::===::====================================================| |===================================================={Left 54}
+::cs::47.93.246.76
+::ex::exit
 
-;====================================================| stop script |====================================================
-CapsLock & F1::
+Esc & f1::
 	Suspend
-	;Pause 
 	return
-	
-	
-	
-	
-		
-;====================================================| number convert special charactor|====================================================
-NumLock & u::
-	send,{1}
-	return
-NumLock & i::
-	send,{2}
-	return
-NumLock & o::
-	send,{3}
-	return
-NumLock & j::
-	send,{4}
-	return
-NumLock & k::
-	send,{5}
-	return
-NumLock & l::
-	send,{6}
-	return
-NumLock & n::
-	send,{7}
-	return
-NumLock & m::
-	send,{8}
-	return
-NumLock & ,::
-	send,{9}
-	return
-NumLock & Space::
-	send,{0}
-	return
+
 
 
 
