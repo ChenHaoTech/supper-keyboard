@@ -4,177 +4,14 @@ SendMode Input
 #SingleInstance force ;强制单进程
 ;#NoTrayIcon ; 不显示托盘图标
 
-;====================================esc========================================
-esc::
-  	send , {Esc}
-  	return
 
-esc & e::
-	Send , {up}
-	return
-	
-esc & d::
-	Send , {Down}
-	return 
-	
-esc & s::
-	Send , {Left}
-	return
-
-esc & f::
-	Send , {right}
-	return
-	
-esc & h::
-	Send,^+{Left}
-	return
-
-esc & n::
-	Send,^+{Right}
-	return
-	
-esc & p::
-	Send,{Home}
-	return
-
-esc & `;::
-	Send,{End}
-	return
-
-esc & a::
-	Send, ^{left}
-	return
-	
-esc & g::
-	Send, ^{right}
-	return
-
-esc & w::
-	Send, {Backspace}
-	return
-	
-esc & r::
-	Send, {delete}
-	return
-
-esc & Enter::
-	Send,{end}{enter}
-
-esc & u::
-	Send,+{home}
-	return
-
-esc & o::
-	Send,+{end}
-	return
-	
-	
-esc & i::
-	Send, +{up}
-	return
-
-esc & k::
-	Send, +{down}
-	return
-	
-esc & z::
-	Send, ^{z}
-	return
-
-esc & c::
-	Send ^{c}
-	return
-	
-		
-esc & v::
-	Send ^{v}
-	return
-
-esc & x::
-	send,^{x}
-	return
-
-esc & j::
-	Send ,+{left}
-	return
-
-esc & l::
-	Send,+{right}
-	return
-	
-esc & t::
-	Send,^{c}!{0}
-	Sleep,1
-	send, ^{a}{BackSpace}^{v}
-	return
-
-esc & q::
-	Send,^{c}
-	Sleep, 1
-	Send,!g^{v}
-	return
-	
-esc & BackSpace::
-	;~ SetTitleMatchMode, 2
-	;~ WinGet, id, List, shell
-	;~ IfWinActive, ahk_id %id%
-		;~ MsgBox sajfhjds
-		;~ IfWinActive
-			;~ Send, ^{k}
-			;~ return
-	;~ todo:
-		;~ WinExist get uniqueId
-		;~ what is wintitle
-		;~ what id wintext
-		;~ ensure cmder_id or cmder_other_id
-			;~ on cmder.linux_class_shell ctrl+k
-			;~ on powershell the original is ok
-	;~ study method:
-		;~ # use qq group chat
-		;~ # use tieba post problem
-		;~ # just read help file
-	;~ Process,Exist,C:\Program Files\cmder\vendor\conemu-maximus5\ConEmu\wsl\wslbridge.exe
-	;~ MsgBox ErrorLevel%ErrorLevel%
-	;~ if (%ErrorLevel% = 0){
-		;~ IfWinActive ahk_pid %ErrorLevel%
-			;~ Send, ^{k}
-			;~ return
-		;~ IfWinNotActive ahk_pid %ErrorLevel%
-			;~ MsgBox ajdh
-		;~ return
-	;~ }	
-	Send,{End}+{Home}{BackSpace}
-	;send,{Home}^{k}
+;====================================================| run-mark  |====================================================
+esc & 0::
+	Run https://mp.csdn.net/mdeditor
 	return
 esc & `::
-	Send, ^{c}!{space}^{v}{enter}
+	Run C:\Program Files\AutoHotkey\Script\autohotkey_study\esc.ahk
 	return
-
-esc & y::
-	Send,{up 5}
-	return
-
-esc & b::
-	Send, {down 5}
-	return
-
-;====================================================| charactor complete |====================================================
-
-esc & {::
-	Send,^{c}{{}{}}{left}^{v}
-	return
-	
-esc & }::
-	Send,^{c}{[}{]}{left}^{v}
-	return
-
-
-esc & '::
-		Send,^{c}{`"}{`"}{Left}^{v}	
-		return
-		
-;========================================================== window active hot key		===========================================================
-
 esc & -::
 	Send ,^+{Tab}
 	return
@@ -225,6 +62,148 @@ esc & 5::
 		else
 			WinActivate , ahk_exe C:\Windows\explorer.exe
 	return
+;====================================| esc_move-mark |========================================
+esc::
+  	send , {Esc}
+  	return
+
+esc & e::
+	Send , {up}
+	return
+	
+esc & d::
+	Send , {Down}
+	return 
+	
+esc & s::
+	Send , {Left}
+	return
+
+esc & f::
+	Send , {right}
+	return
+	
+esc & h::
+	Send,{Left}
+	return
+	
+esc & j::
+	Send ,{Down}
+	return
+
+esc & l::
+	Send,{right}
+	return
+
+esc & k::
+	Send, {up}
+	return
+	
+esc & n::
+	Send,^+{Right}
+	return
+	
+esc & p::
+	Send,{Home}
+	return
+
+esc & `;::
+	Send,{End}
+	return
+
+esc & a::
+	Send, ^{left}
+	return
+	
+esc & g::
+	Send, ^{right}
+	return
+
+esc & w::
+	Send, {Backspace}
+	return
+	
+esc & r::
+	Send, {delete}
+	return
+
+esc & Enter::
+	Send,{end}{enter}
+
+esc & u::
+	Send,+{home}
+	return
+
+esc & o::
+	Send,+{end}
+	return
+	
+	
+esc & i::
+	Send, +{up}
+	return
+
+	
+esc & z::
+	Send, ^{z}
+	return
+
+esc & c::
+	Send ^{c}
+	return
+	
+
+esc & v::
+	
+	return
+
+esc & x::
+	send,^{x}
+	return
+
+
+	
+esc & t::
+	Send,^{c}!{0}
+	Sleep,1
+	send, ^{a}{BackSpace}^{v}
+	return
+
+esc & q::
+	Send,^{c}
+	Sleep, 1
+	Send,!g^{v}
+	return
+	
+esc & BackSpace::
+	Send,{End}+{Home}{BackSpace}
+	return
+
+
+esc & y::
+	Send,{up 5}
+	return
+
+esc & b::
+	Send, {down 5}
+	return
+
+;====================================================| charactor complete |====================================================
+
+esc & {::
+	Send,^{c}{{}{}}{left}^{v}
+	return
+	
+esc & }::
+	Send,^{c}{[}{]}{left}^{v}
+	return
+
+
+esc & '::
+		Send,^{c}{`"}{`"}{Left}^{v}	
+		return
+		
+
 
 ;~ esc & 4::
 	;~ if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
@@ -274,6 +253,11 @@ esc & m::
 esc & \::
 	Send , +^!{o}
 	return
+$!f1::
+	Send, !{f1}
+	;MsgBox hello
+	Send,{esc}
+	return
 ;============================================================hot string convert===========================================MMM================
 :*:()::(){left}
 :*:[]::[]{left}
@@ -284,7 +268,7 @@ esc & \::
 :*:3#::{#}{#}{#}
 :*:4#::{#}{#}{#}{#}
 :*:5#::{#}{#}{#}{#}{#}
-::===::====================================================| |===================================================={Left 54}
+::===::==================================| |========================================{Left 43}
 ::cs::47.93.246.76
 ::ex::exit
 
