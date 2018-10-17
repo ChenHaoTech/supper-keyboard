@@ -12,6 +12,8 @@ esc & 0::
 esc & `::
 	Run C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk\esc_vim.ahk
 	return
+	
+;==================================| win tab|========================================
 esc & -::
 	Send ,^+{Tab}
 	return
@@ -20,7 +22,7 @@ esc & =::
 	Send, ^{Tab}
 	return
 
-
+;==================================| run specially |========================================
 esc & 1::
 	if WinExist("ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 		IfWinActive
@@ -62,22 +64,25 @@ esc & 5::
 		else
 			WinActivate , ahk_exe C:\Windows\explorer.exe
 	return
-	
-esc::
-  	send , {Esc}
-  	return
+
 	
 	
 
 ;==================================| shift mode |========================================
-
 shift_mode := 1 ; initinate true
 
+esc::
+  	send , {Esc}
+	Shift_mode := 1
+	Send, {shift up}
+  	return
+	
 esc & v::
 	if Shift_mode
 	{
 		Send , {Shift Down}
 		Shift_mode := 0
+		return
 	}
 	else
 	{
@@ -85,25 +90,55 @@ esc & v::
 		Shift_mode := 1
 		return
 	}
+
+esc & c::
+{
+	Send, {End}
+	Send, +{home}
+	Send, ^{c}
+	Sleep , 200
+	Send, {left}
+	return
+}
+esc & x::
+{
+	Send, {End}
+	Send, +{home}
+	Sleep , 200
+	Send, ^{x}
+	return
+}
+;~ if Shift_mode
+;~ {
+	;~ v::
+		;~ Send, {shift up}
+		;~ Send , {end}
+		;~ Send , {Shift Down}
+		;~ Send, {home}
+		;~ return
+	
+;~ }
+
 	
 	
 	
 ;================================== |words skip |========================================	
-esc & `;::
+esc & o::
 	Send , ^{Right}
 	return 
 	
-esc & g::
+esc & u::
 	Send , ^{Left}
 	return
 
 ;==================================| home end |========================================
-esc & a::
+esc & `;::
 	Send, {End}
 	return
 
-esc & i::
+esc & p::
 	Send, {home}
+	return
 
 	
 ;================================== | hjkl |========================================
@@ -127,29 +162,11 @@ esc & k::
 esc & Enter::
 	Send,{end}{enter}
 
-esc & u::
-	Send,+{home}
-	return
-
-esc & o::
-	Send,+{end}
-	return
-
-
-	
-esc & z::
-	Send, ^{z}
-	return
-
-esc & x::
-	send,{delete}
-	return
-
 
 	
 esc & t::
 	Send,^{c}!{0}
-	Sleep,1
+	Sleep,1	
 	send, ^{a}{BackSpace}^{v}
 	return
 
@@ -162,7 +179,6 @@ esc & q::
 esc & BackSpace::
 	Send,{End}+{Home}{BackSpace}
 	return
-
 
 ;==================================| five skip |========================================
 esc & y::
@@ -217,30 +233,100 @@ $F2::
 		Send, {F2}
 	return
 
-esc & Space::
-	Send,{Enter}
-	return
-
+;==================================| dida |========================================
 esc & m::
-	Send,+^!{a}
+	Send,+^!{i}
 	return
 
 esc & \::
-	Send , +^!{o}
+	Send , +^!{p}
+	return
+	
+space & M::
+	Send ^!+{o}
 	return
 	
 	
 	
+;================================== | space |========================================
+$Space::
+	Send,{space}
+	return
+
+$^Space::
+	Send,^{space}
+	return
+
+$!Space::
+	Send,!{space}
+	return
+
+esc & Space::
+	Send, {down 17}
+	Send, {up 17}
+	return	
+	
+	
+Space & BackSpace::
+	Send,{delete}
+	return
+
+;================================== | hjkl |========================================
+space & h::
+	Send,+{Left}
+	return
+	
+space & j::
+	Send ,+{Down}
+	return
+
+space & l::
+	Send,+{right}
+	return
+
+space & k::
+	Send, +{up}
+	return
+;==================================| word skips shift|========================================
+
+space & o::
+	Send , +^{Right}
+	return 
+
+space & u::
+	Send , +^{Left}
+	return
+	
+;==================================| top end |========================================
+Space & y::
+	Send,^{Home}
+	return
+	
+Space & b::
+	Send,^{end}
+	return
+	
+
+
+space & `;::
+	Send, +{End}
+	return
+
+space & p::
+	Send, +{home}
+	return
+
+
 ;============================================================hot string convert===========================================MMM================
 :*:()::(){left}
 :*:[]::[]{left}
 :*:""::""{left}
 :*:''::''{left}
 :*:<>::<>{left}
-:*:{}::{{}{}}{left}
-:*:3#::{#}{#}{#}
-:*:4#::{#}{#}{#}{#}
-:*:5#::{#}{#}{#}{#}{#}
+:*:{}::{{}{}}{left}{enter 2}{up}{tab}
+:*:3#::{#}{#}{#}{space}
+:*:4#::{#}{#}{#}{#}{space}
+:*:5#::{#}{#}{#}{#}{#}{space}
 ::===::==================================| |========================================{Left 42}
 ::cs::47.93.246.76
 ::ex::exit
@@ -248,13 +334,3 @@ esc & \::
 Esc & f1::
 	Suspend
 	return
-
-
-
-
-
-
-
-
-
-
