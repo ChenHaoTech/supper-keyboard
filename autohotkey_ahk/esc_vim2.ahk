@@ -62,49 +62,30 @@ esc & 5::
 		else
 			WinActivate , ahk_exe C:\Windows\explorer.exe
 	return
-	
+;====================================| esc_move-mark |========================================
 esc::
   	send , {Esc}
   	return
-	
-	
 
-;==================================| shift mode |========================================
-
-shift_mode := 1 ; initinate true
-
-esc & v::
-	if Shift_mode
-	{
-		Send , {Shift Down}
-		Shift_mode := 0
-	}
-	else
-	{
-		Send, {shift up}
-		Shift_mode := 1
-		return
-	}
-	
-	
-	
-;================================== |words skip |========================================	
-esc & `;::
-	Send , ^{Right}
+esc & e::
+	Send , {up}
+	return
+;================================== |asdf |========================================	
+esc & d::
+	Send , +{Down}
 	return 
 	
-esc & g::
-	Send , ^{Left}
+esc & s::
+	Send , +{Left}
 	return
 
-;==================================| home end |========================================
 esc & a::
-	Send, {End}
+	Send, ^+{left}
 	return
-
-esc & i::
-	Send, {home}
-
+	
+esc & f::
+	Send , +{right}
+	return
 	
 ;================================== | hjkl |========================================
 esc & h::
@@ -122,7 +103,30 @@ esc & l::
 esc & k::
 	Send, {up}
 	return
+	
+esc & n::
+	Send,^+{Right}
+	return
+	
+esc & p::
+	Send,{Home}
+	return
 
+esc & `;::
+	Send,{End}
+	return
+	
+esc & g::
+	Send, ^{right}
+	return
+
+esc & w::
+	Send, {Backspace}
+	return
+	
+esc & r::
+	Send, {delete}
+	return
 
 esc & Enter::
 	Send,{end}{enter}
@@ -134,11 +138,24 @@ esc & u::
 esc & o::
 	Send,+{end}
 	return
-
+	
+	
+esc & i::
+	Send, +{up}
+	return
 
 	
 esc & z::
 	Send, ^{z}
+	return
+
+esc & c::
+	Send ^{c}
+	return
+	
+
+esc & v::
+	
 	return
 
 esc & x::
@@ -164,7 +181,6 @@ esc & BackSpace::
 	return
 
 
-;==================================| five skip |========================================
 esc & y::
 	Send,{up 5}
 	return
@@ -187,6 +203,16 @@ esc & }::
 esc & '::
 		Send,^{c}{`"}{`"}{Left}^{v}	
 		return
+		
+
+
+;~ esc & 4::
+	;~ if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
+		;~ IfWinActive
+			;~ WinMinimize
+		;~ else
+			;~ WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
+	;~ return
 	
 
 
@@ -228,9 +254,6 @@ esc & m::
 esc & \::
 	Send , +^!{o}
 	return
-	
-	
-	
 ;============================================================hot string convert===========================================MMM================
 :*:()::(){left}
 :*:[]::[]{left}
@@ -241,7 +264,7 @@ esc & \::
 :*:3#::{#}{#}{#}
 :*:4#::{#}{#}{#}{#}
 :*:5#::{#}{#}{#}{#}{#}
-::===::==================================| |========================================{Left 42}
+::===::==================================| |========================================{Left 41}
 ::cs::47.93.246.76
 ::ex::exit
 

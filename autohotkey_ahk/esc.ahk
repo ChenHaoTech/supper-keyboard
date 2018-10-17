@@ -1,4 +1,4 @@
-; reference link : https://www.zhihu.com/question/19645501/answer/39906404
+	\22; reference link : https://www.zhihu.com/question/19645501/answer/39906404
 ; make caplock convert esc to fit vi editor
 SendMode Input
 #SingleInstance force ;强制单进程
@@ -10,7 +10,7 @@ esc & 0::
 	Run https://mp.csdn.net/mdeditor
 	return
 esc & `::
-	Run C:\Program Files\AutoHotkey\Script\autohotkey_study\esc.ahk
+	Run C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk\esc.ahk
 	return
 esc & -::
 	Send ,^+{Tab}
@@ -84,19 +84,19 @@ esc & f::
 	return
 	
 esc & h::
-	Send,{Left}
+	Send,+{Left}
 	return
 	
 esc & j::
-	Send ,{Down}
+	Send ,+{Down}
 	return
 
 esc & l::
-	Send,{right}
+	Send,+{right}
 	return
 
 esc & k::
-	Send, {up}
+	Send, +{up}
 	return
 	
 esc & n::
@@ -252,11 +252,6 @@ esc & m::
 
 esc & \::
 	Send , +^!{o}
-	return
-$!f1::
-	Send, !{f1}
-	;MsgBox hello
-	Send,{esc}
 	return
 ;============================================================hot string convert===========================================MMM================
 :*:()::(){left}
