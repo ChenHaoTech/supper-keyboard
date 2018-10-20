@@ -1,192 +1,51 @@
-
 ; reference link : https://www.zhihu.com/question/19645501/answer/39906404
-; make caplock convert esc to fit vi editor
+; make caplock convert capslock to fit vi editor
 SendMode Input
 #SingleInstance force ;强制单进程
 ;#NoTrayIcon ; 不显示托盘图标
-SetCapsLockState, AlwaysOff ; set caplock key always off
 
-;====================================CapsLock========================================
-CapsLock::
-  	send , {Esc}
-  	return
-
-CapsLock & e::
-	Send , {up}
+;==================================|wheel Down |========================================
+capslock & Space::
+	Send, {WheelDown 6}
 	return
-	
-CapsLock & d::
-	Send , {Down}
+
+;==================================| caplock mode|========================================
+CapsLock_MODE := 0
+#capslock::
+	if CAPSLOCK_MODE = 0
+	{
+		SetCapsLockState,on 
+		CapsLock_MODE := 1
+		return 
+	}
+	else
+	{
+		SetCapsLockState,Off
+		CapsLock_MODE := 0
+		return
+	}
 	return 
 	
-CapsLock & s::
-	Send , {Left}
-	return
 
-CapsLock & f::
-	Send , {right}
+;====================================================| run-mark  |====================================================
+capslock & 0::
+	Run https://mp.csdn.net/mdeditor
+	return
+capslock & `::
+	Run C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk\capslock.ahk
 	return
 	
-CapsLock & h::
-	Send,^+{Left}
-	return
-
-CapsLock & n::
-	Send,^+{Right}
-	return
-	
-CapsLock & p::
-	Send,{Home}
-	return
-
-CapsLock & `;::
-	Send,{End}
-	return
-
-CapsLock & a::
-	Send, ^{left}
-	return
-	
-CapsLock & g::
-	Send, ^{right}
-	return
-
-CapsLock & w::
-	Send, {Backspace}
-	return
-	
-CapsLock & r::
-	Send, {delete}
-	return
-
-CapsLock & Enter::
-	Send,{end}{enter}
-
-CapsLock & u::
-	Send,+{home}
-	return
-
-CapsLock & o::
-	Send,+{end}
-	return
-	
-	
-CapsLock & i::
-	Send, +{up}
-	return
-
-CapsLock & k::
-	Send, +{down}
-	return
-	
-CapsLock & z::
-	Send, ^{z}
-	return
-
-CapsLock & c::
-	Send ^{c}
-	return
-	
-		
-CapsLock & v::
-	Send ^{v}
-	return
-
-CapsLock & x::
-	send,^{x}
-	return
-
-CapsLock & j::
-	Send ,+{left}
-	return
-
-CapsLock & l::
-	Send,+{right}
-	return
-	
-CapsLock & t::
-	Send,^{c}!{0}
-	Sleep,1
-	send, ^{a}{BackSpace}^{v}
-	return
-
-CapsLock & q::
-	Send,^{c}
-	Sleep, 1
-	Send,!g^{v}
-	return
-	
-CapsLock & BackSpace::
-	;~ SetTitleMatchMode, 2
-	;~ WinGet, id, List, shell
-	;~ IfWinActive, ahk_id %id%
-		;~ MsgBox sajfhjds
-		;~ IfWinActive
-			;~ Send, ^{k}
-			;~ return
-	;~ todo:
-		;~ WinExist get uniqueId
-		;~ what is wintitle
-		;~ what id wintext
-		;~ ensure cmder_id or cmder_other_id
-			;~ on cmder.linux_class_shell ctrl+k
-			;~ on powershell the original is ok
-	;~ study method:
-		;~ # use qq group chat
-		;~ # use tieba post problem
-		;~ # just read help file
-	;~ Process,Exist,C:\Program Files\cmder\vendor\conemu-maximus5\ConEmu\wsl\wslbridge.exe
-	;~ MsgBox ErrorLevel%ErrorLevel%
-	;~ if (%ErrorLevel% = 0){
-		;~ IfWinActive ahk_pid %ErrorLevel%
-			;~ Send, ^{k}
-			;~ return
-		;~ IfWinNotActive ahk_pid %ErrorLevel%
-			;~ MsgBox ajdh
-		;~ return
-	;~ }	
-	Send,{End}+{Home}{BackSpace}
-	;send,{Home}^{k}
-	return
-CapsLock & `::
-	Send, ^{c}!{space}^{v}{enter}
-	return
-
-CapsLock & y::
-	Send,{up 5}
-	return
-
-CapsLock & b::
-	Send, {down 5}
-	return
-
-;====================================================| charactor complete |====================================================
-
-CapsLock & {::
-	Send,^{c}{{}{}}{left}^{v}
-	return
-	
-CapsLock & }::
-	Send,^{c}{[}{]}{left}^{v}
-	return
-
-
-CapsLock & '::
-		Send,^{c}{`"}{`"}{Left}^{v}	
-		return
-		
-;========================================================== window active hot key		===========================================================
-
-CapsLock & -::
+;==================================| win tab|========================================
+capslock & -::
 	Send ,^+{Tab}
 	return
 	
-CapsLock & =::
+capslock & =::
 	Send, ^{Tab}
 	return
 
-
-CapsLock & 1::
+;==================================| run specially |========================================
+capslock & 1::
 	if WinExist("ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 		IfWinActive
 			WinMinimize
@@ -196,7 +55,7 @@ CapsLock & 1::
 		run ,C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
 	return
 
-CapsLock & 2::
+capslock & 2::
 	if WinExist("ahk_exe C:\Program Files\mindmaster\MindMaster.exe")
 		IfWinActive
 			WinMinimize
@@ -204,7 +63,7 @@ CapsLock & 2::
 			WinActivate , ahk_exe C:\Program Files\mindmaster\MindMaster.exe
 	return
 
-CapsLock & 3::
+capslock & 3::
 	if WinExist("ahk_exe C:\Users\26306\AppData\Local\atom\atom.exe")
 		IfWinActive
 			WinMinimize
@@ -212,7 +71,7 @@ CapsLock & 3::
 			WinActivate , ahk_exe C:\Users\26306\AppData\Local\atom\atom.exe
 	return
 	
-CapsLock & 4::
+capslock & 4::
 	if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
 		IfWinActive
 			WinMinimize
@@ -220,7 +79,7 @@ CapsLock & 4::
 			WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
 	return
 
-CapsLock & 5::
+capslock & 5::
 	if WinExist("ahk_exe C:\Windows\explorer.exe")
 		IfWinActive
 			WinMinimize
@@ -228,13 +87,252 @@ CapsLock & 5::
 			WinActivate , ahk_exe C:\Windows\explorer.exe
 	return
 
-;~ CapsLock & 4::
-	;~ if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
-		;~ IfWinActive
-			;~ WinMinimize
-		;~ else
-			;~ WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
-	;~ return
+	
+	
+
+;==================================| shift mode |========================================
+shift_mode := 1 ; initinate true
+Shift_down_mode := 0
+capslock & v::
+	if Shift_mode = 1
+	{
+		Send, {end}
+		Send, +{home}
+		Shift_mode := 0
+		Send, {shift Down}
+		return
+	}
+	else
+	{
+		Send,{shift up}
+		Shift_mode := 1
+		Shift_down_mode := 0
+		return
+	}
+capslock::
+  	send , {Esc}
+	if shift_mode = 0
+	{
+		Shift_mode := 1
+		Send, {shift up}
+	}
+  	return
+	
+capslock & c::
+	if shift_mode = 1
+	{
+		Send, {End}
+		Send, +{home}
+		Send, ^{c}
+		Sleep , 200
+		Send, {left}
+		return
+	}
+	else
+	{
+		Send, {shift up}
+		Send , ^{c}
+		Shift_down_mode := 0
+		Shift_mode := 1
+		return
+	}
+capslock & x::
+	if shift_mode = 1
+	{
+		Send, {End}
+		Send, +{home}
+		Sleep , 200
+		Send, ^{x}
+		Send, +{home}
+		Send, {BackSpace}
+		return
+	}
+	else 
+	{
+		Send ,{shift  up}
+		Send, ^{x}
+		Shift_down_mode := 0
+		Send, +{home}
+		Send, {BackSpace}
+		Shift_mode := 1
+		return
+	}
+;~ if Shift_mode
+;~ {
+	;~ v::
+		;~ Send, {shift up}
+		;~ Send , {end}
+		;~ Send , {Shift Down}
+		;~ Send, {home}
+		;~ return
+	
+;~ }
+
+	
+	
+	
+;==================================| home end |========================================
+
+capslock & `;::
+	Send, {End}
+	return
+
+capslock & p::
+	Send, {home}
+	return
+
+;==================================|sdfe |========================================
+capslock & d::
+	Send , {down}
+	return
+
+capslock & e::
+	Send, {up}
+	return
+
+capslock & s::
+	Send, {left}
+	return
+	
+capslock & f::
+	Send , {right}
+	return
+
+;================================== | uo  |========================================	
+capslock & o::
+	Send , ^{Right}
+	return 
+	
+capslock & u::
+	Send , ^{Left}
+	return
+
+
+;==================================| yb  |========================================
+capslock & y::
+	Send,{up 10}
+	return
+
+capslock & b::
+	Send, {down 10}
+	return
+;==================================| im  |========================================
+capslock & i::
+	Send, ^{home}
+	return
+capslock & m::
+	Send, ^{end}
+	return
+
+;================================== | hjkl |========================================
+capslock & h::
+	if (getkeystate("alt","p"))
+	{
+		Send ,!{left}
+		return
+	}
+	else
+	{
+		Send,{Left}
+		return
+	}	
+	
+capslock & l::
+	if (getkeystate("alt","p"))
+	{
+		Send,!{right}
+		return
+	}
+	else
+	{
+		Send,{right}
+		return
+	}
+	
+
+capslock & j::
+	if (getkeystate("alt","p"))
+	{
+		Send,!{down}
+		return
+	}
+	else
+	{
+		if shift_mode = 0
+		{
+			if shift_down_mode = 0
+			{
+				Send, {shift up}
+				Send, {left}
+				Send,{Shift down}
+				Send,{end}
+				Shift_down_mode := 1
+				return
+			}
+			else
+			{
+				Send ,{Down}
+				return
+			}
+		}
+		else
+		{
+			Send,{Down}
+			return
+		}
+	}
+
+capslock & k::
+	if (getkeystate("alt","p"))
+	{
+		Send, !{up}
+		return
+	}
+	else
+	{
+		Send,{up}
+		return
+	}
+
+
+capslock & Enter::
+	Send,{end}{enter}
+	return
+
+
+	
+capslock & t::
+	Send,^{c}!{0}
+	Sleep,1	
+	send, ^{a}{BackSpace}^{v}
+	Send ,{enter}
+	return
+
+capslock & q::
+	Send,^{c}
+	Sleep, 1
+	Send,!g^{v}
+	return
+	
+capslock & BackSpace::
+	Send,{End}+{Home}{BackSpace}
+	return
+
+
+;====================================================| charactor complete |====================================================
+
+capslock & {::
+	Send,^{c}{{}{}}{left}^{v}
+	return
+	
+capslock & }::
+	Send,^{c}{[}{]}{left}^{v}
+	return
+
+
+capslock & '::
+		Send,^{c}{`"}{`"}{Left}^{v}	
+		return
 	
 
 
@@ -265,21 +363,132 @@ $F2::
 		Send, {F2}
 	return
 
-;space configuration
-$+Space::
-	Send, {PGUP}
-	return
-CapsLock & Space::
-	Send,{PGDN}
-	return	
-	
-	
-CapsLock & m::
-	Send,+^!{a}
+
+;==================================| dida |========================================
+capslock & 9::
+	Send,+^!{i}
 	return
 
-CapsLock & \::
-	Send , +^!{o}
+capslock & \::
+	Send , +^!{p}
+	return
+	
+space & M::
+	Send ^!+{o}
+	return
+	
+	
+	
+;================================== | space |========================================
+$Space::
+	Send,{space}
+	return
+
+$^Space::
+	Send,^{space}
+	return
+
+$!Space::
+	Send,!{space}
+	return
+
+
+
+$+Space::
+	Send, +{space}
+	return
+	
+
+capslock & w::
+	Send ,{BackSpace}
+	return
+	
+capslock & r::
+	Send,{delete}
+	return
+;==================================| word skips shift|========================================
+
+space & o::
+	Send , +^{Right}
+	return 
+
+space & u::
+	Send , +^{Left}
+	return
+	
+;==================================| top end |========================================
+Space & y::
+	Send,^{Home}
+	return
+	
+Space & b::
+	Send,^{end}
+	return
+	
+;================================== | hjkl |========================================
+space & h::
+if getkeystate("Lalt","p")
+{
+	MouseMove ,-30,0,1,R
+		return
+}
+else
+{
+	Send,+{Left}
+	return
+}
+
+space & j::
+if getkeystate("Lalt","p")
+{
+
+	MouseMove ,0,30,1,R
+		return
+}
+
+else
+{
+	Send ,+{Down}
+	return
+}
+
+space & l::
+if getkeystate("Lalt","p")
+{
+	MouseMove ,30,0,1,R
+		return
+}
+
+else
+{
+	Send,+{right}
+	return
+}
+
+space & k::
+if getkeystate("Lalt","p")
+{
+	MouseMove ,0,-30,1,R
+		return
+
+}
+else
+{
+	Send, +{up}
+	return
+}
+
+
+space & `;::
+	Send, +{End}
+	return
+
+space & p::
+	Send, +{home}
+	return
+
+Space & enter::
+	Send, {LButton}
 	return
 ;============================================================hot string convert===========================================MMM================
 :*:()::(){left}
@@ -288,59 +497,14 @@ CapsLock & \::
 :*:''::''{left}
 :*:<>::<>{left}
 :*:{}::{{}{}}{left}
-:*:3#::{#}{#}{#}
-:*:4#::{#}{#}{#}{#}
-:*:5#::{#}{#}{#}{#}{#}
-:*:es_help::-highlight -w -path-column -name
-::===::====================================================| |===================================================={Left 54}
-
-;====================================================| stop script |====================================================
-CapsLock & F1::
+:*:3#::{#}{#}{#}{space}	
+:*:4#::{#}{#}{#}{#}{space}
+:*:5#::{#}{#}{#}{#}{#}{space}
+:*:=com::==================================| |========================================{Left 42}
+:*:=2com::================================== ========================================{Left 42}{Enter}
+:*:chS::47.93.246.76
+:*:``````::````````````{left 3}{enter}{up}{end}
+:*:7em::&emsp;&emsp;
+Esc & f1::
 	Suspend
-	;Pause 
 	return
-	
-	
-	
-	
-		
-;====================================================| number convert special charactor|====================================================
-NumLock & u::
-	send,{1}
-	return
-NumLock & i::
-	send,{2}
-	return
-NumLock & o::
-	send,{3}
-	return
-NumLock & j::
-	send,{4}
-	return
-NumLock & k::
-	send,{5}
-	return
-NumLock & l::
-	send,{6}
-	return
-NumLock & n::
-	send,{7}
-	return
-NumLock & m::
-	send,{8}
-	return
-NumLock & ,::
-	send,{9}
-	return
-NumLock & Space::
-	send,{0}
-	return
-
-
-
-
-
-
-
-
-

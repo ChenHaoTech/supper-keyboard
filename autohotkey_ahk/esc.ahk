@@ -1,9 +1,31 @@
-	\22; reference link : https://www.zhihu.com/question/19645501/answer/39906404
+; reference link : https://www.zhihu.com/question/19645501/answer/39906404
 ; make caplock convert esc to fit vi editor
 SendMode Input
 #SingleInstance force ;强制单进程
 ;#NoTrayIcon ; 不显示托盘图标
 
+;==================================|wheel Down |========================================
+esc & Space::
+	Send, {WheelDown 6}
+	return
+
+;==================================| caplock mode|========================================
+CapsLock_MODE := 0
+#esc::
+	if CAPSLOCK_MODE = 0
+	{
+		SetCapsLockState,on 
+		CapsLock_MODE := 1
+		return 
+	}
+	else
+	{
+		SetCapsLockState,Off
+		CapsLock_MODE := 0
+		return
+	}
+	return 
+	
 
 ;====================================================| run-mark  |====================================================
 esc & 0::
@@ -12,6 +34,8 @@ esc & 0::
 esc & `::
 	Run C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk\esc.ahk
 	return
+	
+;==================================| win tab|========================================
 esc & -::
 	Send ,^+{Tab}
 	return
@@ -20,7 +44,7 @@ esc & =::
 	Send, ^{Tab}
 	return
 
-
+;==================================| run specially |========================================
 esc & 1::
 	if WinExist("ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 		IfWinActive
@@ -62,111 +86,226 @@ esc & 5::
 		else
 			WinActivate , ahk_exe C:\Windows\explorer.exe
 	return
-;====================================| esc_move-mark |========================================
+
+	
+	
+
+;==================================| shift mode |========================================
+shift_mode := 1 ; initinate true
+Shift_down_mode := 0
+esc & v::
+	if Shift_mode = 1
+	{
+		Send, {end}
+		Send, +{home}
+		Shift_mode := 0
+		Send, {shift Down}
+		return
+	}
+	else
+	{
+		Send,{shift up}
+		Shift_mode := 1
+		Shift_down_mode := 0
+		return
+	}
 esc::
   	send , {Esc}
+	if shift_mode = 0
+	{
+		Shift_mode := 1
+		Send, {shift up}
+	}
   	return
+	
+esc & c::
+	if shift_mode = 1
+	{
+		Send, {End}
+		Send, +{home}
+		Send, ^{c}
+		Sleep , 200
+		Send, {left}
+		return
+	}
+	else
+	{
+		Send, {shift up}
+		Send , ^{c}
+		Shift_down_mode := 0
+		Shift_mode := 1
+		return
+	}
+esc & x::
+	if shift_mode = 1
+	{
+		Send, {End}
+		Send, +{home}
+		Sleep , 200
+		Send, ^{x}
+		Send, +{home}
+		Send, {BackSpace}
+		return
+	}
+	else 
+	{
+		Send ,{shift  up}
+		Send, ^{x}
+		Shift_down_mode := 0
+		Send, +{home}
+		Send, {BackSpace}
+		Shift_mode := 1
+		return
+	}
+;~ if Shift_mode
+;~ {
+	;~ v::
+		;~ Send, {shift up}
+		;~ Send , {end}
+		;~ Send , {Shift Down}
+		;~ Send, {home}
+		;~ return
+	
+;~ }
+
+	
+	
+	
+;==================================| home end |========================================
+
+esc & `;::
+	Send, {End}
+	return
+
+esc & p::
+	Send, {home}
+	return
+
+;==================================|sdfe |========================================
+esc & d::
+	Send , {down}
+	return
 
 esc & e::
-	Send , {up}
-	return
-	
-esc & d::
-	Send , {Down}
-	return 
-	
-esc & s::
-	Send , {Left}
+	Send, {up}
 	return
 
+esc & s::
+	Send, {left}
+	return
+	
 esc & f::
 	Send , {right}
 	return
+
+;================================== | uo  |========================================	
+esc & o::
+	Send , ^{Right}
+	return 
 	
-esc & h::
-	Send,+{Left}
-	return
-	
-esc & j::
-	Send ,+{Down}
+esc & u::
+	Send , ^{Left}
 	return
 
-esc & l::
-	Send,+{right}
+
+;==================================| yb  |========================================
+esc & y::
+	Send,{up 10}
 	return
+
+esc & b::
+	Send, {down 10}
+	return
+;==================================| im  |========================================
+esc & i::
+	Send, ^{home}
+	return
+esc & m::
+	Send, ^{end}
+	return
+
+;================================== | hjkl |========================================
+esc & h::
+	if (getkeystate("alt","p"))
+	{
+		Send ,!{left}
+		return
+	}
+	else
+	{
+		Send,{Left}
+		return
+	}	
+	
+esc & l::
+	if (getkeystate("alt","p"))
+	{
+		Send,!{right}
+		return
+	}
+	else
+	{
+		Send,{right}
+		return
+	}
+	
+
+esc & j::
+	if (getkeystate("alt","p"))
+	{
+		Send,!{down}
+		return
+	}
+	else
+	{
+		if shift_mode = 0
+		{
+			if shift_down_mode = 0
+			{
+				Send, {shift up}
+				Send, {left}
+				Send,{Shift down}
+				Send,{end}
+				Shift_down_mode := 1
+				return
+			}
+			else
+			{
+				Send ,{Down}
+				return
+			}
+		}
+		else
+		{
+			Send,{Down}
+			return
+		}
+	}
 
 esc & k::
-	Send, +{up}
-	return
-	
-esc & n::
-	Send,^+{Right}
-	return
-	
-esc & p::
-	Send,{Home}
-	return
+	if (getkeystate("alt","p"))
+	{
+		Send, !{up}
+		return
+	}
+	else
+	{
+		Send,{up}
+		return
+	}
 
-esc & `;::
-	Send,{End}
-	return
-
-esc & a::
-	Send, ^{left}
-	return
-	
-esc & g::
-	Send, ^{right}
-	return
-
-esc & w::
-	Send, {Backspace}
-	return
-	
-esc & r::
-	Send, {delete}
-	return
 
 esc & Enter::
 	Send,{end}{enter}
-
-esc & u::
-	Send,+{home}
-	return
-
-esc & o::
-	Send,+{end}
-	return
-	
-	
-esc & i::
-	Send, +{up}
-	return
-
-	
-esc & z::
-	Send, ^{z}
-	return
-
-esc & c::
-	Send ^{c}
-	return
-	
-
-esc & v::
-	
-	return
-
-esc & x::
-	send,^{x}
 	return
 
 
 	
 esc & t::
 	Send,^{c}!{0}
-	Sleep,1
+	Sleep,1	
 	send, ^{a}{BackSpace}^{v}
+	Send ,{enter}
 	return
 
 esc & q::
@@ -179,14 +318,6 @@ esc & BackSpace::
 	Send,{End}+{Home}{BackSpace}
 	return
 
-
-esc & y::
-	Send,{up 5}
-	return
-
-esc & b::
-	Send, {down 5}
-	return
 
 ;====================================================| charactor complete |====================================================
 
@@ -202,16 +333,6 @@ esc & }::
 esc & '::
 		Send,^{c}{`"}{`"}{Left}^{v}	
 		return
-		
-
-
-;~ esc & 4::
-	;~ if WinExist("ahk_exe C:\Program Files\Typora\Typora.exe")
-		;~ IfWinActive
-			;~ WinMinimize
-		;~ else
-			;~ WinActivate , ahk_exe C:\Program Files\Typora\Typora.exe
-	;~ return
 	
 
 
@@ -242,16 +363,132 @@ $F2::
 		Send, {F2}
 	return
 
-esc & Space::
-	Send,{Enter}
-	return
 
-esc & m::
-	Send,+^!{a}
+;==================================| dida |========================================
+esc & 9::
+	Send,+^!{i}
 	return
 
 esc & \::
-	Send , +^!{o}
+	Send , +^!{p}
+	return
+	
+space & M::
+	Send ^!+{o}
+	return
+	
+	
+	
+;================================== | space |========================================
+$Space::
+	Send,{space}
+	return
+
+$^Space::
+	Send,^{space}
+	return
+
+$!Space::
+	Send,!{space}
+	return
+
+
+
+$+Space::
+	Send, +{space}
+	return
+	
+
+esc & w::
+	Send ,{BackSpace}
+	return
+	
+esc & r::
+	Send,{delete}
+	return
+;==================================| word skips shift|========================================
+
+space & o::
+	Send , +^{Right}
+	return 
+
+space & u::
+	Send , +^{Left}
+	return
+	
+;==================================| top end |========================================
+Space & y::
+	Send,^{Home}
+	return
+	
+Space & b::
+	Send,^{end}
+	return
+	
+;================================== | hjkl |========================================
+space & h::
+if getkeystate("Lalt","p")
+{
+	MouseMove ,-30,0,1,R
+		return
+}
+else
+{
+	Send,+{Left}
+	return
+}
+
+space & j::
+if getkeystate("Lalt","p")
+{
+
+	MouseMove ,0,30,1,R
+		return
+}
+
+else
+{
+	Send ,+{Down}
+	return
+}
+
+space & l::
+if getkeystate("Lalt","p")
+{
+	MouseMove ,30,0,1,R
+		return
+}
+
+else
+{
+	Send,+{right}
+	return
+}
+
+space & k::
+if getkeystate("Lalt","p")
+{
+	MouseMove ,0,-30,1,R
+		return
+
+}
+else
+{
+	Send, +{up}
+	return
+}
+
+
+space & `;::
+	Send, +{End}
+	return
+
+space & p::
+	Send, +{home}
+	return
+
+Space & enter::
+	Send, {LButton}
 	return
 ;============================================================hot string convert===========================================MMM================
 :*:()::(){left}
@@ -260,23 +497,14 @@ esc & \::
 :*:''::''{left}
 :*:<>::<>{left}
 :*:{}::{{}{}}{left}
-:*:3#::{#}{#}{#}
-:*:4#::{#}{#}{#}{#}
-:*:5#::{#}{#}{#}{#}{#}
-::===::==================================| |========================================{Left 43}
-::cs::47.93.246.76
-::ex::exit
-
+:*:3#::{#}{#}{#}{space}	
+:*:4#::{#}{#}{#}{#}{space}
+:*:5#::{#}{#}{#}{#}{#}{space}
+:*:=com::==================================| |========================================{Left 42}
+:*:=2com::================================== ========================================{Left 42}{Enter}
+:*:chS::47.93.246.76
+:*:``````::````````````{left 3}{enter}{up}{end}
+:*:7em::&emsp;&emsp;
 Esc & f1::
 	Suspend
 	return
-
-
-
-
-
-
-
-
-
-
