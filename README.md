@@ -32,8 +32,6 @@ caplock键未注册表重映射成esc的的可以使用"caplock.exe"文件
 
 ### space+alt
 
-​		
-
 - hjkl==>滚轮的 左上下右的移动
 - 垂直水平移动
   - i==>到达窗口顶端
