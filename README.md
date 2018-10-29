@@ -1,7 +1,4 @@
 # supper key(未完成)
-现在还是半成品, esc模式已经成熟, 但space模式还未开发完全
-
-caplock键未注册表重映射成esc的的可以使用"caplock.exe"文件
 
 # shift mode
 
@@ -11,8 +8,6 @@ caplock键未注册表重映射成esc的的可以使用"caplock.exe"文件
 
 1. 再按一下退出 shift模式
 
-2. ctrl+c 退出shift模式
-3. ctrl+x 退出shift模式
 
 ### 其他快捷键不影响
 
@@ -42,7 +37,7 @@ caplock键未注册表重映射成esc的的可以使用"caplock.exe"文件
   - y==>滚轮上滑三格
   - b==>滚轮下滑三格
 
-### space+enter
+### space+capslock
 
 - 光标当前位置左单击
 
@@ -50,9 +45,13 @@ caplock键未注册表重映射成esc的的可以使用"caplock.exe"文件
 
 - 光标当前位置右单击
 
-# esc mode
+### space + z
 
-### esc
+使用鼠标跳转的操作撤回
+
+# capslock mode
+
+### capslock
 
 - hjkl==>光标的左上下右
 
@@ -69,13 +68,21 @@ caplock键未注册表重映射成esc的的可以使用"caplock.exe"文件
   - u==>单词前跳转
   - o=>单词后跳转
 
-### esc+alt
+### capslock+alt
 
 - hijk==>alt键+左上下右
 
-### esc+win
+### capslock+win
 
 - 等价于单击capslock
+
+### capslock+backspaec
+
+- 删除一整行
+
+### capslock+z
+
+- 使用capslock跳转的操作撤回
 
 ​	
 
@@ -91,8 +98,14 @@ caplock键未注册表重映射成esc的的可以使用"caplock.exe"文件
 
 # soft mode (未完成)
 
-按住 esc + space 键 激活
+按住 capslock + space 键 激活
 
 
 
-​	
+# 剪切板模式
+
+### space+c进入复制模式
+
+### space+v进入粘贴模式
+
+### space+x进入剪切模式
