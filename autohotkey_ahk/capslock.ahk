@@ -5,64 +5,104 @@ SendMode Input
 ;#NoTrayIcon ; 不显示托盘图标
 #Persistent
 SetCapsLockState, AlwaysOff
+;================================== | space |========================================
+$Space::
+Send,{space}
+return
+
+$^Space::
+Send,^{space}
+return
+
+$!Space::
+Send,!{space}
+return
+
+$+Space::
+Send, +{space}
+return
 ;==================================|wheel Move |========================================
 space & y::
-Send, {Wheelup 3}
-return
-space & b::
-Send, {WheelDown 3}
-return
-;wheel hjkl
-;================================== | hjkl |========================================
-space & h::
-if getkeystate("Lalt","p")
-{
-	Send, {WheelLeft}
+	MouseMove ,0,-60,0,R
 	return
-}
-else
-{
-	MouseMove ,-30,0,1,R
-		return
-}
+space & b::
+	MouseMove ,0,60,0,R
+	return
+;================================== | mouse move |========================================
+space & h::
+MoveCurses("h")
+return
 
 space & j::
-if getkeystate("Lalt","p")
-{
-	Send, {Wheeldown}
-	return
-}
-
-else
-{
-	MouseMove ,0,30,1,R
-		return
-}
+MoveCurses("j")
+return
 
 space & l::
-if getkeystate("Lalt","p")
-{
-	Send, {WheelRignt}
-	return
-}
-
-else
-{
-	MouseMove ,30,0,1,R
-		return
-}
+MoveCurses("l")
+return
 
 space & k::
-if getkeystate("Lalt","p")
+MoveCurses("k")
+return
+ 
+MoveCurses(key,speed := 40)
 {
-	Send, {WheelUp}
+if GetKeyState("shift","p")
+{
+	speed := 10
+	send,{shift up}
+}
+if (key == "h")
+	MouseMove ,speed * -1,0,0,R
+if (key == "j")
+	MouseMove ,0,speed,0,R
+if (key == "k")
+	MouseMove ,0,speed * -1,0,R
+if (key == "l")
+	MouseMove ,speed,0,0,R
+return
+}
+shift & space::
 	return
-}
-else
-{
-	MouseMove ,0,-30,1,R
-		return
-}
+
+;==================================|window move |========================================
+
+space & u::
+	MouseMove,20,54,0
+	return
+Space & o::
+	MouseMove,1874,48,0
+	return
+Space & n::
+	MouseMove,20,1070,0
+	return
+Space & ,::
+	MouseMove,1865,1062,0
+	return
+Space & p::
+	MouseMove , 73, 469,0
+	return
+Space & `;::
+	MouseMove,1780,504,0
+	return
+space & i::
+MouseMove,892,66,0
+return
+space & m::
+MouseMove,957,1067,0
+return
+;==================================|space window |========================================
+space & x::
+send, ^{w}
+return
+
+space & q::
+send,!{f4} 
+return
+
+space & s::
+send,^{s}
+return
 
 ;==================================| caplock mode|========================================
 CapsLock_MODE := 0
@@ -149,9 +189,14 @@ return
 shift_mode := 1 ; initinate true
 Shift_down_mode := 0
 $shift::
+if (A_PriorHotkey <> "$shift" or A_TimeSincePriorHotkey > 400)  
+{
+KeyWait, shift  
+return
+}
 if Shift_mode = 1
 {   
- 	Shift_mode := 0
+	Shift_mode := 0
 	Send, {shift Down}
 	return
 }
@@ -163,9 +208,10 @@ else
 	return
 }
 
+
 $^+t::
-	send,^+{t}
-	return
+send,^+{t}
+return
 
 capslock & v::
 if Shift_mode = 1
@@ -173,8 +219,8 @@ if Shift_mode = 1
 	Send, {end}
 	Send, +{home}
 Shift_mode := 0
-	Send, {shift Down}
-	return
+				Send, {shift Down}
+			return
 }
 else
 {
@@ -194,7 +240,7 @@ if shift_mode = 1
 	Send, +{home}
 	Send, ^{c}
 	Sleep , 200
-	Send, {left}
+		Send, {left}
 	return
 }
 else
@@ -211,7 +257,7 @@ if shift_mode = 1
 	Send, {End}
 	Send, +{home}
 	Sleep , 200
-		Send, ^{x}
+	Send, ^{x}
 	Send, +{home}
 	Send, {BackSpace}
 	return
@@ -221,10 +267,10 @@ else
 	Send ,{shift  up}
 	Send, ^{x}
 Shift_down_mode := 0
-					 Send, +{home}
-				 Send, {BackSpace}
+	 Send, +{home}
+	 Send, {BackSpace}
 Shift_mode := 1
-				return
+		return
 }
 
 
@@ -274,81 +320,95 @@ return
 
 ;==================================| yb  |========================================
 capslock & y::
+if (getkeystate("space","p"))
+{
+	Send, {Wheelup 3}
+	return
+}
 Send,{up 10}
 return
 
 capslock & b::
+if (getkeystate("space","p"))
+{
+	Send, {WheelDown 3}
+	return
+}
 Send, {down 10}
 return
-
 ;================================== | hjkl |========================================
+window_mode := 0
+capslock & space::
+window_mode :=1
+return
 capslock & h::
 if (getkeystate("alt","p"))
 {
-Send ,!{left}
-return
+	Send ,!{left}
+	return
+}
+if getkeystate("space","p")
+{
+	Send, {WheelLeft}
+	return
 }
 else
 {
-Send,{Left}
-return
+	Send,{Left}
+	return
 }	
 
 capslock & l::
+if getkeystate("space","p")
+{
+	Send, {WheelRight}
+	return
+}
 if (getkeystate("alt","p"))
 {
-Send,!{right}
-return
+	Send,!{right}
+	return
 }
 else
 {
-Send,{right}
-return
+	Send,{right}
+	return
 }
 
 
 capslock & j::
-if (getkeystate("alt","p"))
+if getkeystate("space","p")
 {
-Send,!{down}
-return
-}
-else
-{
-if shift_mode = 0
-{
-if shift_down_mode = 0
-{
-	Send, {shift up}
-	Send, {left}
-	Send,{Shift down}
-	Send,{end}
-Shift_down_mode := 1
-			 return
-}
-else
-{
-	Send ,{Down}
+	Send, {Wheeldown}
 	return
 }
+if (getkeystate("alt","p"))
+{
+	Send,!{down}
+	return
 }
 else
 {
-Send,{Down}
-return
-}
+	
+	Send,{Down}
+	return
 }
 
 capslock & k::
+if getkeystate("space","p")
+{
+	Send, {WheelUp}
+	return
+}
 if (getkeystate("alt","p"))
 {
-Send, !{up}
-return
+	Send, !{up}
+	return
 }
 else
 {
-Send,{up}
-return
+	Send,{up}
+	return
 }
 
 
@@ -379,8 +439,8 @@ return
 ;====================================================| charactor complete |====================================================
 
 capslock & {::
-Send,^{c}{{}{}}{left}^{v}
-return
+	Send,^{c}{{}{}}{left}^{v}
+	return
 
 capslock & }::
 Send,^{c}{[}{]}{left}^{v}
@@ -430,28 +490,6 @@ capslock & \::
 Send , +^!{p}
 return
 
-space & M::
-Send ^!+{o}
-return
-
-
-
-;================================== | space |========================================
-$Space::
-Send,{space}
-return
-
-$^Space::
-Send,^{space}
-return
-
-$!Space::
-Send,!{space}
-return
-
-$+Space::
-Send, +{space}
-return
 
 
 capslock & w::
@@ -461,25 +499,7 @@ return
 capslock & r::
 Send,{delete}
 return
-;==================================| word skips shift|========================================
 
-space & o::
-Send , +^{Right}
-return 
-
-space & u::
-Send , +^{Left}
-return
-
-
-
-space & `;::
-Send, +{End}
-return
-
-space & p::  
-Send, +{home}
-return
 
 Space & capslock::
 Send, {LButton}
