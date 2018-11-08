@@ -1,6 +1,4 @@
-SendMode Input
 #SingleInstance force ;强制单进程
-#Persistent
 SetCapsLockState, AlwaysOff
 
 
@@ -8,4 +6,6 @@ SetCapsLockState, AlwaysOff
 #Include ./capslock.ahk
 #Include ./run.ahk
 #Include ./colon.ahk
-
+#Include ./string.ahk
+#Include ./mouse.ahk
+#Include ./normal_key.ahk

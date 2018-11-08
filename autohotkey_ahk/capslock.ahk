@@ -1,30 +1,14 @@
 capslock::
-send ,{Esc}
+send ,{Blind}{Esc}
 return
-;==================================| caplock mode|========================================
-CapsLock_MODE := 0
-#capslock::
-if CAPSLOCK_MODE = 0
-{
-	SetCapsLockState,on 
-		CapsLock_MODE := 1
-		return 
-}
-else
-{
-	SetCapsLockState,Off
-		CapsLock_MODE := 0
-		return
-}
-return 
 
 ;==================================| win tab|========================================
 capslock & -::
-Send ,^+{Tab}
+Send ,{Blind}^+{Tab}
 return
 
 capslock & =::
-Send, ^{Tab}
+Send,{Blind}^{Tab}
 return
 
 ;==================================| home end |========================================
@@ -39,19 +23,19 @@ return
 
 ;==================================|sdfe |========================================
 capslock & d::
-Send , {PGDN}
+Send ,{Blind}{PGDN}
 return
 
 capslock & e::
-Send, {PGUP}
+Send,{Blind}{PGUP}
 return
 
 capslock & s::
-Send, !{left}
+Send,{Blind}!{left}
 return
 
 capslock & f::
-Send , !{right}
+Send ,{Blind}!{right}
 return
 ;==================================|im |========================================
 capslock & i::
@@ -94,45 +78,33 @@ capslock_movtion("l")
 return
 
 capslock & Enter::
-Send,{end}{enter}
+Send,{Blind}{end}{enter}
 return
 
 
 capslock & BackSpace::
-Send,{End}+{Home}{BackSpace}
+Send,{Blind}{End}+{Home}{BackSpace}
 return
 
 capslock & v::
-if Shift_mode = 1
-{
-	Send, {end}
-	Send, +{home}
-	Shift_mode := 0
-	Send, {shift Down}
-	return
-}
-else
-{
-	Send,{shift up}
-	Shift_mode := 1
-	Shift_down_mode := 0
-	return
-}
+Send,{Blind}{end}
+Send,{Blind}+{home}
+return
 
 capslock & c::
 if shift_mode = 1
 {
-	Send, {End}
-	Send, +{home}
-	Send, ^{c}
-	Sleep , 200
-	Send, {left}
+	Send,{Blind}{End}
+	Send,{Blind}+{home}
+	Send,{Blind}^{c}
+	Sleep ,200
+	Send,{Blind}{left}
 	return
 }
 else
 {
-	Send, {shift up}
-	Send , ^{c}
+	Send,{Blind}{shift up}
+	Send ,{Blind}^{c}
 	Shift_down_mode := 0
 	 Shift_mode := 1
  	return
@@ -141,21 +113,21 @@ else
 capslock & x::
 if shift_mode = 1
 {
-	Send, {End}
-	Send, +{home}
-	Sleep , 200
-	Send, ^{x}
-	Send, +{home}
-	Send, {BackSpace}
+	Send,{Blind}{End}
+	Send,{Blind}+{home}
+	Sleep ,200
+	Send,{Blind}^{x}
+	Send,{Blind}+{home}
+	Send,{Blind}{BackSpace}
 	return
 }
 else 
 {
-	Send ,{shift  up}
-	Send, ^{x}
+	Send ,{Blind}{shift  up}
+	Send,{Blind}^{x}
 	Shift_down_mode := 0
-	 Send, +{home}
-	 Send, {BackSpace}
+	 Send,{Blind}+{home}
+	 Send,{Blind}{BackSpace}
 	Shift_mode := 1
 	return
 }
@@ -178,124 +150,65 @@ return
 
 
 capslock & w::
-Send ,{BackSpace}
+Send ,{Blind}{BackSpace}
 return
 
 capslock & r::
-Send,{delete}
+Send,{Blind}{delete}
 return
 	;============================================================|function|===========================================================
 capslock_movtion(key)
 {
-	if (getkeystate("shift","p"))
+	if (key == "h")
 	{
-		if (key == "h")
-		{
-			Send ,+{left}
-		}
-		if (key == "j")
-		{
-			Send ,+{down}
-		}
-		if (key == "k")
-		{
-			Send ,+{up}
-		}
-		if (key == "l")
-		{
-			Send ,+{right}
-		}
-		if (key == "y")
-		{
-			Send ,+{up 5}
-		}
-		if (key == "b")
-		{
-			Send ,+{down 5}
-		}
-		if (key == "o")
-		{
-			Send ,^+{Right}
-		}
-		if (key == "u")
-		{
-			Send ,^+{left}
-		}
-		if (key == "m")
-		{
-			Send ,+^{end}
-		}
-		if (key == "i")
-		{
-			Send ,+^{home}
-		}
-		if (key == ";")
-		{
-			send,+{end}
-		}
-		if (key == "p")
-		{
-			send,+{home}
-		}
-		return
+		Send,{Blind}{Left}
 	}
-	; if getkeystate("space","p")
-	;     {
-	;     if (key == "l")
-	;         MouseClickDrag ,left,,,100,-50,3,R
-	;     return
-	;     }
-	else
+	if (key == "j")
 	{
-		if (key == "h")
-		{
-			Send,{Left}
-		}
-		if (key == "j")
-		{
-			Send,{down}
-		}
-		if (key == "k")
-		{
-			Send,{up}
-		}
-		if (key == "l")
-		{
-			Send,{right}
-		}
-		if (key == "y")
-		{
-			Send ,{up 5}
-		}
-		if (key == "b")
-		{
-			Send ,{down 5}
-		}
-		if (key == "o")
-		{
-			Send ,^{Right}
-		}
-		if (key == "u")
-		{
-			Send ,^{left}
-		}
-		if (key == "m")
-		{
-			Send ,^{end}
-		}
-		if (key == "i")
-		{
-			Send ,^{home}
-		}
-		if (key == ";")
-		{
-			send,{end}
-		}
-		if (key == "p")
-		{
-			send,{home}
-		}
-		return
-	}	
+		Send,{Blind}{down}
+	}
+	if (key == "k")
+	{
+		; keywait,win
+		; keywait,L
+		Send,{Blind}{up}
+	}
+	if (key == "l")
+	{
+		Send,{Blind}{right}
+	}
+	if (key == "y")
+	{
+		Send ,{Blind}{up 5}
+	}
+	if (key == "b")
+	{
+		Send ,{Blind}{down 5}
+	}
+	if (key == "o")
+	{
+		Send ,{Blind}^{Right}
+	}
+	if (key == "u")
+	{
+		Send ,{Blind}^{left}
+	}
+	if (key == "m")
+	{
+		Send ,{Blind}^{end}
+	}
+	if (key == "i")
+	{
+		Send ,{Blind}^{home}
+	}
+	if (key == ";")
+	{
+		send,{Blind}{end}
+	}
+	if (key == "p")
+	{
+		send,{Blind}{home}
+	}
+	return
 }
 

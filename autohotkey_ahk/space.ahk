@@ -1,24 +1,15 @@
+capslock & ctrl::
+send,{ctrl down}
+return
+
 Space & capslock::
 Send, {LButton}
 return
-
 space & enter::
 Send, {RButton}
 return
-
-+space::
-return
-;================================== | space |========================================
-$Space::
-Send,{space}
-return
-
-$^Space::
-Send,^{space}
-return
-
-$!Space::
-Send,!{space}
+space & \::
+Send, {Appskey}
 return
 
 ;==================================|wheel Move |========================================
@@ -87,21 +78,21 @@ return
 
 
 
-;==================================|function |========================================
+	;==================================|function |========================================
 MoveCurses(key,speed := 40)
 {
 	if GetKeyState("shift","p")
 	{
 		speed := 10
-		   send,{shift up}
+	   send,{shift up}
 	}
 	if (key == "h")
-		MouseMove ,speed * -1,0,0,R
+	MouseMove ,speed * -1,0,0,R
 	if (key == "j")
-		MouseMove ,0,speed,0,R
+	MouseMove ,0,speed,0,R
 	if (key == "k")
-		MouseMove ,0,speed * -1,0,R
+	MouseMove ,0,speed * -1,0,R
 	if (key == "l")
-		MouseMove ,speed,0,0,R
+	MouseMove ,speed,0,0,R
 	return
 }

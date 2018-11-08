@@ -1,13 +1,12 @@
 soft_mode := 0
-capslock & space::
+
+space & r::
+enter & r::
 soft_mode := 1
 GUI,NEW
-GUI,show,hide
-; GUI,Destroy
-return
-
-$enter::
-send,{enter}
+GUI,show
+sleep, 1000
+GUI,Destroy 
 return
 
 enter & t::
@@ -16,51 +15,87 @@ msgbox, %TimeString%
 return
 
 
-;==================================| dida |========================================
-#if soft_mode==1
-:*?:dm::
-stringRun("dm") 
-return
+;==|baobao|===
+enter & b::
+stringRun("baobao")
+return 
+;===|baobao end|===
+
+;===| dida |====
+#if (soft_mode==1)
+; #if (getkeystate("enter","p"))
 :*?:da::
 stringRun("da") 
 return
 :*?:df::
 stringRun("df") 
 return
+:*?:dm::
+stringRun("dm") 
+return
+;===| dida-end |====
+
+;===| blog  |====
+:*?:be::
+stringRun("be")
+return
+:*?:bm::
+stringRun("bm")
+return
+:*?:bc::
+stringRun("bc")
+return
+
+;===| blog-end  |====
 #if
 
 stringRun(keyString)
 {
-
-	if(keyString == "dm")
+	global soft_mode
+		;blog
+		if(keyString == "be")
+		{
+			Run https://mp.csdn.net/mdeditor
+		}
+	if(keyString == "bm")
 	{
-		send,{enter}
-		send,!^+{o}
-soft_mode := 0
+		Run https://mp.csdn.net 
 	}
+	if(keyString == "bc")
+	{
+		Run https://blog.csdn.net/column/mycolumn.html
+	}
+	;dida
+		if(keyString == "dm")
+		{
+			send,!^+{o}
+		}
 	if(keyString == "da")
 	{
 		send, !+^{a}
-soft_mode := 0
 	}
 	if(keyString == "df")
 	{
 		send, !+^{f}
-soft_mode := 0
-	}}
-;====================================================| run-mark  |====================================================
-capslock & 0::
-Run https://mp.csdn.net/mdeditor
-return
+	}
+	if(keyString == "baobao")
+	{
+		run,""
+	}
 
+soft_mode :=0
+}
+;====================================================| run-mark  |====================================================
 capslock & `::
 Run C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk\capslock.ahk
 return
 
 capslock & t::
-Send,^{c}!{0}
-Sleep,1	
+Send,^{c}
+send,!{0}
+Sleep,300	
 send, {Esc}
+Send,^{v}
 Send ,{enter}
 return
 
@@ -70,20 +105,6 @@ Sleep, 1
 Send,!g^{v}
 return
 ;====================================================| special configulation |====================================================
-; add perfix $ make tab key can not reverse
-$Tab::
-if WinExist("ahk_exe C:\Program Files\mindmaster\MindMaster.exe")
-IfWinActive
-Send,^{Enter}
-IfWinNotActive
-Send,{Tab}
-return
-IfWinNotExist ahk_exe C:\Program Files\mindmaster\MindMaster.exe
-Send,{Tab}
-return
-
-
-
 ; in xmind
 $F2::
 if winExist( "ahk_exe C:\Program Files (x86)\XMind\XMind.exe")

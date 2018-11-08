@@ -1,30 +1,53 @@
 $`;::
-	send,`;
+	send,{Blind}`;
 	return
 $+`;::
-	send,:
+	send,{Blind}:
 	return
 `; & j::
-	send , {wheeldown 1.5}
+	roller("j")
 	return
 `; & k::
-	send , {wheelup 1.5}
+	roller("k")
 	return
 `; & h::
-	send , {wheelleft 2}
+	roller("h")
 	return
 `; & l::
-	send , {wheelright 2}
+	roller("l")
 	return
 `; & y::
-	send , {wheelup 3}
+	roller("y")
 	return
 `; & b::
-	send , {wheeldown 3}
+	roller("b")
 	return
 `; & i::
-	send, ^{home}
+	roller("i")
 	return
 `; & m::
-	send, ^{end}
+	roller("m")
 	return 
+
+roller(key,speed := 2 )
+{
+	if(getkeyState("shift","p"))
+		speed := 1 
+	if(key == "j")
+		send ,{wheeldown %speed%}
+	if(key == "k")
+		send ,{wheelup %speed%}
+	if(key == "h")
+		send ,{wheelleft %speed%}
+	if(key == "l")
+		send ,{wheelright %speed%}
+	if(key == "y")
+		send ,{wheelup 3}
+	if(key == "b")
+		send ,{wheeldown 3}
+	if(key == "i")
+		send,^{home}
+	if(key == "m")
+		send,^{end}
+	return 
+}
