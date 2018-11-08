@@ -1,4 +1,4 @@
-# supper key
+### supper key
 
 # ; mode
 
@@ -100,7 +100,7 @@
 
 # soft mode (未完成)
 
-按住 capslock + space 键 激活
+按住 enter + space 键 激活
 
 # 剪切板模式(未完成)
 
@@ -110,4 +110,8 @@
 
 ### space+x进入剪切模式
 
- 
+#  focus 模式(未完成)
+
+按住 space & f 进入focus模式
+
+屏幕被划分成好几份

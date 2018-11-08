@@ -1,5 +1,6 @@
 #SingleInstance force 
-~tab::
+$*tab::
+	normal_key("tab")
 	return
 
 $*enter::
