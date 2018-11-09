@@ -1,9 +1,3 @@
-$`;::
-	send,{Blind}`;
-	return
-$+`;::
-	send,{Blind}:
-	return
 `; & j::
 	roller("j")
 	return
@@ -27,20 +21,19 @@ $+`;::
 	return
 `; & m::
 	roller("m")
-	return 
+	return
 
-roller(key,speed := 2 )
+roller(key)
 {
-	if(getkeyState("shift","p"))
-		speed := 1 
+	rooler_speed := 2
 	if(key == "j")
-		send ,{wheeldown %speed%}
+		send ,{wheeldown %rooler_speed%}
 	if(key == "k")
-		send ,{wheelup %speed%}
+		send ,{wheelup %rooler_speed%}
 	if(key == "h")
-		send ,{wheelleft %speed%}
+		send ,{wheelleft %rooler_speed%}
 	if(key == "l")
-		send ,{wheelright %speed%}
+		send ,{wheelright %rooler_speed%}
 	if(key == "y")
 		send ,{wheelup 3}
 	if(key == "b")

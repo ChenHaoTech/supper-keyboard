@@ -12,13 +12,6 @@ space & \::
 Send, {Appskey}
 return
 
-;==================================|wheel Move |========================================
-space & y::
-MouseMove ,0,-120,0,R
-return
-space & b::
-MouseMove ,0,120,0,R
-return
 ;================================== | mouse move |========================================
 space & h::
 MoveCurses("h")
@@ -63,8 +56,11 @@ return
 space & m::
 MouseMove,957,1067,0
 return
-;==================================|space window |========================================
-space & x::
+;==================================|space ctrl |========================================
+space & z::
+send, ^{z}
+return
+space & w::
 send, ^{w}
 return
 
@@ -76,14 +72,27 @@ space & s::
 send,^{s}
 return
 
-
+space & c::
+send , ^{c}
+return
+space & v::
+send, ^{v}
+return
+space & x::
+send , ^{x}
+return
 
 	;==================================|function |========================================
-MoveCurses(key,speed := 40)
+MoveCurses(key,speed := 100)
 {
+	if GetKeyState("alt","p")
+	{
+		speed := speed * 3
+	   send,{shift up}
+	}
 	if GetKeyState("shift","p")
 	{
-		speed := 10
+		speed := 25
 	   send,{shift up}
 	}
 	if (key == "h")

@@ -9,11 +9,12 @@ $*enter::
 $*space::
 	normal_key("space")
 	return
-~RButton::
+$*;::
+	normal_key(";")
 	return
 
 normal_key(key)
 {
-	send,{blind}{%key%}
+	sendInput,{blind}{%key%}
 	return
 }

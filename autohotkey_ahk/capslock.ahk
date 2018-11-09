@@ -23,20 +23,21 @@ return
 
 ;==================================|sdfe |========================================
 capslock & d::
-Send ,{Blind}{PGDN}
+Send,{Blind}{PGdn}
 return
-
 capslock & e::
 Send,{Blind}{PGUP}
 return
 
 capslock & s::
-Send,{Blind}!{left}
+Send,!{left}
 return
 
 capslock & f::
-Send ,{Blind}!{right}
+Send,!{Right}
 return
+
+
 ;==================================|im |========================================
 capslock & i::
 capslock_movtion("i")
@@ -86,9 +87,13 @@ capslock & BackSpace::
 Send,{Blind}{End}+{Home}{BackSpace}
 return
 
-capslock & v::
+capslock & a::
 Send,{Blind}{end}
 Send,{Blind}+{home}
+return
+
+capslock & v::
+sendinput,%clipboard%
 return
 
 capslock & c::

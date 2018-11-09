@@ -14,16 +14,19 @@ FormatTime , TimeString ,YYYYMMDDHH24MISS
 msgbox, %TimeString%
 return
 
-
-;==|baobao|===
 enter & b::
-stringRun("baobao")
-return 
-;===|baobao end|===
+send,+^!{1}
+return
+enter & g::
+send,+^!{2}
+return
+enter & m::
+send,+^!{3}
+return
+
 
 ;===| dida |====
 #if (soft_mode==1)
-; #if (getkeystate("enter","p"))
 :*?:da::
 stringRun("da") 
 return
@@ -34,7 +37,11 @@ return
 stringRun("dm") 
 return
 ;===| dida-end |====
-
+;===|baobao|====
+:*?:bb::
+stringRun("bb") 
+return
+;===|baobao end|====
 ;===| blog  |====
 :*?:be::
 stringRun("be")
@@ -78,9 +85,12 @@ stringRun(keyString)
 	{
 		send, !+^{f}
 	}
-	if(keyString == "baobao")
+	if(keyString == "bb")
 	{
-		run,""
+		send,!{space}
+		send,±¦±¦
+			sleep , 100
+		send, {enter}
 	}
 
 soft_mode :=0
