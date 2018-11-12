@@ -1,91 +1,49 @@
-capslock::
-send ,{Blind}{Esc}
-return
+capslock:: send ,{Blind}{Esc}
 
 ;==================================| win tab|========================================
-capslock & -::
-Send ,{Blind}^+{Tab}
-return
+capslock & -:: Send ,{Blind}^+{Tab}
 
-capslock & =::
-Send,{Blind}^{Tab}
-return
+capslock & =:: Send,{Blind}^{Tab}
 
 ;==================================| home end |========================================
 
-capslock & `;::
-capslock_movtion(";")
-return
+capslock & `;:: capslock_movtion(";")
 
-capslock & p::
-capslock_movtion("p")
-return
+capslock & p:: capslock_movtion("p")
 
 ;==================================|sdfe |========================================
-capslock & d::
-Send,{Blind}{PGdn}
-return
-capslock & e::
-Send,{Blind}{PGUP}
-return
+capslock & d:: Send,{Blind}{PGdn}
+capslock & e:: Send,{Blind}{PGUP}
 
-capslock & s::
-Send,!{left}
-return
+capslock & s:: Send,!{left}
 
-capslock & f::
-Send,!{Right}
-return
+capslock & f:: Send,!{Right}
 
 
 ;==================================|im |========================================
-capslock & i::
-capslock_movtion("i")
-return
-capslock & m::
-capslock_movtion("m")
-return
+capslock & i:: capslock_movtion("i")
+capslock & m:: capslock_movtion("m")
 ;================================== | uo  |========================================	
-capslock & o::
-capslock_movtion("o")
-return 
+capslock & o:: capslock_movtion("o")
 
-capslock & u::
-capslock_movtion("u")
-return
+capslock & u:: capslock_movtion("u")
 
 
 ;==================================| yb  |========================================
-capslock & y::
-capslock_movtion("y")
-return
+capslock & y:: capslock_movtion("y")
 
-capslock & b::
-capslock_movtion("b")
-return
+capslock & b:: capslock_movtion("b")
 ;================================== | hjkl |========================================
 
-capslock & h::
-capslock_movtion("h")
-return
-capslock & j::
-capslock_movtion("j")
-return
-capslock & k::
-capslock_movtion("k")
-return
-capslock & l::
-capslock_movtion("l")
-return
+capslock & h:: capslock_movtion("h")
+capslock & j:: capslock_movtion("j")
+capslock & k:: capslock_movtion("k")
+capslock & l:: capslock_movtion("l")
 
-capslock & Enter::
-Send,{Blind}{end}{enter}
-return
+capslock & Enter:: Send,{Blind}{end}{enter}
 
 
-capslock & BackSpace::
-Send,{Blind}{End}+{Home}{BackSpace}
-return
+capslock & BackSpace:: Send,{Blind}{End}+{Home}{BackSpace}
 
 capslock & a::
 Send,{Blind}{end}
@@ -113,27 +71,17 @@ capslock & x::
 
 ;====================================================| charactor complete |====================================================
 
-capslock & {::
-	Send,^{c}{{}{}}{left}^{v}
-	return
+capslock & {:: Send,^{c}{{}{}}{left}^{v}
 
-capslock & }::
-Send,^{c}{[}{]}{left}^{v}
-return
+capslock & }:: Send,^{c}{[}{]}{left}^{v}
 
 
-capslock & '::
-Send,^{c}{`"}{`"}{Left}^{v}	
-return
+capslock & ':: Send,^{c}{`"}{`"}{Left}^{v}	
 
 
-capslock & w::
-Send ,{Blind}{BackSpace}
-return
+capslock & w:: Send ,{Blind}{BackSpace}
 
-capslock & r::
-Send,{Blind}{delete}
-return
+capslock & r:: Send,{Blind}{delete}
 	;============================================================|function|===========================================================
 capslock_movtion(key)
 {
