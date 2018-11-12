@@ -3,9 +3,9 @@ $*enter::
 	return
 	soft_mode := 0
 
-Space & enter::
+space & enter::
 soft_mode := 1
-sleep, 1000
+tooltip in softMode
 return
 
 enter & t::
@@ -25,6 +25,11 @@ return
 
 
 #if (soft_mode==1)
+capslock::
+soft_mode := 0
+tooltip
+return
+
 d & a:: stringRun("da") 
 d & f:: stringRun("df") 
 d & m:: stringRun("dm") 
@@ -32,6 +37,72 @@ b:: stringRun("bb")
 b & e:: stringRun("be")
 b & m:: stringRun("bm")
 b & c:: stringRun("bc")
+a::
+c::
+d::
+e::
+f::
+g::
+h::
+i::
+j::
+k::
+l::
+m::
+n::
+o::
+p::
+q::
+r::
+s::
+t::
+u::
+v::
+w::
+x::
+y::
+z::
+0::
+1::
+2::
+3::
+4::
+5::
+6::
+7::
+8::
+9::
+`::
+~::
+!::
+@::
+#::
+$::
+%::
+^::
+&::
+*::
+(::
+)::
+-::
+_::
+=::
++::
+[::
+{::
+]::
+}::
+\::
+|::
+:::
+`;::
+'::
+"::
+,::
+<::
+.::
+>::
+return
 #if
 
 stringRun(keyString)
@@ -71,6 +142,7 @@ sleep , 100
 send, {enter}
 }
 soft_mode :=0
+tooltip
 }
 ;====================================================| run-mark  |====================================================
 !capslock::send,!+^{L}

@@ -1,4 +1,5 @@
 capslock:: send ,{Blind}{Esc}
+capslock & space:: send, {enter}
 
 ;==================================| win tab|========================================
 capslock & -:: Send ,{Blind}^+{Tab}
