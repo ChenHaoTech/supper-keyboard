@@ -43,9 +43,9 @@ space & `;:: MoveCurses(";")
 space & z:: send, ^{z}
 space & w:: send, ^{s}
 space & q:: send,!{f4} 
-space & c:: send , ^{c}
+space & c:: send ,^{c}
 space & v:: send, ^{v}
-space & x:: send , ^{x}
+space & x:: send ,^{w}
 
 	;==================================|function |========================================
 MoveCurses(key,speed := 100)
