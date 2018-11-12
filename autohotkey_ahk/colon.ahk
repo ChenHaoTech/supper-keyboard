@@ -1,3 +1,6 @@
+$*;::
+	normal_key(";")
+	return
 `; & j::
 	roller("j")
 	return

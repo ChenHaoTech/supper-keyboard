@@ -92,32 +92,17 @@ Send,{Blind}{end}
 Send,{Blind}+{home}
 return
 
-capslock & v::
-sendinput,%clipboard%
-return
+capslock & v::send,^{v}
 
 capslock & c::
-if shift_mode = 1
-{
 	Send,{Blind}{End}
 	Send,{Blind}+{home}
 	Send,{Blind}^{c}
 	Sleep ,200
 	Send,{Blind}{left}
 	return
-}
-else
-{
-	Send,{Blind}{shift up}
-	Send ,{Blind}^{c}
-	Shift_down_mode := 0
-	 Shift_mode := 1
- 	return
-}
 
 capslock & x::
-if shift_mode = 1
-{
 	Send,{Blind}{End}
 	Send,{Blind}+{home}
 	Sleep ,200
@@ -125,18 +110,6 @@ if shift_mode = 1
 	Send,{Blind}+{home}
 	Send,{Blind}{BackSpace}
 	return
-}
-else 
-{
-	Send ,{Blind}{shift  up}
-	Send,{Blind}^{x}
-	Shift_down_mode := 0
-	 Send,{Blind}+{home}
-	 Send,{Blind}{BackSpace}
-	Shift_mode := 1
-	return
-}
-
 
 ;====================================================| charactor complete |====================================================
 

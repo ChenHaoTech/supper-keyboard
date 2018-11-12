@@ -1,12 +1,11 @@
-soft_mode := 0
+$*enter::
+	normal_key("enter")
+	return
+	soft_mode := 0
 
-space & r::
-enter & r::
+Space & enter::
 soft_mode := 1
-GUI,NEW
-GUI,show
 sleep, 1000
-GUI,Destroy 
 return
 
 enter & t::
@@ -25,77 +24,57 @@ send,+^!{3}
 return
 
 
-;===| dida |====
 #if (soft_mode==1)
-:*?:da::
-stringRun("da") 
-return
-:*?:df::
-stringRun("df") 
-return
-:*?:dm::
-stringRun("dm") 
-return
-;===| dida-end |====
-;===|baobao|====
-:*?:bb::
-stringRun("bb") 
-return
-;===|baobao end|====
-;===| blog  |====
-:*?:be::
-stringRun("be")
-return
-:*?:bm::
-stringRun("bm")
-return
-:*?:bc::
-stringRun("bc")
-return
-
-;===| blog-end  |====
+d & a:: stringRun("da") 
+d & f:: stringRun("df") 
+d & m:: stringRun("dm") 
+b:: stringRun("bb") 
+b & e:: stringRun("be")
+b & m:: stringRun("bm")
+b & c:: stringRun("bc")
 #if
 
 stringRun(keyString)
 {
-	global soft_mode
-		;blog
-		if(keyString == "be")
-		{
-			Run https://mp.csdn.net/mdeditor
-		}
-	if(keyString == "bm")
-	{
-		Run https://mp.csdn.net 
-	}
-	if(keyString == "bc")
-	{
-		Run https://blog.csdn.net/column/mycolumn.html
-	}
-	;dida
-		if(keyString == "dm")
-		{
-			send,!^+{o}
-		}
-	if(keyString == "da")
-	{
-		send, !+^{a}
-	}
-	if(keyString == "df")
-	{
-		send, !+^{f}
-	}
-	if(keyString == "bb")
-	{
-		send,!{space}
-		send,右右
-			sleep , 100
-		send, {enter}
-	}
-
+global soft_mode
+;blog
+if(keyString == "be")
+{
+Run https://mp.csdn.net/mdeditor
+}
+if(keyString == "bm")
+{
+Run https://mp.csdn.net 
+}
+if(keyString == "bc")
+{
+Run https://blog.csdn.net/column/mycolumn.html
+}
+;dida
+if(keyString == "dm")
+{
+send,!^+{o}
+}
+if(keyString == "da")
+{
+send, !+^{a}
+}
+if(keyString == "df")
+{
+send, !+^{f}
+}
+if(keyString == "bb")
+{
+send,!{space}
+send,右右
+sleep , 100
+send, {enter}
+}
 soft_mode :=0
 }
 ;====================================================| run-mark  |====================================================
+!capslock::send,!+^{L}
+!;::send,^!+{p}
 capslock & `::
 Run C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk\capslock.ahk
 return
@@ -168,4 +147,3 @@ WinMinimize
 else
 WinActivate , ahk_exe C:\Windows\explorer.exe
 return
-

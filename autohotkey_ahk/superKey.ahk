@@ -7,5 +7,4 @@ SetCapsLockState, AlwaysOff
 #Include ./run.ahk
 #Include ./colon.ahk
 #Include ./string.ahk
-#Include ./mouse.ahk
 #Include ./normal_key.ahk

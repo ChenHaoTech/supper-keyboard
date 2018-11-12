@@ -1,86 +1,51 @@
-capslock & ctrl::
-send,{ctrl down}
-return
+$*space::
+	normal_key("space")
+	return
+capslock & ctrl:: send,{ctrl down}
 
-Space & capslock::
-Send, {LButton}
-return
-space & enter::
-Send, {RButton}
-return
-space & \::
-Send, {Appskey}
-return
+Space & u:: Send, {LButton}
+space & o:: Send, {RButton}
+space & f:: Send, {Appskey}
 
+space & `:: num_char("``")
+space & -:: num_char("-")
+space & =:: num_char("=")
+space & }:: num_char("}")
+space & {:: num_char("{")
+space & 1:: num_char("1")
+space & 2:: num_char("2")
+space & 3:: num_char("3")
+space & 4:: num_char("4")
+space & 5:: num_char("5")
+space & 6:: num_char("6")
+space & 7:: num_char("7")
+space & 8:: num_char("8")
+space & 9:: num_char("9")
+space & 0:: num_char("0")
+space & ':: num_char("'")
+
+num_char(key)
+{
+	send,+{%key%}
+	return
+}
 ;================================== | mouse move |========================================
-space & h::
-MoveCurses("h")
-return
-
-space & j::
-MoveCurses("j")
-return
-
-space & l::
-MoveCurses("l")
-return
-
-space & k::
-MoveCurses("k")
-return
-
-
-;==================================|window move |========================================
-
-space & u::
-MouseMove,20,54,0
-return
-Space & o::
-MouseMove,1874,48,0
-return
-Space & n::
-MouseMove,20,1070,0
-return
-Space & ,::
-MouseMove,1865,1062,0
-return
-Space & p::
-MouseMove , 73, 469,0
-return
-Space & `;::
-MouseMove,1780,504,0
-return
-space & i::
-MouseMove,892,66,0
-return
-space & m::
-MouseMove,957,1067,0
-return
+space & h:: MoveCurses("h")
+space & j:: MoveCurses("j")
+space & l:: MoveCurses("l")
+space & k:: MoveCurses("k")
+;==================================|mouse move plus|========================================
+space & p:: MoveCurses("p")
+space & m:: MoveCurses("m")
+space & i:: MoveCurses("i")
+space & `;:: MoveCurses(";")
 ;==================================|space ctrl |========================================
-space & z::
-send, ^{z}
-return
-space & w::
-send, ^{w}
-return
-
-space & q::
-send,!{f4} 
-return
-
-space & s::
-send,^{s}
-return
-
-space & c::
-send , ^{c}
-return
-space & v::
-send, ^{v}
-return
-space & x::
-send , ^{x}
-return
+space & z:: send, ^{z}
+space & w:: send, ^{s}
+space & q:: send,!{f4} 
+space & c:: send , ^{c}
+space & v:: send, ^{v}
+space & x:: send , ^{x}
 
 	;==================================|function |========================================
 MoveCurses(key,speed := 100)
@@ -103,5 +68,13 @@ MoveCurses(key,speed := 100)
 	MouseMove ,0,speed * -1,0,R
 	if (key == "l")
 	MouseMove ,speed,0,0,R
+	if (key == "p")
+	MouseMove ,speed * -16,0,0,R
+	if (key == "m")
+	MouseMove ,0,speed * 9,0,R
+	if (key == "i")
+	MouseMove ,0,speed * -9,0,R
+	if (key == ";")
+	MouseMove ,speed * 16,0,0,R
 	return
 }
