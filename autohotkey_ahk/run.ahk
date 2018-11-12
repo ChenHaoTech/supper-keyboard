@@ -162,8 +162,9 @@ return
 
 capslock & q::
 Send,^{c}
+send,+!^{1}
 Sleep, 1
-Send,!g^{v}
+Send,^{v}
 return
 ;====================================================| special configulation |====================================================
 ; in xmind
