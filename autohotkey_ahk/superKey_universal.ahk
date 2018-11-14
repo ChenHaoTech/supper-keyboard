@@ -6,4 +6,4 @@ SetCapsLockState, AlwaysOff
 #Include ./capslock.ahk
 #Include ./colon.ahk
 #Include ./string.ahk
-#Include ./normal_key.ahk
+#Include ./utility.ahk

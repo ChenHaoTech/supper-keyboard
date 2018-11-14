@@ -2,9 +2,11 @@
 SetCapsLockState, AlwaysOff
 
 
+#Include ./colon.ahk
 #Include ./space.ahk
 #Include ./capslock.ahk
 #Include ./run.ahk
-#Include ./colon.ahk
 #Include ./string.ahk
-#Include ./normal_key.ahk
+#Include ./utility.ahk
+#Include ./Transparent.ahk
+

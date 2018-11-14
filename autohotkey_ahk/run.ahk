@@ -1,7 +1,7 @@
-$*enter::
-	normal_key("enter")
-	return
-	soft_mode := 0
+!`::Send, ^!{tab}
+$*enter::normal_key("enter")
+
+global soft_mode := 0
 
 space & enter::
 soft_mode := 1
@@ -13,46 +13,73 @@ FormatTime , TimeString ,YYYYMMDDHH24MISS
 msgbox, %TimeString%
 return
 
-enter & b::
-send,+^!{1}
-return
-enter & g::
-send,+^!{2}
-return
-enter & m::
-send,+^!{3}
-return
+;~ enter & b::
+;~ send,+^!{1}
+;~ return
+;~ enter & g::
+;~ send,+^!{2}
+;~ return
+;~ enter & m::
+;~ send,+^!{3}
+;~ return
+
+;~ searchKey(key)
+;~ {
+	;~ Send ,{Blind}{%key%}
+	;~ KeyWait %key%
+	;~ If (A_TimeSinceThisHotkey > 300)
+	;~ {
+		;~ Clipboard = 
+		;~ Send,^{c}
+		;~ ClipWait 0.1
+		;~ if ErrorLevel
+		;~ {
+			;~ Send ,{Blind}{%key%}
+			;~ return
+		;~ }
+		;~ if (key == "b")
+			;~ Run https://www.baidu.com/s?wd=%Clipboard%
+		;~ if (key == "m")
+			;~ Run https://ww2.mathworks.cn/help/search.html?qdoc=%Clipboard%
+		;~ if (key == "g")
+			;~ Run https://www.google.com/search?q=%Clipboard%
+	;~ }
+	;~ else
+	;~ {
+		;~ Send ,{Blind}{%key%}
+	;~ }
+;~ }
 
 
-#if (soft_mode==1)
+#if soft_mode==1
 capslock::
 soft_mode := 0
 tooltip
 return
-
 d & a:: stringRun("da") 
 d & f:: stringRun("df") 
 d & m:: stringRun("dm") 
-b:: stringRun("bb") 
+b::stringRun("bb") 
 b & e:: stringRun("be")
 b & m:: stringRun("bm")
 b & c:: stringRun("bc")
+b & d::stringRun("bd")
+q::stringRun("q")
+g::stringRun("g")
+m::stringRun("m")
 a::
 c::
 d::
 e::
 f::
-g::
 h::
 i::
 j::
 k::
 l::
-m::
 n::
 o::
 p::
-q::
 r::
 s::
 t::
@@ -95,60 +122,95 @@ _::
 \::
 |::
 :::
-`;::
+;::
 '::
 "::
 ,::
 <::
 .::
 >::
+func_tooltip("no-map-key")
 return
 #if
 
 stringRun(keyString)
 {
-global soft_mode
 ;blog
 if(keyString == "be")
 {
-Run https://mp.csdn.net/mdeditor
+	Run https://mp.csdn.net/mdeditor
 }
 if(keyString == "bm")
 {
-Run https://mp.csdn.net 
+	Run https://mp.csdn.net 
 }
 if(keyString == "bc")
 {
-Run https://blog.csdn.net/column/mycolumn.html
+	Run https://blog.csdn.net/column/mycolumn.html
 }
 ;dida
 if(keyString == "dm")
 {
-send,!^+{o}
+	send,!^+{o}
 }
 if(keyString == "da")
 {
-send, !+^{a}
+	send, !+^{a}
 }
 if(keyString == "df")
 {
-send, !+^{f}
+	send, !+^{f}
 }
-if(keyString == "bb")
+if( keyString == "bb")
 {
-send,!{space}
-send,右右
-sleep , 100
-send, {enter}
+	send,!{space}
+	send,右右
+	sleep , 100
+	send, {enter}
+}
+if (keyString == "bd" and func_getClipboard())
+{
+	Run https://www.baidu.com/s?wd=%Clipboard%
+}
+if (keyString == "m" and func_getClipboard())
+{
+	Run https://ww2.mathworks.cn/help/search.html?qdoc=%Clipboard%
+}
+if (keyString == "g" and func_getClipboard())
+{
+	Run https://www.google.com/search?q=%Clipboard%
+}
+if (keyString == "q")
+{	soft_mode :=0
+	InputBox , SearchString, Searcher, please input SearchString
+	if (SearchString == "")
+	{
+		func_tooltip("NoDataInput",500)
+		return
+	}
+	Run https://www.baidu.com/s?wd=%SearchString%
 }
 soft_mode :=0
 tooltip
+}
+
+func_getClipboard()
+{
+Clipboard = 
+Send,^{c}
+ClipWait 0.1
+if ErrorLevel
+{
+	func_tooltip("no-clipboard-data",500)
+	return 0
+}
+return 1
 }
 ;====================================================| run-mark  |====================================================
 !capslock::send,!+^{L}
 !;::send,^!+{p}
 capslock & `::
-Run C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk\capslock.ahk
+Run explore C:\Program Files\AutoHotkey\Script\autohotkey_study\autohotkey_ahk
 return
 
 capslock & t::
@@ -160,14 +222,11 @@ Send,^{v}
 Send ,{enter}
 return
 
-capslock & q::
-Send,^{c}
-send,+!^{1}
-Sleep, 1
-Send,^{v}
-return
+
 ;====================================================| special configulation |====================================================
-; in xmind
+#IfWinActive ahk_exe C:\Program Files\mindmaster\MindMaster.exe
+tab::Send, ^{enter}
+#if
 $F2::
 if winExist( "ahk_exe C:\Program Files (x86)\XMind\XMind.exe")
 ifwinActive

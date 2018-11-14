@@ -1,49 +1,53 @@
-$*;::
-	normal_key(";")
-	return
-`; & j::
-	roller("j")
-	return
-`; & k::
-	roller("k")
-	return
-`; & h::
-	roller("h")
-	return
-`; & l::
-	roller("l")
-	return
-`; & y::
-	roller("y")
-	return
-`; & b::
-	roller("b")
-	return
-`; & i::
-	roller("i")
-	return
-`; & m::
-	roller("m")
-	return
+*`;:: normal_key(";")
+`; & j:: roller("j")
+`; & k:: roller("k")
+`; & h:: roller("h")
+`; & l:: roller("l")
+`; & f:: roller("f")
+`; & s:: roller("s")
 
 roller(key)
 {
-	rooler_speed := 2
+	global static roller_speed := 1
 	if(key == "j")
-		send ,{wheeldown %rooler_speed%}
+		send ,{wheeldown %roller_speed%}
 	if(key == "k")
-		send ,{wheelup %rooler_speed%}
+		send ,{wheelup %roller_speed%}
 	if(key == "h")
-		send ,{wheelleft %rooler_speed%}
+		send ,{wheelleft %roller_speed%}
 	if(key == "l")
-		send ,{wheelright %rooler_speed%}
-	if(key == "y")
-		send ,{wheelup 3}
-	if(key == "b")
-		send ,{wheeldown 3}
-	if(key == "i")
-		send,^{home}
-	if(key == "m")
-		send,^{end}
+		send ,{wheelright %roller_speed%}
+	if(key == "s")
+		roller_speed -= 1
+	if(key == "f")	
+		roller_speed += 1
+	;~ tooltip %roller_speed%
 	return 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
