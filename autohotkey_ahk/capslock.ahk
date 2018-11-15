@@ -70,6 +70,17 @@ capslock & {:: Send,^{c}{{}{}}{left}^{v}
 capslock & }:: Send,^{c}{[}{]}{left}^{v}
 capslock & ':: Send,^{c}{`"}{`"}{Left}^{v}	
 
+;~ CapsLock & w::
+;~ if  GetKeyState("u","p")
+;~ {
+	;~ Send, sldk.,^{BS}
+;~ }
+;~ if GetKeyState("p","p")
+	;~ Send,{bs}+{Home}{BS}
+;~ else 
+	;~ Send ,{Blind}{BackSpace}			
+;~ return
+
 capslock & w:: 
 KeyWait w
 if (A_TimeSinceThisHotkey > 200)

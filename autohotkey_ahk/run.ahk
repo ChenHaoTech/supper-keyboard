@@ -13,43 +13,6 @@ FormatTime , TimeString ,YYYYMMDDHH24MISS
 msgbox, %TimeString%
 return
 
-;~ enter & b::
-;~ send,+^!{1}
-;~ return
-;~ enter & g::
-;~ send,+^!{2}
-;~ return
-;~ enter & m::
-;~ send,+^!{3}
-;~ return
-
-;~ searchKey(key)
-;~ {
-	;~ Send ,{Blind}{%key%}
-	;~ KeyWait %key%
-	;~ If (A_TimeSinceThisHotkey > 300)
-	;~ {
-		;~ Clipboard = 
-		;~ Send,^{c}
-		;~ ClipWait 0.1
-		;~ if ErrorLevel
-		;~ {
-			;~ Send ,{Blind}{%key%}
-			;~ return
-		;~ }
-		;~ if (key == "b")
-			;~ Run https://www.baidu.com/s?wd=%Clipboard%
-		;~ if (key == "m")
-			;~ Run https://ww2.mathworks.cn/help/search.html?qdoc=%Clipboard%
-		;~ if (key == "g")
-			;~ Run https://www.google.com/search?q=%Clipboard%
-	;~ }
-	;~ else
-	;~ {
-		;~ Send ,{Blind}{%key%}
-	;~ }
-;~ }
-
 
 #if soft_mode==1
 capslock::
@@ -67,6 +30,15 @@ b & d::stringRun("bd")
 q::stringRun("q")
 g::stringRun("g")
 m::stringRun("m")
+esc::ExitApp
+r & 2:: run C:\Program Files\AutoHotkey\Script\my_ahk_exe\superkey.exe
+s & j::
+send,^!{z}
+Sleep 300
+send,返字
+sleep , 1000
+send, {enter}
+return
 a::
 c::
 d::
@@ -164,7 +136,7 @@ if(keyString == "df")
 if( keyString == "bb")
 {
 	send,!{space}
-	send,右右
+	send,右右 lnk
 	sleep , 100
 	send, {enter}
 }

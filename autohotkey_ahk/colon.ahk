@@ -18,13 +18,28 @@ roller(key)
 	if(key == "l")
 		send ,{wheelright %roller_speed%}
 	if(key == "s")
-		roller_speed -= 1
+	{
+		if (roller_speed < 1)
+			roller_speed := 1
+		else
+			roller_speed -= 1
+	}
 	if(key == "f")	
-		roller_speed += 1
+	{
+		if (roller_speed > 5)
+			roller_speed := 5
+		else
+			roller_speed += 1
+	}		
+	ToolTip %roller_speed%
+	SetTimer , message_rollerSpeed , 1000
 	;~ tooltip %roller_speed%
 	return 
 }
-
+message_rollerSpeed:
+SetTimer , message_rollerSpeed , off
+ToolTip
+return
 
 
 

@@ -5,10 +5,12 @@ global TransparentFlag := 0 ; initinate flag = faulse
 
 CapsLock & WheelDown::TransparentSet(-10)
 Space & CapsLock::TransparentSet(-100)
+
 Space & esc::
-TransparentSet(-100)
+winGet, Transparent, Transparent,A
+WinSet,Transparent,10,A
 KeyWait esc
-TransparentSet(100)
+WinSet,Transparent,255,A
 return
 
 CapsLock & WheelUp::TransparentSet(10)

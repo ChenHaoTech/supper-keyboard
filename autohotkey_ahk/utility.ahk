@@ -4,7 +4,7 @@ normal_key(key)
 	return
 }
 
-func_tooltip(string,time := 1000)
+func_tooltip(string:="",time := 1000)
 {
 ToolTip %string%
 Sleep 1000
