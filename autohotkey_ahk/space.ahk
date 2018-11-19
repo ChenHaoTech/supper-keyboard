@@ -33,26 +33,22 @@ space & j:: MoveCurses("j")
 space & l:: MoveCurses("l")
 space & k:: MoveCurses("k")
 ;==================================|mouse move plus|========================================
-space & p:: MoveCurses("p")
+
 space & m:: MoveCurses("m")
 space & i:: MoveCurses("i")
-space & `;:: MoveCurses(";")
-
-;==================================|space move speed |========================================
-space & s:: MoveCurses("s")
-space & f:: MoveCurses("f")
+space & `;:: Send,{:}
 ;==================================|space ctrl |========================================
 space & w:: send, ^{s}
 space & q:: send,!{f4} 
 Space & x:: Send, ^{w}
-
-space & e::
-space & t::
+space & p:: 
+;~ space & e::
+;~ space & t::
 space & y::
 space & a::
 space & d:: 
 space & g:: 
-space & c:: 
+;~ space & c:: 
 space & v:: 
 space & b:: 
 space & n:: 
@@ -76,12 +72,12 @@ return
 	;==================================|function |========================================
 MoveCurses(key,speed := 100)
 {
-	if GetKeyState("f","p")
+	if GetKeyState("alt","p")
 	{
 		speed := speed * 3
 	   send,{shift up}
 	}
-	if GetKeyState("s","p")
+	if GetKeyState("shift","p")
 	{
 		speed := speed / 3 
 	   send,{shift up}

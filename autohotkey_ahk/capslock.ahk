@@ -1,4 +1,5 @@
-capslock:: send ,{Blind}{Esc}
+$capslock:: send ,{Blind}{Esc}
+
 
 capslock & space:: send, {enter}
 CapsLock & \:: Send {Appskey}
@@ -66,9 +67,38 @@ return
 
 ;====================================================| charactor complete |====================================================
 
-capslock & {:: Send,^{c}{{}{}}{left}^{v}
-capslock & }:: Send,^{c}{[}{]}{left}^{v}
-capslock & ':: Send,^{c}{`"}{`"}{Left}^{v}	
+capslock & {:: 
+Clipboard = 
+Send, ^{c}
+ClipWait 0.1
+if !ErrorLevel
+{
+Send,^{c}{{}{}}{left}^{v}
+}
+return
+
+
+capslock & }:: 
+Clipboard = 
+Send, ^{c}
+ClipWait 0.1
+if !ErrorLevel
+{
+Send,^{c}{[}{]}{left}^{v}
+}
+return
+
+
+capslock & ':: 
+Clipboard = 
+Send, ^{c}
+ClipWait 0.1
+if !ErrorLevel
+{
+Send,^{c}{`"}{`"}{Left}^{v}	
+}
+return
+
 
 ;~ CapsLock & w::
 ;~ if  GetKeyState("u","p")

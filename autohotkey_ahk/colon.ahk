@@ -6,6 +6,12 @@
 `; & f:: roller("f")
 `; & s:: roller("s")
 
+`; & u:: Send, {LButton}
+`; & o:: Send, {RButton}
+
+`; & i:: Send, ^{Home}
+`; & m:: Send, ^{end}
+
 roller(key)
 {
 	global static roller_speed := 1
@@ -19,15 +25,15 @@ roller(key)
 		send ,{wheelright %roller_speed%}
 	if(key == "s")
 	{
-		if (roller_speed < 1)
+		if (roller_speed <= 1)
 			roller_speed := 1
 		else
 			roller_speed -= 1
 	}
 	if(key == "f")	
 	{
-		if (roller_speed > 5)
-			roller_speed := 5
+		if (roller_speed > 10)
+			roller_speed := 10
 		else
 			roller_speed += 1
 	}		

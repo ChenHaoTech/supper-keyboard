@@ -4,12 +4,15 @@
 SetCapsLockState, AlwaysOff
 
 #Include ./colon.ahk
-#Include ./space.ahk
+#Include ./space.ahk        
 #Include ./capslock.ahk
 #Include ./run.ahk
-#Include ./string.ahk
+#Include ./string.ahk    
 #Include ./utility.ahk
 #Include ./Transparent.ahk
+#Include ./win.ahk
+#Include ./typeWriting.ahk
+;~ #Include ./lock.ahk
 
 ;~ #f1::
 ;~ ControlGetText, OutputVar [, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]
@@ -20,15 +23,3 @@ SetCapsLockState, AlwaysOff
 ;~ WinActivate
 ;~ send %outputVar%
 
-
-SwitchIME(dwLayout){
-    HKL:=DllCall("LoadKeyboardLayout", Str, dwLayout, UInt, 1)
-    ControlGetFocus,ctl,A
-    SendMessage,0x50,0,HKL,%ctl%,A
-}
-
-;~ esc::
-    ;~ ; 下方代码可只保留一个
-    ;~ SwitchIME(0x08040804) ; 英语(美国) 美式键盘
-    ;~ SwitchIME(0x04090409) ; 中文(中国) 简体中文-美式键盘
-;~ return

@@ -14,6 +14,7 @@ msgbox, %TimeString%
 return
 
 
+global lockFlag := 0
 #if soft_mode==1
 capslock::
 soft_mode := 0
@@ -39,6 +40,8 @@ send,返字
 sleep , 1000
 send, {enter}
 return
+l:: ;lockFlag := 1
+n & l:: ;lockFlag := 0
 a::
 c::
 d::
@@ -48,7 +51,7 @@ h::
 i::
 j::
 k::
-l::
+;~ l::
 n::
 o::
 p::
@@ -137,7 +140,7 @@ if( keyString == "bb")
 {
 	send,!{space}
 	send,右右 lnk
-	sleep , 100
+	sleep , 300
 	send, {enter}
 }
 if (keyString == "bd" and func_getClipboard())
@@ -211,8 +214,7 @@ return
 
 ;==================================| run specially |========================================
 capslock & 1::
-if WinExist("ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-IfWinActive
+If WinActive("ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 WinMinimize
 else
 WinActivate , ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe	
@@ -226,6 +228,8 @@ IfWinActive
 WinMinimize
 else
 WinActivate , ahk_exe C:\Program Files\mindmaster\MindMaster.exe
+IfWinNotExist ahk_exe C:\Program Files\mindmaster\MindMaster.exe
+	Run, C:\Program Files\mindmaster\MindMaster.exe
 return
 
 capslock & 3::
