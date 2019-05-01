@@ -1,6 +1,5 @@
 $capslock:: send ,{Blind}{Esc}
 
-
 capslock & space:: send, {enter}
 CapsLock & \:: Send {Appskey}
 ;==================================| win tab|========================================
@@ -29,7 +28,7 @@ capslock & j:: capslock_movtion("j")
 capslock & k:: capslock_movtion("k")
 capslock & l:: capslock_movtion("l")
 capslock & Enter:: Send,{Blind}{end}{enter}
-capslock & BackSpace:: Send,{bs}{Blind}{End}+{Home}{BackSpace}
+capslock & BackSpace:: Send,{Blind}{End}+{Home}{BackSpace}
 
 capslock & a::
 Send,{Blind}{end}
@@ -44,11 +43,11 @@ Send, ^{c}
 ClipWait 0.1
 if ErrorLevel
 {
-Send,{Blind}{End}
-Send,{Blind}+{home}
-Send,{Blind}^{c}
-Sleep ,200
-Send,{Blind}{left}
+	Send,{Blind}{End}
+	Send,{Blind}+{home}
+	Send,{Blind}^{c}
+	Sleep ,200
+	Send,{Blind}{left}
 }	
 return
 
@@ -65,8 +64,7 @@ Send,{Blind}^{x}
 }	
 return
 
-;====================================================| charactor complete |====================================================
-
+;=======|	�ַ�����	|============================================
 capslock & {:: 
 Clipboard = 
 Send, ^{c}
@@ -76,7 +74,6 @@ if !ErrorLevel
 Send,^{c}{{}{}}{left}^{v}
 }
 return
-
 
 capslock & }:: 
 Clipboard = 
@@ -88,7 +85,6 @@ Send,^{c}{[}{]}{left}^{v}
 }
 return
 
-
 capslock & ':: 
 Clipboard = 
 Send, ^{c}
@@ -99,18 +95,7 @@ Send,^{c}{`"}{`"}{Left}^{v}
 }
 return
 
-
-;~ CapsLock & w::
-;~ if  GetKeyState("u","p")
-;~ {
-	;~ Send, sldk.,^{BS}
-;~ }
-;~ if GetKeyState("p","p")
-	;~ Send,{bs}+{Home}{BS}
-;~ else 
-	;~ Send ,{Blind}{BackSpace}			
-;~ return
-
+;=======|	del BS	|============================================
 capslock & w:: 
 KeyWait w
 if (A_TimeSinceThisHotkey > 200)
@@ -122,7 +107,6 @@ else
 	Send ,{Blind}{BackSpace}			
 }
 return
-
 
 capslock & r:: 
 KeyWait r
@@ -136,7 +120,7 @@ else
 }
 return
 
-	;============================================================|function|===========================================================
+;=======|	function	|============================================
 capslock_movtion(key)
 {
 	if (key == "h")
@@ -192,4 +176,11 @@ capslock_movtion(key)
 	}
 	return
 }
+
+CapsLock & F1::Run config.ini
+;=======|	snipaste	|============================================
+CapsLock & F2:: Send #^!+{F2}
+CapsLock & F3:: Send  #!^+{F3}
+;=======|	ScreenToGif	|============================================
+CapsLock & F4:: Send !^+{F4}
 

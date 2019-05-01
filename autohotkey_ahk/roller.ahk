@@ -1,17 +1,5 @@
-*`;:: normal_key(";")
-`; & j:: roller("j")
-`; & k:: roller("k")
-`; & h:: roller("h")
-`; & l:: roller("l")
-`; & f:: roller("f")
-`; & s:: roller("s")
-
-`; & u:: Send, {LButton}
-`; & o:: Send, {RButton}
-
-`; & i:: Send, ^{Home}
-`; & m:: Send, ^{end}
-
+;=======|	function	|============================================
+$*`;:: normal_key(";")
 roller(key)
 {
 	global static roller_speed := 1
@@ -46,29 +34,19 @@ message_rollerSpeed:
 SetTimer , message_rollerSpeed , off
 ToolTip
 return
+`; & j:: roller("j")
+`; & k:: roller("k")
+`; & h:: roller("h")
+`; & l:: roller("l")
+`; & f:: roller("f")
+`; & s:: roller("s")
+
+`; & u:: Send, {LButton}
+`; & o:: Send, {RButton}
+
+`; & i:: Send, ^{Home}
+`; & m:: Send, ^{end}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+`; & t::run %temp%
+`; & a::Run %dailyRecordPath%
