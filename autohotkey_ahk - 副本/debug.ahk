@@ -11,7 +11,7 @@ do1(num,item,keyup){
 }
 
 
-; #!^+f1::
+#!^+f1::
 temp1 := StrSplit(allString, "`,")
 count := temp1._maxIndex()
 Loop, %count%
@@ -34,17 +34,14 @@ Loop, %count%
 Return
 
 
-CapsLock & esc::
-func_tooltip("reloading")
-Reload
-return
-
+CapsLock & esc::Reload
 
 capslock & `::
-FileCopy, ./config.ini , "D:\code\AHK\autohotkey_study\autohotkey_ahk\config.ini"
-Run,  "C:\Users\chen\AppData\Local\Programs\Microsoft VS Code\Code.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk"
-Run, "D:\code\AHK\AutoHotkey.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk\superKey.ahk"
+Run %ahkFilePath%
+run %ahkRunPath% %ahkPath%
+Run %ahkPath%
+run %exeFilePath%
+FileCopy,%exeConfigPath% ,%ahkConfigPath%
 ExitApp
 return
 
-; !+#^F2::Run "powershell.exe" "ahk.ps1"

@@ -27,34 +27,34 @@ capslock & 0::funcwWinActive(10)
 
 
 ;=======|	winActiveHide	|============================================
-func_winActiveHide(ways,progrmClass,programPath,hideMode:=True)
+func_winActiveHide(ways,progrmClass,programPath)
 {
 	global activePid
 	IfWinExist, %ways% %progrmClass%
 		IfWinActive, %ways% %progrmClass%
 			{
 				Send !{ESC}
-				if (hideMode == 0)
-					WinMinimize
-				else
-					WinHide
+				WinHide
 			}
 		else 
 		{
-			if(hideMode == False)
-				WinMaximize
-			else
-				WinShow %ways% %progrmClass%
+			WinShow %ways% %progrmClass%
 			WinActivate
 		}
 	else{
 		WinShow %ways% %progrmClass%
-		WinActivate
+		; WinActivate %ways% %progrmClass%
 		IfWinNotActive, %ways% %progrmClass%
 		{
-			func_tooltip("wait a moment",2000)
+			WinKill %ways% %progrmClass%
+			func_tooltip("wait a moment")
 			run %programPath%
-			WinActivate %ways% %progrmClass%
+			; WinGet activePid ,pid
+			; temp := StrSplit(programPath, ".")
+			; temp := StrSplit(temp,"\")
+			; count := temp._maxIndex()
+			; MsgBox, % count
+			; _iniWrite("WINACTIVETE",temp[count],activePid)
 		}
 	}
 }
@@ -63,11 +63,27 @@ func_winActiveHide(ways,progrmClass,programPath,hideMode:=True)
 *$enter::normal_key("enter")
 
 ;=======|	oneNote	|============================================
-Enter & n::func_winActiveHide("ahk_class","Framework::CFrame","C:\Program Files\Microsoft Office\root\Office16\ONENOTE.EXE")
+Enter & n::func_winActiveHide("ahk_class","Framework::CFrame","C:\Program Files (x86)\Microsoft Office\root\Office16\ONENOTE.EXE")
+
 
 ;=======|	yinxiang	|============================================
-Enter & a::func_winActiveHide("ahk_class","YXMainFrame",%yinxiang%)
-
+Enter & a::
+IfWinActive ahk_class YXMainFrame
+{
+	func_winActiveHide("ahk_class","YXMainFrame",%yinxiang%)
+	Sleep 600
+	Click 893,246
+}else{
+	KeyWait a
+	if (A_TimeSinceThisHotkey > 200)
+		func_winActiveHide("ahk_class","YXMainFrame",%yinxiang%)
+	else{
+		Send !#^+{n}
+		Sleep 600
+		Send {enter 2}
+	}
+}
+return
 
 
 ;=======|	xortime	|============================================
@@ -76,12 +92,12 @@ func_winActiveHide("ahk_class","XorTime","C:\Program Files (x86)\XorTime\XorTime
 WinHide ahk_class #32770
 return
 ;=======|	vnote	|============================================
-enter & v::func_winActiveHide("ahk_exe", "vnote.exe","D:\Program Portable\VNote\VNote.exe",False)
+enter & v::func_winActiveHide("ahk_exe", "vnote.exe","D:\Program Portable\VNote\VNote.exe")
 
 
 
 ;~ eagle download
 Enter & e::func_winActiveHide("ahk_class","EagleGet","C:\Program Files (x86)\EagleGet\EagleGet.exe")
-;~ fdma
+;~ fdm
 Enter & F::func_winActiveHide("ahk_exe","fdm.exe","C:\Program Files\FreeDownloadManager.ORG\Free Download Manager\fdm.exe")
 ; F1::func_winActiveHide("ahk_pid","5240","C:\Users\chen\AppData\Local\Programs\Microsoft VS Code\Code.exe")

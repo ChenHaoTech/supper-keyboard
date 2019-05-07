@@ -52,7 +52,7 @@ space & 8:: num_char("8")
 space & 0:: num_char("0")
 space & 9:: 
 IfWinActive ahk_group IDE
-	send , (
+	send , (){left}
 else
 {
 	Clipboard := ""
@@ -78,7 +78,7 @@ num_char(key,num:=1){
 		Send ^{c}
 		ClipWait 0.1
 		if ErrorLevel
-			Send,+{%key% %num%}
+			Send,+{%key% %num%}{left}
 		else{
 			Send, ^{c}
 			Send,+{%key% 2}{left}			
@@ -105,7 +105,6 @@ space & F1::
 send #!^{F1}
 convertTypeWriter("E")
 return
-;
 Space & F2:: 
 MouseGetPos, xpos, ypos 
 Clipboard := xpos . "," . ypos
@@ -121,6 +120,11 @@ Clipboard :="path """ .  temp0 . "`nahk_exe " . temp1 . "`nahk_class " . temp2 .
 				. "`npid " . temp4
 func_tooltip(Clipboard)
 return
+Space & F12::Run D:\����\��Ҫ��ͼ\�α�.png
+
+space & F10::run C:\Windows\System32\control.exe
+
+
 
 space & t::
 WinSet AlwaysOnTop ,Toggle ,A

@@ -5,7 +5,6 @@
 SetCapsLockState, AlwaysOff
 SendMode Input
 SetTitleMatchMode, 2
-FileEncoding utf-8
 ;==================================================================================
 ;==================================================================================
 ;
@@ -13,21 +12,10 @@ FileEncoding utf-8
 ;
 ;==================================================================================
 ;==================================================================================
-;=======|	UWP config 	|============================================
-UWPedgeSignal := False
-;=======|	winA mode	|============================================
-noteSignal := False
-codeSignal := False
-IniRead, rootFile,./config.ini,filePath,ROOTFILE
-noteFile := rootFile . "note\"
-IniRead, lastDate, ./config.ini, DATE, Today, "20190502"
-IniRead, lastDateName, ./config.ini, DATE, TodayString, "2019_05_02"
-IniRead,notePath,./config.ini,filePath,todayNotePath
 ;=======|	debug	|============================================
 allStringWithNum := "1,2,3,4,5,6,7,8,9,0,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
 allString := "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
 ;=======|	search string	|============================================
-searchSignal := False
 searchEnginName := Object()
 searchEnginString := Object()
 searchPrompt :="please input SearchString`n"
@@ -40,7 +28,6 @@ Loop 10{
 	searchEnginName[A_Index] := temp1
 	searchEnginString[A_Index] := temp2
 }
-; prompt
 Loop 5{
 	temp1 := searchEnginName[A_Index*2-1]
 	temp2 := searchEnginName[A_Index*2]
@@ -57,22 +44,22 @@ loop 20{
 	keyWinBind[A_Index] := temp
 }
 
-; ;=======|	winRmode	|============================================
+;=======|	winRmode	|============================================
 winRsignal := 0
-; winRsignal2 := 0
-; winRArray := Object()
-; loop 676{
-; 	IniRead  temp, config.ini,winR, %A_Index%
-; 	winRArray[A_Index] := temp
-; }
+winRsignal2 := 0
+winRArray := Object()
+loop 676{
+	IniRead  temp, config.ini,winR, %A_Index%
+	winRArray[A_Index] := temp
+}
 ;=======|	winEmode	|============================================
-winEsignal := False
-; winEsignal2 := 0
-; winEArray := Object()
-; loop 676{
-; 	IniRead  temp, config.ini,winE, %A_Index%
-; 	winEArray[A_Index] := temp
-; }
+winEsignal := 0
+winEsignal2 := 0
+winEArray := Object()
+loop 676{
+	IniRead  temp, config.ini,winE, %A_Index%
+	winEArray[A_Index] := temp
+}
 
 ;=======|	daily record	|============================================
 IniRead  dailyRecordPath, config.ini,filePath, dailyRecordPathKey
@@ -90,11 +77,6 @@ GroupAdd, notePad,ahk_exe Code.exe
 ;=======|	group IDE	|============================================
 GroupAdd , IDE,ahk_exe Code.exe
 GroupAdd ,IDE ,ahk_class PX_WINDOW_CLASS
-GroupAdd ,IDE ,ahk_exe ConEmu64.exe
-;=======|	shift==>ctrl	|============================================
-GroupAdd , altNum,ahk_exe Code.exe
-GroupAdd ,altNum, ahk_exe ConEmu64.exe
-groupadd ,altNum, ahk_class PX_WINDOW_CLASS
 ;=======|	ahk file	|============================================
 IniRead  exePath, config.ini,AHKPATH, exe
 IniRead  exeFilePath, config.ini,AHKPATH, exeFile
@@ -102,7 +84,14 @@ IniRead  exeConfigPath, config.ini,AHKPATH, exeConfig
 IniRead  ahkPath, config.ini,AHKPATH, ahk
 IniRead  ahkFilePath, config.ini,AHKPATH, ahkFile
 IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
-; ListVars
+;=======|	WINACTIVETEHIDE	|============================================
+IniRead temp,config.ini,winBind_id
+Loop, Parse, temp , "`n"
+{
+	; todo 文件写未完成
+	array := StrSplit(A_LoopField, "=")
+	winActiveHide[array[1]] := array[2]
+}
 
 ;==================================================================================
 ;==================================================================================
@@ -114,29 +103,18 @@ IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
 #Include, ./capslock.ahk
 #Include, ./winActive.ahk
 #Include, ./space.ahk
-#Include, ./typing.ahk	
+#Include, ./typing.ahk
 #Include, ./roller.ahk
 #Include, ./search.ahk
 #Include, ./string.ahk
 #Include, ./transparent.ahk
 #Include, ./winActive.ahk
-#Include, ./debug.ahk
 #Include, ./winR.ahk
-#Include,  ./winE.ahk
-#Include, ./shift.ahk
-#Include, ./winA.ahk
-;=======|	function	|============================================ 
-longPress(key,time:=200)
-{
-	KeyWait %key%
-	if (A_TimeSinceThisHotkey > time)
-	{
-		return True
-	}else{
-		return False
-	}
-}
+#Include, ./winE.ahk
+#Include, ./winOther.ahk
+#Include, ./debug.ahk
 
+;=======|	function	|============================================
 normal_key(key)
 {
 	sendInput,{blind}{%key%}
@@ -192,10 +170,6 @@ $F2::Send , {F2}{Right}
 ;=======|	vnote	|============================================
 #IfWinActive ahk_exe D:\Program Portable\VNote\VNote.exe
 \::send ^{e}
-!i::
-send !{i}
-send {i}
-return
 #if
 ;=======|	dito	|============================================
 Space & v::send !^+#{v}
@@ -206,59 +180,16 @@ Space & v::send !^+#{v}
 ;=======|	qq tim	|============================================
 CapsLock & Tab::
 Send !^+{z}
-Sleep 100
 IfWinActive, ahk_exe tim.exe
-{
 	convertTypeWriter("C")
-}
 return
 #IfWinActive ahk_exe TIM.exe
-; alt
 !F::Click 205,52
 !s::click 500,742
 !v::
 Click 1002,113 
 Sleep 1000
 Click 1060,308
-return
-
-!-::MouseMove 139,397
-!=::MouseMove 698,418
-
-!p::
-Click 205,52
-send 手机
-Sleep 100
-send {enter}
-return
-
-!b::
-Click 205,52
-send 宝宝
-Sleep 100
-send {enter}
-return
-
-!m::click 717,200
-
-; shift
-+`:: click 151,122
-+1:: click 226,198
-+2:: click 187,296
-+3:: click 199,398
-+4:: click 148,480
-+5:: click 133,593
-+6:: click 151,665
-+7:: click 117,753
-+8:: click 110,855
-
-
-;string
-`::
-send ``
-convertTypeWriter("E")
-Sleep 2000
-convertTypeWriter("C")
 return
 #if
 ;=======|	wechat	|============================================
@@ -269,16 +200,6 @@ IfWinActive, ahk_exe wechat.exe
 return
 #IfWinActive ahk_exe WeChat.exe
 !F::Click 313,54
-!-::MouseMove 308,326
-!=::MouseMove 666,319
-
-+1::click 366,145
-+2::click 333,255
-+3::click 273,313
-+4::click 263,456
-+5::click 237,544
-+6::click 236,636
-+7::click 222,730
 #if
 ;=======|	Scite notePad++ subLine++	|============================================
 #IfWinActive ahk_class SciTEWindow
@@ -295,22 +216,7 @@ Send {enter}
 return
 #If
 ;=======|	explore.exe	|============================================
-#IfWinActive, ahk_class #32770
-!a::
-click 181,110
-return
-!f::
-click 540,214
-return
-#If
 #IfWinActive ahk_class CabinetWClass
-!=::
-click 738,638
-Sleep 300
-send {esc}
-return
-!-::MouseMove 328,597
-
 !a::
 Sleep 500
 Send ,{RButton}
@@ -326,8 +232,6 @@ Space & f::send, !+^{f}
 ;=======|	QTranslate |============================================
 CapsLock & T::
 Send !{0}
-Sleep 500
-send {CtrlUp}}
 return
 ;=======|	eveerything		|============================================
 CapsLock & n::Run C:\Program Files\Everything\Everything.exe
@@ -381,6 +285,7 @@ return
 		func_tooltip("in draw mode")
 		Click 288,87
 		MouseMove xpos, ypos
+		
 		return
 #if
 
@@ -397,94 +302,3 @@ return
 
 ;=======|      mailbox |============================================
 enter & BS::Send !^+{p}
-
-;=======|	chrome	|============================================
-#IfWinActive, ahk_exe chrome.exe
-!capslock::
-click 1492,94
-MouseMove 1396,156
-return
-
-!w::
-send !{w}
-Sleep 500
-click 1696,315
-MouseMove 300,513
-return
-#if
-
-;=======|	FOXITREADER 	|============================================
-#IfWinActive, ahk_class classFoxitReader
-!1::FOXITREADER(366,119)
-!2::FOXITREADER(301,119)
-!3::FOXITREADER(51,125)
-
-!CapsLock::
-click 198,56
-click 155,116
-click 768,62
-return
-#if
-FOXITREADER(x,y){
-		MouseGetPos, xpos, ypos 
-		Click %x%,%y%
-		MouseMove xpos, ypos
-}
-
-
-;=======|	uwp	|============================================
-#IfWinActive, ahk_class ApplicationFrameWindow
-!capslock::
-if UWPedgeSignal == true
-	UWPedgeSignal := False
-else
-{
-	MsgBox, 4,, is edge?
-	IfMsgBox Yes
-	{
-		UWPedgeSignal := True
-		MouseGetPos x1,y1
-		click 1305,94
-		MouseMove %x1% , %y1%
-	}
-	else
-	UWPoneNoteSignal := True
-}
-#if
-
-
-#if (UWPedgeSignal == true) and WinActive("ahk_class ApplicationFrameWindow")
-!1::edgeDraw(1513,225)
-!2::edgeDraw(1427,240)
-!3::edgeDraw(1184,225)
-edgeDraw(x,y){
-	MouseGetPos x1,y1
-	click 1527,87
-	click 1391,95
-	click 1391,95
-	Sleep 100
-	Click %x%,%y%	
-	MouseMove %x1% , %y1%
-	return
-}
-!4::
-MouseGetPos x1,y1
-click 1527,87
-click 1329,77
-MouseMove %x1% , %y1%
-return
-
-; erazer
-!z::
-MouseGetPos x1,y1
-click 1527,87
-click 1451,77
-MouseMove %x1% , %y1%
-return
-
-!a::
-MouseGetPos x,y
-click 1532,95
-MouseMove %x%, %y%
-return
-#if

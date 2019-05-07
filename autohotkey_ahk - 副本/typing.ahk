@@ -12,6 +12,7 @@ convertTypeWriter(key){
     }
     if(key == "C"){
         PostMessage, 0x50,, 0x8040804,, A
+        Send, ^{space}
         func_tooltip("chinese")
     }
 }

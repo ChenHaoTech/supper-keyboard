@@ -179,7 +179,7 @@ capslock_movtion(key)
 
 CapsLock & F1::Run config.ini
 ;=======|	snipaste	|============================================
-CapsLock & F2:: Send #^!+{PrintScreen}
+CapsLock & F2:: Send #^!+{F2}
 CapsLock & F3:: Send  #!^+{F3}
 ;=======|	ScreenToGif	|============================================
 CapsLock & F4:: Send !^+{F4}

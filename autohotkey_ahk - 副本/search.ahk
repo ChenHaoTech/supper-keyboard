@@ -1,17 +1,12 @@
 CapsLock & Q::
-searchSignal := True
 if(func_getClipboard())
-	InputBox , SearchString, Searcher, %searchPrompt%,,250,230,,,,,%Clipboard%	
+	run % searchEnginDefaultString . Clipboard
 else{
 	InputBox , SearchString, Searcher, %searchPrompt%,,250,230,,,,,%SearchString%
 }
 return
 
-#if (searchSignal == true)
-CapsLock:: 
-searchSignal := False
-Send {esc}
-return
+#If WinActive("ahk_exe D:\AHK\AutoHotkey.exe")
 !1::funcSearch(1)
 !2::funcSearch(2)
 !3::funcSearch(3)
@@ -24,15 +19,12 @@ return
 !0::funcSearch(10)
 return
 funcSearch(modeID){
-	global searchSignal
 	global searchEnginString 
 	global SearchString
-	searchSignal := False
 	mode := searchEnginString[modeID]
 	Send, {Enter}	
 	runString := mode . SearchString
 	run %runString%
 	return
-
 }
 #if
