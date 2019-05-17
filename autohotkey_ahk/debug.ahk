@@ -39,12 +39,11 @@ func_tooltip("reloading")
 Reload
 return
 
-
-capslock & `::
-FileCopy, ./config.ini , "D:\code\AHK\autohotkey_study\autohotkey_ahk\config.ini"
-Run,  "C:\Users\chen\AppData\Local\Programs\Microsoft VS Code\Code.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk"
-Run, "D:\code\AHK\AutoHotkey.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk\superKey.ahk"
-ExitApp
-return
+; capslock & `::
+; FileCopy, ./config.ini , "D:\code\AHK\autohotkey_study\autohotkey_ahk\config.ini"
+; Run,  "C:\Users\chen\AppData\Local\Programs\Microsoft VS Code\Code.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk"
+; Run, "D:\code\AHK\AutoHotkey.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk\superKey.ahk"
+; ExitApp
+; return
 
 ; !+#^F2::Run "powershell.exe" "ahk.ps1"

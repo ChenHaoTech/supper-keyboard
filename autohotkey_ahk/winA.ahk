@@ -4,14 +4,21 @@
 if(longPress("a",time:=200)){ 
     Run "D:\Program Portable\VNote\VNote.exe" %notePath%   
 }Else{
-    noteSignal := True
-    codeSignal := true
-    gui,Add,Edit,vCode r20 w400 wanttab 
-    gui,Show,x42 y50,note
+    IfWinExist, note ahk_class AutoHotkeyGUI
+    {
+        WinActivate, note ahk_class AutoHotkeyGUI
+    }
+    Else
+    {
+        noteSignal := True
+        func_tooltip()
+        gui,Add,Edit,vCode r20 w400 wanttab 
+       gui,Show,x42 y50,note
+    }
 }
 Return
 
-
+ExitSuperKey:
 GuiClose:
 gui,Submit
 gui,Destroy
@@ -73,7 +80,23 @@ codeWrite(code,fileName:="./noteTemp.md"){
     file.Close()
 }
 
-#if noteSignal == true
+#if noteSignal == true and (winActive("ahk_class AutoHotkeyGUI"))
+!2::
+^2::
+Send {#}{#}{Space}
+return
+
+!1::
+^1::
+func_tooltip("heading 1 is not allowed")
+return
+
+!3::
+^3::
+Send {#}{#}{#}{Space}
+return
+
+^M::
 !M::
 Send,^{Space}
 Send, ``````{Enter}``````{up}

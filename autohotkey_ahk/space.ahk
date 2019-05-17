@@ -70,6 +70,10 @@ return
 space & ':: num_char("'",2)
 
 num_char(key,num:=1){
+	if(longPress(key)){
+		send +{%key%}		
+		return
+	}
 	IfWinActive, ahk_group IDE
 		send +{%key%}
 	else
@@ -97,9 +101,14 @@ space & m:: MoveCurses("m")
 space & i:: MoveCurses("i")
 space & `;:: Send,{:}
 ;==================================|space ctrl |========================================
-space & w::send, ^{s}
+space & w::	send, ^{s}
 space & q:: send,!{f4} 
-Space & x:: Send, ^{w}
+Space & x::
+IfWinActive ahk_group IDE
+	send ^{F4}
+else
+ 	Send, ^{w}
+return
 
 space & F1::
 send #!^{F1}
@@ -107,8 +116,10 @@ convertTypeWriter("E")
 return
 ;
 Space & F2:: 
+; CoordMode,  mouse,window
 MouseGetPos, xpos, ypos 
-Clipboard := xpos . "," . ypos
+Clipboard :=xpos . "," . ypos
+func_tooltip(Clipboard)
 return
 
 Space & F8::

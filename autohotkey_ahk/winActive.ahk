@@ -1,16 +1,39 @@
 ;=======|	function	|============================================
 funcwWinActive(id){
 	global keyWinBind
+	global keyWinBindPath
+	winID := "win" . id
 	if getkeyState("alt","p")
 	{
 		WinGet, wid, ID, A
-		winID := "win" . id
+		WinGet,wpath,ProcessPath,A
+		IniWrite,%wpath%,config.ini,winBind_path,%winID%
 		IniWrite, %wid%, config.ini, winBind_id,  %winID%	
 		keyWinBind[id] := wid
+		keyWinBindPath[id] := wpath
 	}else
 	{	
 		wid := keyWinBind[id]
-		WinActivate, ahk_id  %wid%
+		IfWinNotExist,  ahk_id %wid%
+		{
+			path := keyWinBindPathp[id]
+			MsgBox, 4,, confirm runing?  %path%
+			IfMsgBox Yes
+			{
+				WinGet, wid, ID, A
+				WinGet,wpath,ProcessPath,A
+				IniWrite,%wpath%,config.ini,winBind_path,%winID%
+				IniWrite, %wid%, config.ini, winBind_id,  %winID%	
+				keyWinBind[id] := wid
+				keyWinBindPath[id] := wpath
+				run % keyWinBindPath[id]
+
+			}
+			else
+				return
+		}
+		else
+			WinActivate, ahk_id  %wid%
 	}
 }
 ;=======|	key	|============================================
@@ -67,7 +90,6 @@ Enter & n::func_winActiveHide("ahk_class","Framework::CFrame","C:\Program Files\
 
 ;=======|	yinxiang	|============================================
 Enter & a::func_winActiveHide("ahk_class","YXMainFrame",%yinxiang%)
-
 
 
 ;=======|	xortime	|============================================

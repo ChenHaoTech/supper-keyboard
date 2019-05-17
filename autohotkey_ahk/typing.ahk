@@ -30,5 +30,20 @@ IME_GET(WinTitle="")
     Return ErrorLevel
 }
 ;=======|	key	|============================================
-space & e:: convertTypeWriter("E")
-space & c:: convertTypeWriter("C")
+space & e:: 
+if (longPress("e")){
+    Send, ^{space}
+    func_tooltip("English sougou")
+}Else{
+    convertTypeWriter("E")
+}
+Return
+
+space & c:: 
+if (longPress("c")){
+    Send, ^{space}
+    func_tooltip("Chinese sougou")
+}Else{
+    convertTypeWriter("C")
+}
+Return

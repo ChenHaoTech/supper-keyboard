@@ -12,6 +12,7 @@ CapsLock::
 searchSignal := False
 Send {esc}
 return
+; $*Enter::funcSearch(1)
 !1::funcSearch(1)
 !2::funcSearch(2)
 !3::funcSearch(3)
@@ -22,8 +23,9 @@ return
 !8::funcSearch(8)
 !9::funcSearch(9)
 !0::funcSearch(10)
+!g::funcSearch(-1,0)
 return
-funcSearch(modeID){
+funcSearch(modeID,direcRun:=False){
 	global searchSignal
 	global searchEnginString 
 	global SearchString
@@ -31,7 +33,10 @@ funcSearch(modeID){
 	mode := searchEnginString[modeID]
 	Send, {Enter}	
 	runString := mode . SearchString
-	run %runString%
+	if (direcRun==False)
+		run %runString%
+	else
+		run   %SearchString%
 	return
 
 }

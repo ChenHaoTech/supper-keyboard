@@ -6,6 +6,9 @@ SetCapsLockState, AlwaysOff
 SendMode Input
 SetTitleMatchMode, 2
 FileEncoding utf-8
+
+;=======|	mouse	|============================================
+CoordMode, mouse, window
 ;==================================================================================
 ;==================================================================================
 ;
@@ -13,6 +16,9 @@ FileEncoding utf-8
 ;
 ;==================================================================================
 ;==================================================================================
+;=======|	PDF	|============================================
+FOXITREADER_signal := False
+areaHightLIght := False
 ;=======|	UWP config 	|============================================
 UWPedgeSignal := False
 ;=======|	winA mode	|============================================
@@ -56,6 +62,12 @@ loop 20{
 	IniRead  temp, config.ini,winBind_id, %winID%
 	keyWinBind[A_Index] := temp
 }
+keyWinBindPath := Object()
+loop 20{
+	winID := "win" . A_Index
+	IniRead  temp, config.ini,winBind_path, %winID%
+	keyWinBindPath[A_Index] := temp
+}
 
 ; ;=======|	winRmode	|============================================
 winRsignal := 0
@@ -91,6 +103,7 @@ GroupAdd, notePad,ahk_exe Code.exe
 GroupAdd , IDE,ahk_exe Code.exe
 GroupAdd ,IDE ,ahk_class PX_WINDOW_CLASS
 GroupAdd ,IDE ,ahk_exe ConEmu64.exe
+GroupAdd ,IDE,ahk_class SunAwtFrame
 ;=======|	shift==>ctrl	|============================================
 GroupAdd , altNum,ahk_exe Code.exe
 GroupAdd ,altNum, ahk_exe ConEmu64.exe
@@ -125,6 +138,7 @@ IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
 #Include,  ./winE.ahk
 #Include, ./shift.ahk
 #Include, ./winA.ahk
+#Include, ./wheel.ahk 
 ;=======|	function	|============================================ 
 longPress(key,time:=200)
 {
@@ -160,7 +174,7 @@ Clipboard =
 Send,^{c}
 ClipWait 0.1
 if ErrorLevel
-	return 0
+return 0
 return 1
 }
 ;=======|	tooltip	|============================================
@@ -215,7 +229,7 @@ return
 #IfWinActive ahk_exe TIM.exe
 ; alt
 !F::Click 205,52
-!s::click 500,742
+!s::click 579,736
 !v::
 Click 1002,113 
 Sleep 1000
@@ -285,9 +299,21 @@ return
 F5::click 506,83
 #If
 ;=======|	chm exe	|============================================
+#IfWinActive, ahk_exe ExtraChm.exe
+!1::chm(54,130)
+!2::chm(157,143)
+!3::chm(234,129)
+!4::chm(291,128)
+chm(x,y){
+	MouseGetPos xpos,ypos
+	click %x%,%y%
+	MouseMove % xpos,ypos
+}
+#if
 #IfWinActive ahk_exe C:\Windows\hh.exe
 !p::
-click 280,100
+; click 280,100
+send ^{p}
 Sleep 500
 Send {enter}
 Sleep 500
@@ -323,11 +349,15 @@ return
 Enter & d::Send, !+^{o}
 space & a::send, !+^{a}
 Space & f::send, !+^{f}
-;=======|	QTranslate |============================================
+;=======|	Translate |============================================
 CapsLock & T::
+IfWinActive ahk_exe idea64.exe
+	{
+		send ^+{y}
+		return
+	}
 Send !{0}
 Sleep 500
-send {CtrlUp}}
 return
 ;=======|	eveerything		|============================================
 CapsLock & n::Run C:\Program Files\Everything\Everything.exe
@@ -336,7 +366,7 @@ CapsLock & n::Run C:\Program Files\Everything\Everything.exe
 #IfWinActive,  ahk_exe XorTime.exe
 F5::
 send {f6}{up}
-Sleep 300
+Sleep 500
 send {down}
 Sleep 300
 send {F5}
@@ -348,12 +378,31 @@ return
 	!1::func_oneNote(678,177)
 	!2::func_oneNote(758,173)
 	!3::func_oneNote(764,139)
-	!4::func_oneNote(521,140)
-	!z::func_oneNote(297,140)
-	func_oneNote(x,y){
-		Send {esc}
+	!4::func_oneNote(521,140,1)
+	!z::func_oneNote(254,124)
+	+`::func_oneNote3(1047,154)
+	+1::func_oneNote3(1009,117)
+	+2::func_oneNote3(1049,115)
+	+3::func_oneNote3(46,157,1,0)
+	+4::func_oneNote3(-1,-1,0)
+	func_oneNote3(x,y,addAction:=1,addAction2:=1){
+		send {esc}
 		MouseGetPos, xpos, ypos 
+		if(addAction2 == true){
+			click 398,132
+		}
+		if(addAction == true){
+			Click %x%,%y%			
+		}
+		MouseMove xpos, ypos
+	}
+	func_oneNote(x,y,addAction:=0){
+		MouseGetPos, xpos, ypos 
+		click 55,128	
 		Click %x%,%y%
+		if(addAction == true){
+			click 1051,144
+		}
 		MouseMove xpos, ypos
 	}
 	
@@ -365,12 +414,11 @@ return
 	MouseMove xpos, ypos
 	return 
 #If WinActive("ahk_exe" "ONENOTE.EXE") and (signStateOneNote == 1)
-		!1::func_oneNote2(23,196)
-		!2::func_oneNote2(159,156)
-		!3::func_oneNote2(31,30)
+		!1::func_oneNote2(747,140)
+		!2::func_oneNote2(757,186)
+		; !3::func_oneNote2(31,30)
 		func_oneNote2(x,y){	
 			MouseGetPos, xpos, ypos 
-			Click 447,196
 			Click %x%,%y%
 			MouseMove xpos, ypos
 		}
@@ -400,36 +448,105 @@ enter & BS::Send !^+{p}
 
 ;=======|	chrome	|============================================
 #IfWinActive, ahk_exe chrome.exe
+!-::MouseMove 172,506
+!=::MouseMove 1178,477
 !capslock::
 click 1492,94
 MouseMove 1396,156
 return
 
-!w::
-send !{w}
+!a::
+send !{a}
 Sleep 500
 click 1696,315
 MouseMove 300,513
 return
 #if
+;=======|	FOXITREADER pdf	|============================================
+; #IfWinActive, ahk_class classFoxitReader
+#IfWinActive, ahk_class classFoxitPhantom
+$capslock::
+send {esc}
+FOXITREADER_signal := False
+; MsgBox %FOXITREADER_signal%
+return
 
-;=======|	FOXITREADER 	|============================================
-#IfWinActive, ahk_class classFoxitReader
+$esc:: 
+if (areaHightLIght == true)
+{
+	areaHightLIght := False
+	func_tooltip("textHightLight")
+}
+else
+{
+	areaHightLIght := true
+	func_tooltip("aeraHightLight")
+}
+FOXITREADER_signal := False
+return
 !1::FOXITREADER(366,119)
-!2::FOXITREADER(301,119)
+!2::FOXITREADER(283,137)
 !3::FOXITREADER(51,125)
+FOXITREADER(x,y){
+	global FOXITREADER_signal
+	global areaHightLIght
+	MouseGetPos, xpos, ypos 
+
+	; not in hightlisgt mode
+	if (FOXITREADER_signal == False)
+	{
+		; MsgBox %FOXITREADER_signal%
+		; click 注释
+		click 430,52
+		if( areaHightLIght == true)
+		{
+			send {esc}
+			; areaHight
+			click 768,109
+			FOXITREADER_signal := False
+		}else{
+			; textHight
+			click 152,114
+			FOXITREADER_signal := true
+		}
+		; click 注释格式
+		; MsgBox %areaHightLIght%
+		click 1026,67
+		func_tooltip("in hightLight mode")
+	}
+	
+	Click %x%,%y%
+	MouseMove xpos, ypos
+	
+}
 
 !CapsLock::
-click 198,56
-click 155,116
-click 768,62
+MouseGetPos, xpos, ypos 
+; click 注释
+click 431,60
+; click 文本注释
+click 169,111
+; click 注释格式
+click 1004,66
+MouseMove xpos, ypos
+FOXITREADER_signal := trueMMM 
 return
+
+
++`::FOXITREADER2(67,27)
++1::FOXITREADER2(103,29)
++2::FOXITREADER2(128,18)
++3::FOXITREADER2(156,21)
++4::FOXITREADER2(190,27)
 #if
-FOXITREADER(x,y){
-		MouseGetPos, xpos, ypos 
-		Click %x%,%y%
-		MouseMove xpos, ypos
+FOXITREADER2(x,y){
+	global FOXITREADER_signal
+	FOXITREADER_signal := False
+	MouseGetPos, xpos, ypos 
+	click %x% ,%y%
+	MouseMove xpos, ypos
 }
+
 
 
 ;=======|	uwp	|============================================
@@ -488,3 +605,66 @@ click 1532,95
 MouseMove %x%, %y%
 return
 #if
+
+
+;=======|	ppt	|============================================
+#IfWinActive,  ahk_class screenClass
+!a::
+click 380,1047
+Sleep 500
+click 380,1047
+return
+#If
+
+
+;=======|	eagle	|============================================
+#IfWinActive, ahk_class EagleGet
+$*enter::click 1228,780
+#if	
+
+;=======|	截图	|============================================
+#F2:: send !^+{F2}
+#F3:: send !+^{F3}
+#IfWinActive ahk_class TTextBoard
+capslock::send {F1}
++`::send {F9}
++1::send {F8}
++2::send {F6}
++3::send {F3}
++4::send {F7}
+^s::send ^{p}
+
+!1:: TTextBoard(246,529)
+!2:: TTextBoard(336,515)
+!3:: TTextBoard(618,524)
+TTextBoard(x,y){
+	MouseGetPos xpos,ypos
+	send {F12}
+	click 278,990
+	click %x% ,%y%
+	MouseMove %xpos%, %ypos%
+}
+#if
+
+;=======|	listary	|============================================
+; !space::send !+^{l}
+;=======|	cocall	|============================================
+capslock & `::
+WinActivate, ahk_exe cocall.exe
+Send +!^{c}
+return
+
+;=======|	idea	|============================================
+; #IfWinActive, ahk_exe idea64.exe
+; +1::IDEA(489,91)
+; +2::IDEA(726,92)
+; +3::IDEA(903,97)
+; +4::IDEA(1132,97)
+; +5::IDEA(1324,92)
+; #if
+; IDEA(x,y){
+; 	MouseGetPos xpos,ypos
+; 	Sleep 200
+; 	click %x% ,%y%
+; 	MouseMove %xpos%, %ypos%
+; }

@@ -1,5 +1,6 @@
 ;=======|	function	|============================================
 $*`;:: normal_key(";")
+
 roller(key)
 {
 	global static roller_speed := 1

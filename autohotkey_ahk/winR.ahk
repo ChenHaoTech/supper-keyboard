@@ -1,3 +1,5 @@
+#Include, ./winA.ahk
+
 #r::
 winRsignal := True
 func_tooltip("win winR mode")
@@ -26,6 +28,7 @@ w & x::winR("D:\Program Portable\wox\Wox-1.3.524.exe","wox")
 
 esc::
 MsgBox, it will exit superKey
+Goto, ExitSuperKey
 ExitApp, 10085
 Return
 

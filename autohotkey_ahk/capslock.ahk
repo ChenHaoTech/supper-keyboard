@@ -180,7 +180,11 @@ capslock_movtion(key)
 CapsLock & F1::Run config.ini
 ;=======|	snipaste	|============================================
 CapsLock & F2:: Send #^!+{PrintScreen}
-CapsLock & F3:: Send  #!^+{F3}
+CapsLock & F3::
+Send  #!^+{F3}
+WinWait, ahk_class Qt5QWindowToolSaveBits
+; send {space}
+return
 ;=======|	ScreenToGif	|============================================
 CapsLock & F4:: Send !^+{F4}
 
