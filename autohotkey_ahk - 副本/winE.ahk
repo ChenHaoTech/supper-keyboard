@@ -1,4 +1,5 @@
 #Include, winR.ahk
+#Include, superkey.ahk
 ;=======|	function	|============================================
 winE(index,key,TrueKey)
 {

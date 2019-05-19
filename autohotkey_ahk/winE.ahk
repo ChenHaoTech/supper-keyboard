@@ -1,13 +1,8 @@
-#Include, ./superkey.ahk
+﻿#Include, ./superkey.ahk
 
 #e::
-if(longPress("e") == False)
-{
-    winEsignal := True
-}Else{
-    run d:\
-    winEsignal := False
-}
+winEsignal := True
+func_tooltip("in winE softe")
 return
 
 #if (winEsignal == true)

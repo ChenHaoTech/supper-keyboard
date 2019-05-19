@@ -1,3 +1,5 @@
+#Include, ./winA.ahk
+
 SendMode, Input
 do(num,item){
     

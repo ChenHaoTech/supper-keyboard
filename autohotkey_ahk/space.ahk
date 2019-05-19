@@ -128,8 +128,9 @@ WinGet ,temp1,ProcessName,A
 WinGetClass ,temp2,A
 WinGet temp3 ,ID,A
 WinGet temp4,PID,A
+WinGetTitle, temp5, A
 Clipboard :="path """ .  temp0 . "`nahk_exe " . temp1 . "`nahk_class " . temp2 . "`nahk_id " . temp3
-				. "`npid " . temp4
+				. "`npid " . temp4 . "`n" . temp5
 func_tooltip(Clipboard)
 return
 

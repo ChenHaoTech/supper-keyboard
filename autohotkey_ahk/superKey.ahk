@@ -55,7 +55,7 @@ Loop 5{
 ;=======|	oneNote	|============================================
 signStateOneNote := 0
 
-;=======|	winBind	|============================================
+;=======|	winBind	winActice |============================================
 keyWinBind := Object()
 loop 20{
 	winID := "win" . A_Index
@@ -236,8 +236,8 @@ Sleep 1000
 Click 1060,308
 return
 
-!-::MouseMove 139,397
-!=::MouseMove 698,418
+<!-::MouseMove 139,397
+<!=::MouseMove 698,418
 
 !p::
 Click 205,52
@@ -256,15 +256,15 @@ return
 !m::click 717,200
 
 ; shift
-+`:: click 151,122
-+1:: click 226,198
-+2:: click 187,296
-+3:: click 199,398
-+4:: click 148,480
-+5:: click 133,593
-+6:: click 151,665
-+7:: click 117,753
-+8:: click 110,855
+<+`:: click 151,122
+<+1:: click 226,198
+<+2:: click 187,296
+<+3:: click 199,398
+<+4:: click 148,480
+<+5:: click 133,593
+<+6:: click 151,665
+<+7:: click 117,753
+<+8:: click 110,855
 
 
 ;string
@@ -283,16 +283,16 @@ IfWinActive, ahk_exe wechat.exe
 return
 #IfWinActive ahk_exe WeChat.exe
 !F::Click 313,54
-!-::MouseMove 308,326
-!=::MouseMove 666,319
+<!-::MouseMove 308,326
+<!=::MouseMove 666,319
 
-+1::click 366,145
-+2::click 333,255
-+3::click 273,313
-+4::click 263,456
-+5::click 237,544
-+6::click 236,636
-+7::click 222,730
+<+1::click 366,145
+<+2::click 333,255
+<+3::click 273,313
+<+4::click 263,456
+<+5::click 237,544
+<+6::click 236,636
+<+7::click 222,730
 #if
 ;=======|	Scite notePad++ subLine++	|============================================
 #IfWinActive ahk_class SciTEWindow
@@ -300,6 +300,9 @@ F5::click 506,83
 #If
 ;=======|	chm exe	|============================================
 #IfWinActive, ahk_exe ExtraChm.exe
+<!-::MouseMove 129,570
+<!=::MouseMove 1071,525
+
 !1::chm(54,130)
 !2::chm(157,143)
 !3::chm(234,129)
@@ -330,12 +333,12 @@ click 540,214
 return
 #If
 #IfWinActive ahk_class CabinetWClass
-!=::
+<!=::
 click 738,638
 Sleep 300
 send {esc}
 return
-!-::MouseMove 328,597
+<!-::MouseMove 328,597
 
 !a::
 Sleep 500
@@ -375,16 +378,16 @@ return
 
 ;=======|	oneNote	|============================================
 #If WinActive("ahk_exe" "ONENOTE.EXE") and (signStateOneNote == 0 or signStateOneNote == "")
-	!1::func_oneNote(678,177)
-	!2::func_oneNote(758,173)
-	!3::func_oneNote(764,139)
-	!4::func_oneNote(521,140,1)
-	!z::func_oneNote(254,124)
-	+`::func_oneNote3(1047,154)
-	+1::func_oneNote3(1009,117)
-	+2::func_oneNote3(1049,115)
-	+3::func_oneNote3(46,157,1,0)
-	+4::func_oneNote3(-1,-1,0)
+	<!1::func_oneNote(678,177)
+	<!2::func_oneNote(758,173)
+	<!3::func_oneNote(764,139)
+	<!4::func_oneNote(521,140,1)
+	<!z::func_oneNote(254,124)
+	<+`::func_oneNote3(1047,154)
+	<+1::func_oneNote3(1009,117)
+	<+2::func_oneNote3(1049,115)
+	<+3::func_oneNote3(46,157,1,0)
+	<+4::func_oneNote3(-1,-1,0)
 	func_oneNote3(x,y,addAction:=1,addAction2:=1){
 		send {esc}
 		MouseGetPos, xpos, ypos 
@@ -442,9 +445,25 @@ Send M
 Send {enter}
 return
 
-
 ;=======|      mailbox |============================================
-enter & BS::Send !^+{p}
+enter & bs::send !+^{p}
+#IfWinActive,ahk_class MainWindow
+<!-::MouseMove 257,336
+<!=::MouseMove 951,290
+<+1::mailbox(258,223)
+<+2::mailbox(234,313)
+<+3::mailbox(222,458)
+<+4::mailbox(215,561)
+<+5::mailbox(199,692)
+<+6::mailbox(193,796)
+!enter::mailbox(344,117)
+mailbox(xpos, ypos){
+	MouseGetPos x, y
+	Sleep 300
+	click %xpos%, %ypos%
+	MouseMove %x%, %y%
+}
+#if
 
 ;=======|	chrome	|============================================
 #IfWinActive, ahk_exe chrome.exe
@@ -533,11 +552,11 @@ FOXITREADER_signal := trueMMM
 return
 
 
-+`::FOXITREADER2(67,27)
-+1::FOXITREADER2(103,29)
-+2::FOXITREADER2(128,18)
-+3::FOXITREADER2(156,21)
-+4::FOXITREADER2(190,27)
+<+`::FOXITREADER2(67,27)
+<+1::FOXITREADER2(103,29)
+<+2::FOXITREADER2(128,18)
+<+3::FOXITREADER2(156,21)
+<+4::FOXITREADER2(190,27)
 #if
 FOXITREADER2(x,y){
 	global FOXITREADER_signal
@@ -627,11 +646,11 @@ $*enter::click 1228,780
 #F3:: send !+^{F3}
 #IfWinActive ahk_class TTextBoard
 capslock::send {F1}
-+`::send {F9}
-+1::send {F8}
-+2::send {F6}
-+3::send {F3}
-+4::send {F7}
+<+`::send {F9}
+<+1::send {F8}
+<+2::send {F6}
+<+3::send {F3}
+<+4::send {F7}
 ^s::send ^{p}
 
 !1:: TTextBoard(246,529)
@@ -668,3 +687,4 @@ return
 ; 	click %x% ,%y%
 ; 	MouseMove %xpos%, %ypos%
 ; }
+

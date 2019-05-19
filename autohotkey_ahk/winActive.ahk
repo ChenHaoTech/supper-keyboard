@@ -1,4 +1,4 @@
-;=======|	function	|============================================
+﻿;=======|	function	|============================================
 funcwWinActive(id){
 	global keyWinBind
 	global keyWinBindPath
@@ -14,23 +14,33 @@ funcwWinActive(id){
 	}else
 	{	
 		wid := keyWinBind[id]
+		wpath := keyWinBindPath[id]
+		; ??id的窗口不存在
 		IfWinNotExist,  ahk_id %wid%
 		{
-			path := keyWinBindPathp[id]
-			MsgBox, 4,, confirm runing?  %path%
-			IfMsgBox Yes
-			{
-				WinGet, wid, ID, A
-				WinGet,wpath,ProcessPath,A
-				IniWrite,%wpath%,config.ini,winBind_path,%winID%
-				IniWrite, %wid%, config.ini, winBind_id,  %winID%	
-				keyWinBind[id] := wid
-				keyWinBindPath[id] := wpath
-				run % keyWinBindPath[id]
-
-			}
-			else
+			if (wpath == "ERROR"){
+				func_tooltip("no exe run")
 				return
+			}
+			; ??exe的窗口不存在
+			IfWinNotExist ahk_exe %wpath%
+			{
+				MsgBox, 4,, confirm runing?  %wpath%
+				IfMsgBox Yes
+				{
+					RunWait,  % keyWinBindPath[id]
+				}	
+			; 窗口存在
+			}else{
+				WinActivate ahk_exe %wpath%
+			}
+			WinWait, ahk_exe %wpath%
+			WinGet, wid, ID, A
+			WinGet,wpath,ProcessPath,A
+			IniWrite,%wpath%,config.ini,winBind_path,%winID%
+			IniWrite, %wid%, config.ini, winBind_id,  %winID%	
+			keyWinBind[id] := wid
+			keyWinBindPath[id] := wpath
 		}
 		else
 			WinActivate, ahk_id  %wid%
@@ -107,3 +117,20 @@ Enter & e::func_winActiveHide("ahk_class","EagleGet","C:\Program Files (x86)\Eag
 ;~ fdma
 Enter & F::func_winActiveHide("ahk_exe","fdm.exe","C:\Program Files\FreeDownloadManager.ORG\Free Download Manager\fdm.exe")
 ; F1::func_winActiveHide("ahk_pid","5240","C:\Users\chen\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+
+enter & p::
+IfWinActive ahk_class CabinetWClass
+{
+	MouseGetPos, x, y
+	; click 1749,13
+	click 1760,27
+	MouseMove, X, Y 
+}
+else
+{
+	run D:\文档
+	WinWait ahk_class CabinetWClass
+	WinMaximize ahk_class CabinetWClass
+}
+return
+

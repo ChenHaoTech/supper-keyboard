@@ -1,5 +1,4 @@
 CapsLock & Q::
-searchSignal := True
 if(func_getClipboard())
 	InputBox , SearchString, Searcher, %searchPrompt%,,250,230,,,,,%Clipboard%	
 else{
@@ -7,10 +6,10 @@ else{
 }
 return
 
-#if (searchSignal == true)
-CapsLock:: 
-searchSignal := False
+#if  WinActive("Searcher ahk_class #32770")
+$CapsLock::
 Send {esc}
+func_tooltip("exit searchMode")
 return
 ; $*Enter::funcSearch(1)
 !1::funcSearch(1)
@@ -26,10 +25,8 @@ return
 !g::funcSearch(-1,0)
 return
 funcSearch(modeID,direcRun:=False){
-	global searchSignal
 	global searchEnginString 
 	global SearchString
-	searchSignal := False
 	mode := searchEnginString[modeID]
 	Send, {Enter}	
 	runString := mode . SearchString
@@ -37,7 +34,7 @@ funcSearch(modeID,direcRun:=False){
 		run %runString%
 	else
 		run   %SearchString%
+	func_tooltip("exit searchMode")
 	return
-
 }
 #if
