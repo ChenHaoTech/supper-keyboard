@@ -1,24 +1,46 @@
 #include ./superkey.ahk
 
 #a::
+IfWinActive,note ahk_class AutoHotkeyGUI
+{
+    WinSet AlwaysOnTop ,off ,A
+    WinHide, note ahk_class AutoHotkeyGUI
+    return
+} 
 IfWinExist, note ahk_class AutoHotkeyGUI
 {
     WinActivate, note ahk_class AutoHotkeyGUI
+    WinWait, note ahk_class AutoHotkeyGUI
+    WinSet AlwaysOnTop ,on ,A
 }
 Else
 {
-    func_tooltip()
+    WinShow, note ahk_class AutoHotkeyGUI
+    WinActivate, note ahk_class AutoHotkeyGUI
+    IfWinActive note ahk_class AutoHotkeyGUI
+    {
+        ;TODO 此处未经过, 修理FIX
+        return
+    }
+    ; func_tooltip()
     gui, add, Text, , &CODE
     gui,Add,Edit,vCode r20 w400 wanttab 
     gui, add, Text, , &NAME
     gui,Add,Edit,vCodeNote r1 w400 wanttab 
-    gui,Show,x42 y50,note
+    gui,Show,AutoSize x42 y50,note
+    ;TODO 记录上次所在位置
+    ; WinSet Disable, , A
+    ; WinSet, TransColor, White, A
     WinSet,Transparent,230,A
-    WinSet AlwaysOnTop ,Toggle ,A
+    WinSet AlwaysOnTop ,on ,A
+    ; WinSet, Style, +0x40000, A
 }
 Return
 
-#s:: Run "D:\Program Portable\VNote\VNote.exe" %notePath%   
+#s:: 
+Run "D:\Program Portable\VNote\VNote.exe",  %notePath%   
+run  %noteFile% 
+return
 
 
 
@@ -61,6 +83,7 @@ codeWrite(code,fileName:="")
     FileEncoding utf-8
 
     ; 当文件名不为空
+    ; MsgBox, %fileName%
     if (fileName != "")
     {
         fileName := noteFile . fileName . ".md"
@@ -123,29 +146,36 @@ codeWrite(code,fileName:="")
 
 
 #if winActive("note ahk_class AutoHotkeyGUI")
+^l::Send {[}{]}{(}^{v}{)}{Home}{Right}
+^`;::Send {``}{``}{Left}^{v}
 ^d::
 Send +{Home}^{c}
 Send ~~~~{Left 2}
 Send ^{v}
 return
 
-!1::
-^1::
+
+<^1::
 Send {#}{Space}
 return
 
-!3::
-^3::
+
+
+<^4::
+Send {#}{#}{#}{#}{Space}
+return
+
+
+<^3::
 Send {#}{#}{#}{Space}
 return
 
-!2::
-^2::
+
+<^2::
 Send {#}{#}{Space}
 return
 
-^M::
-!M::
+<^M::
 Send,^{Space}
 Send, ``````{Enter}``````{up}
 Sleep, 2000

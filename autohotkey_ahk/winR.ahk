@@ -1,17 +1,8 @@
-#Include, ./winA.ahk
-
-#r::
-winRsignal := True
-func_tooltip("win winR mode")
-Return
+﻿#Include, ./winA.ahk
 
 
 
-
-
-
-#if winRsignal == TRUE
-CapsLock::winRsignal := False1
+#IfWinActive, 运行 ahk_class #32770 ahk_exe Explorer.EXE 
 
 z & y::winR("D:\Program Portable\zym7.64\fg766p.exe","ziyoumen")
 WinActivate, ahk_exe 自由门.exe

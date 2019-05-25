@@ -1,3 +1,4 @@
+#Include, ./superKey.ahk
 MoveCurses(key,speed := 100)
 {
 	if GetKeyState("alt","p")
@@ -102,7 +103,17 @@ space & i:: MoveCurses("i")
 space & `;:: Send,{:}
 ;==================================|space ctrl |========================================
 space & w::	send, ^{s}
-space & q:: send,!{f4} 
+
+space & q:: 
+; IfWinActive, ahk_group DONOTWANTKILL
+; IfWinActive, ahk_class Chrome_WidgetWin_1
+; {
+; 	; send , !{esc}
+; 	return
+; }else{2
+	send,!{f4} 
+; }
+return
 Space & x::
 IfWinActive ahk_group IDE
 	send ^{F4}
@@ -116,7 +127,7 @@ convertTypeWriter("E")
 return
 ;
 Space & F2:: 
-; CoordMode,  mouse,window
+CoordMode, mouse, Screen
 MouseGetPos, xpos, ypos 
 Clipboard :=xpos . "," . ypos
 func_tooltip(Clipboard)
@@ -134,8 +145,49 @@ Clipboard :="path """ .  temp0 . "`nahk_exe " . temp1 . "`nahk_class " . temp2 .
 func_tooltip(Clipboard)
 return
 
-space & t::
-WinSet AlwaysOnTop ,Toggle ,A
-WinGet winName, ProcessName,A
-func_tooltip(winName,time := 1000)
+;TODO 更加全屏
+space & F11::
+; 去除标题栏
+WinSet, Style, ^0xC00000, A
+WinMaximize, A ;最大化
 return
+
+space & t::
+WinSet AlwaysOnTop ,off, %lastTopWindow%
+toggleWindows.Remove(toggleWindows.MaxIndex())
+WinGet wName, ProcessName, A
+WinGetTitle, title, A
+WinSet AlwaysOnTop ,off , %title%
+output := "confirm toggleTop:`n" . wName . "-" . title 
+; for index, element in toggleWindows
+; {
+; 	output := output . toggleWindows[index] . "`n"
+; }
+MsgBox, 4,, % output
+WinSet AlwaysOnTop ,on ,ahk_class #32770
+IfMsgBox Yes
+{
+	WinSet AlwaysOnTop ,on ,A	
+	lastTopWindow := title . "ahk_exe" . wName
+	toggleWindows.Insert(wName . title)
+}else{
+	WinSet AlwaysOnTop ,off ,A	
+	toggleWindows.Remove(toggleWindows.MaxIndex())
+}
+return
+;实现win 短按查看,  长按 
+; *Lwin::
+; if (!longPress("Lwin")){
+; 	MouseGetPos x, y
+; 	send #{b}
+; 	; MouseMove 735,1079, 100
+; 	; Sleep, 100
+; 	; MouseMove 735,1079 100
+; 	Sleep 1000
+; 	send !{Esc}
+; 	MouseMove %x%, %y%
+; }else{
+; 	send {Blind}{Lwin}
+; }
+; return
+
