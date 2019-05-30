@@ -208,6 +208,8 @@ IfWinActive, ahk_exe tim.exe
 return
 
 ;=======|	winActiveHide	|============================================
+; TODO 设置获得所有的:
+;  title exe class id(?)
 hWinActiveHide(key, ways,programPath,hideMode:=True)
 {
 	; 窗口存在
