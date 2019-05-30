@@ -90,6 +90,8 @@ if (WinActive("ahk_class CabinetWClass ahk_exe Explorer.EXE")){
 	; run, %titileExplorer%
 	winshow,  %titileExplorer% ahk_class CabinetWClass ahk_exe Explorer.EXE
 	WinActivate, %titileExplorer% ahk_class CabinetWClass ahk_exe Explorer.EXE
+	IfWinNotActive, %titileExplorer% ahk_class CabinetWClass ahk_exe Explorer.EXE
+		run, D:\文档
 }
 return
 
