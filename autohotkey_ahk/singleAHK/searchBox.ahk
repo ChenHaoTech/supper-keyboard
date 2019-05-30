@@ -1,32 +1,59 @@
-#Include, ./superkey.ahk
-CapsLock & Q::
-searchSignal := True ; 对应标志位置1
-if(func_getClipboard())
-	InputBox , SearchString, Searcher, %searchPrompt%,,250,230,,,,,%Clipboard%	
-else{
-	InputBox , SearchString, Searcher, %searchPrompt%,,250,230,,,,,%SearchString%
+#SingleInstance, force
+#Persistent
+SetWorkingDir, "D:\code\AHK\autohotkey_study\autohotkey_ahk"
+; SetCapsLockState, AlwaysOff
+;========| 变量|===========
+MyEdit := ""
+searchEnginName := Object()
+searchEnginString := Object()
+searchPrompt :="please input SearchString`n"
+IniRead ,searchEnginDefauleName,./config.ini,SearchEnginName,default
+IniRead ,searchEnginDefaultString,./config.ini,SearchEngin,defaultqqqq
+Loop 20{
+	iniKey := "alt" . A_Index
+	IniRead ,temp1,config.ini,SearchEnginName,%iniKey%,%searchEnginDefauleName%
+	IniRead ,temp2,config.ini,SearchEngin,%iniKey%,%searchEnginDefaultString%
+	searchEnginName[A_Index] := temp1
+	searchEnginString[A_Index] := temp2
 }
+; prompt TODO分层显示alt键
+Loop 10{
+	temp1 := searchEnginName[A_Index*2-1]
+	temp2 := searchEnginName[A_Index*2]
+	searchPrompt := searchPrompt . "`nAlt+" . A_Index*2-1 . ": " . temp1 . "	Alt+" . A_Index*2 . ": " . temp2
+}
+;========| include |===========
+#Include, D:\code\AHK\autohotkey_study\autohotkey_ahk\Lib\utility.ahk
+
+#Q::
+; Gui, New ,Searcher
+gui, add, Text, , %searchPrompt%
+gui,Add,Edit,vMyEdit r1 w250 
+if(ClipboarNotNull()){
+   GuiControl,, MyEdit, %Clipboard%
+}
+else{
+   GuiControl,, MyEdit, %SearchString%
+}
+gui,Show,AutoSize,Searcher
 return
 
-#if WinActive("Searcher ahk_class #32770") ; and (searchSignal == true)
+GuiClose:
+gui,Submit
+gui,Destroy
+Return
 
-$CapsLock::
-Send {esc}
-func_tooltip("exit searchMode")
-searchSignal := False
+
+#if WinActive("Searcher ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe") ; and (searchSignal == true)
+; 再次按#q 退出
+#q:: 
+WinKill,Searcher ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
 return
 
-; ~Enter::
-; searchSignal := False
-; return
 
 !1::
-; $*Enter::funcSearch(1)
 <!1::funcSearch(1)
-;TODO FIX 不可用
-
 <!2::funcSearch(2)
-; !2::funcSearch(2)
 <!3::funcSearch(3)
 <!4::funcSearch(4)
 <!5::funcSearch(5)
@@ -35,33 +62,46 @@ return
 <!8::funcSearch(8)
 <!9::funcSearch(9)
 <!0::funcSearch(10)
-<!g::funcSearch(-1,0)
+<!q::funcSearch(11)
+<!w::funcSearch(12)
+<!e::funcSearch(13)
+<!r::funcSearch(14)
+<!t::funcSearch(15)
+<!y::funcSearch(16)
+<!u::funcSearch(17)
+<!i::funcSearch(18)
+<!o::funcSearch(19)
+<!p::funcSearch(20)
 
-<!q::
+
+<!g::funcSearch(-1,0)
+; TODO 选择历史信息出错
+up::SearchString := history
+; 计算激活
+$tab::
 send ^{a}^{c}{Right}
 result := "=" . calc(Clipboard)
 send  %result%
 searchSignal := False
 return
-
 #if
 
 funcSearch(modeID,direcRun:=False){
 	global searchEnginString 
-	global SearchString
+	global MyEdit
 	global searchSignal
 	searchSignal := False
 	mode := searchEnginString[modeID]
-	Send, {Enter}	
-	runString := mode . SearchString
+   WinKill,Searcher ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
+	runString := mode . MyEdit
 	; ListVars
 	if (direcRun==False)
 		run %runString%
 	else
-		run   %SearchString%
+		run   %MyEdit%
 	WinActivate, ahk_exe chrome.exe
 	WinWait, ahk_exe chrome.exe
-	func_tooltip("exit searchMode")
+	hToolTip("exit searchMode")
 	return
 }
 

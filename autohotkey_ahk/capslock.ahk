@@ -1,4 +1,7 @@
-$capslock:: send ,{Blind}{Esc}
+$capslock:: 
+send ,{Blind}{Esc}
+ToolTip	
+return
 
 capslock & space:: send, {enter}
 CapsLock & \:: Send {Appskey}
@@ -63,37 +66,37 @@ Sleep ,200
 Send,{Blind}^{x}
 }	
 return
-
+; TOFIX 经常上下左右的时候会按错 
 ;=======|	�ַ�����	|============================================
-capslock & {:: 
-Clipboard = 
-Send, ^{c}
-ClipWait 0.1
-if !ErrorLevel
-{
-Send,^{c}{{}{}}{left}^{v}
-}
-return
+; capslock & {:: 
+; Clipboard = 
+; Send, ^{c}
+; ClipWait 0.1
+; if !ErrorLevel
+; {
+; Send,^{c}{{}{}}{left}^{v}
+; }
+; return
 
-capslock & }:: 
-Clipboard = 
-Send, ^{c}
-ClipWait 0.1
-if !ErrorLevel
-{
-Send,^{c}{[}{]}{left}^{v}
-}
-return
+; capslock & }:: 
+; Clipboard = 
+; Send, ^{c}
+; ClipWait 0.1
+; if !ErrorLevel
+; {
+; Send,^{c}{[}{]}{left}^{v}
+; }
+; return
 
-capslock & ':: 
-Clipboard = 
-Send, ^{c}
-ClipWait 0.1
-if !ErrorLevel
-{
-Send,^{c}{`"}{`"}{Left}^{v}	
-}
-return
+; capslock & ':: 
+; Clipboard = 
+; Send, ^{c}
+; ClipWait 0.1
+; if !ErrorLevel
+; {
+; Send,^{c}{`"}{`"}{Left}^{v}	
+; }
+; return
 
 ;=======|	del BS	|============================================
 capslock & w:: 
@@ -186,5 +189,5 @@ WinWait, ahk_class Qt5QWindowToolSaveBits
 ; send {space}
 return
 ;=======|	ScreenToGif	|============================================
-CapsLock & F4:: Send !^+{F4}
+; CapsLock & F4:: Send !^+{F4}
 

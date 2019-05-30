@@ -2,35 +2,28 @@
 #Include, ./Lib/utility.ahk
 #a::
 ; 窗口已经激活
-; path "D:\code\AHK\AutoHotkey.exe
-; ahk_exe AutoHotkey.exe
-; ahk_class AutoHotkeyGUI
-; ahk_id 0xa4110c
-; pid 18220
-; note
-if WinActive("note ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe")
+IfWinActive,note ahk_class AutoHotkeyGUI
+
 {
-    Send ^{a}^{c}
+    MsgBox alsdkmmmjj
+    ; Send ^{a}^{c}
     WinSet AlwaysOnTop ,off ,A
-    WinHide, note ahk_class AutoHotkeyGUI 
+    WinHide, note ahk_class AutoHotkeyGUI
     return
 } 
 ; 窗口存在
 IfWinExist, note ahk_class AutoHotkeyGUI
 {
+    MsgBox alsdkmmm
     WinActivate, note ahk_class AutoHotkeyGUI
     WinWait, note ahk_class AutoHotkeyGUI
     WinSet AlwaysOnTop ,on ,A
-}
-; 不存在窗口
-Else
-{
+}else{ ; 不存在窗口
+    MsgBox alsdk
     WinShow, note ahk_class AutoHotkeyGUI
     WinActivate, note ahk_class AutoHotkeyGUI
     IfWinActive note ahk_class AutoHotkeyGUI
     {
-        WinWait, note ahk_class AutoHotkeyGUI
-        WinSet AlwaysOnTop ,on ,A
         return
     }
     gui, add, Text, , &CODE

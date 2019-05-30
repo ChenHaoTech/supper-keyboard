@@ -1,0 +1,10 @@
+{
+	"q":hello,
+    "from":"auto",
+    "to":"auto",
+    "appkey":,
+    "salt":1263703451,
+    "sign":4736B9B2C9F9AAD027E13D4BE87F0597F22C011A5C25280F0B8D998792FFFB93,
+    "signType":"v3",
+    "curTime":1558872156
+}

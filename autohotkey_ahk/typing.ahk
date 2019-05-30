@@ -7,12 +7,12 @@
 convertTypeWriter(key){
     if(key == "E"){
         PostMessage, 0x50,, 0x4090409,, A
-        func_tooltip("English")
+        hToolTip("English")
 			
     }
     if(key == "C"){
         PostMessage, 0x50,, 0x8040804,, A
-        func_tooltip("chinese")
+        hToolTip("chinese")
     }
 }
 IME_GET(WinTitle="")
@@ -31,18 +31,18 @@ IME_GET(WinTitle="")
 }
 ;=======|	key	|============================================
 space & e:: 
-if (longPress("e")){
+if (hLongPress("e")){
     Send, ^{space}
-    func_tooltip("English sougou")
+    hToolTip("English sougou")
 }Else{
     convertTypeWriter("E")
 }
 Return
 
 space & c:: 
-if (longPress("c")){
+if (hLongPress("c")){
     Send, ^{space}
-    func_tooltip("Chinese sougou")
+    hToolTip("Chinese sougou")
 }Else{
     convertTypeWriter("C")
 }

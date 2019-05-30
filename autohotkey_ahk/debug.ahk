@@ -1,51 +1,84 @@
-#Include, ./winA.ahk
+﻿; #Include, ./winA.ahk
+#Include, ./Lib/utility.ahk
 
-SendMode, Input
-do(num,item){
+
+; do(num,item){
     
-    outputString :=  "*" . item . "::" . "winR(" . num . ",""" . item . """,""" . item . """)`n"
-    Send, %outputString%
-}
-do1(num,item,keyup){   
-    outputString := item . "::" . "winR(" . num . ",""" . keyup . """,""" . item . """)`n"
-    Send, %outputString%
-    Sleep,  100
-}
+;     outputString :=  "*" . item . "::" . "winR(" . num . ",""" . item . """,""" . item . """)`n"
+;     Send, %outputString%
+; }
+; do1(num,item,keyup){   
+;     outputString := item . "::" . "winR(" . num . ",""" . keyup . """,""" . item . """)`n"
+;     Send, %outputString%
+;     Sleep,  100
+; }
+; ; #!^+f1::
+; temp1 := StrSplit(allString, "`,")
+; count := temp1._maxIndex()
+; Loop, %count%
+; {
+;     do(A_Index,temp1[A_Index])
+; }
+; currentCount := count
+; Loop, %count%
+; {
+;     outerCount := A_Index
+;     Loop, %count%
+;     {
+;         CountNum := (outerCount-1) * 25 +A_Index + currentCount
+;         If (temp1[outerCount] == temp1[A_index])
+;             Continue
+;         key := temp1[outerCount] . " & " . temp1[A_Index]
+;         do1(countNum,key,temp1[A_index])
+;     }
+; }
+; Return
+
+; 使用 space + d 进入debug模式 并且有 hToolTip提示, CapsLock 退出, 其余任意按钮也是退出
 
 
-; #!^+f1::
-temp1 := StrSplit(allString, "`,")
-count := temp1._maxIndex()
-Loop, %count%
-{
-    do(A_Index,temp1[A_Index])
-}
-currentCount := count
-Loop, %count%
-{
-    outerCount := A_Index
-    Loop, %count%
-    {
-        CountNum := (outerCount-1) * 25 +A_Index + currentCount
-        If (temp1[outerCount] == temp1[A_index])
-            Continue
-        key := temp1[outerCount] . " & " . temp1[A_Index]
-        do1(countNum,key,temp1[A_index])
-    }
-}
-Return
+; 快捷键:
+; 若 == 1 进入
+; rc :: 跑当前选中文件 使用 ahk
+; r :: reload
+; o :: 使用vscode打开
+`; & d::
+    ; hIniWrite(Debugsignal,Signal, 1)
+    Debugsignal := 1
+    hToolTip("进入debug模式")
+return
 
+#If (Debugsignal == 1) ;or (Debugsignal == "")
+capslock::setDebugSignal()
 
-CapsLock & esc::
-func_tooltip("reloading")
+r & c:: 
+var := Explorer_GetSelected()
+hToolTip("run current ahk")
+Run, %A_AhkPath%\AutoHotkey.exe %var%
+Sleep 1000
+setDebugSignal()
+return
+
+r::
+hToolTip("reloading")
+; Debugsignal := 0
+Sleep 500
+; setDebugSignal()
+; Sleep 300
 Reload
 return
 
-; capslock & `::
-; FileCopy, ./config.ini , "D:\code\AHK\autohotkey_study\autohotkey_ahk\config.ini"
-; Run,  "C:\Users\chen\AppData\Local\Programs\Microsoft VS Code\Code.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk"
-; Run, "D:\code\AHK\AutoHotkey.exe" "D:\code\AHK\autohotkey_study\autohotkey_ahk\superKey.ahk"
-; ExitApp
-; return
+o:: 
+hToolTip("open ahk codeing")
+Run C:\Program Files\Microsoft VS Code\Code.exe D:\code\AHK\autohotkey_study\autohotkey_ahk
+Sleep 1000
+setDebugSignal()
+return
+#if
+setDebugSignal(){
+    global Debugsignal
+    hToolTip("退出debug模式")
+    Debugsignal := 0
+}
 
-; !+#^F2::Run "powershell.exe" "ahk.ps1"
+

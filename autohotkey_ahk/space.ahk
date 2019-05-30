@@ -30,7 +30,8 @@ MoveCurses(key,speed := 100)
 	return
 }
 ;=======|	key	|============================================
-$*space::normal_key("space")
+; TODO 不同的IDE的添加, 给此处的使用排错
+$*space::hNormalKey("space")
 capslock & ctrl:: send,{ctrl down}
 
 Space & u:: Send, {LButton}
@@ -40,8 +41,8 @@ Space & r:: Send , {f5}
 space & `:: num_char("``")
 space & -:: num_char("-")
 space & =:: num_char("=")
-space & }:: Send,{[}{]}{Left}
-space & {:: Send,{{}{}}{Left}
+space & {:: Send,{{}
+space & }:: send, {}} 
 space & 1:: num_char("1")
 space & 2:: num_char("2")
 space & 3:: num_char("3")
@@ -52,44 +53,45 @@ space & 7:: num_char("7")
 space & 8:: num_char("8")
 space & 0:: num_char("0")
 space & 9:: 
-IfWinActive ahk_group IDE
+; IfWinActive ahk_group IDE
 	send , (
-else
-{
-	Clipboard := ""
-	Send ^{c}
-	ClipWait 0.1
-	if ErrorLevel
-		Send,(){left}
-	else{
-		Send, ^{c}
-		Send, (){Left}
-		Send, ^{v}
-	}
-}
+; else
+; {
+; 	Clipboard := ""
+; 	Send ^{c}
+; 	ClipWait 0.1
+; 	if ErrorLevel
+; 		Send,(){left}
+; 	else{
+; 		Send, ^{c}
+; 		Send, (){Left}
+; 		Send, ^{v}
+; 	}
+; }
 return
 space & ':: num_char("'",2)
 
 num_char(key,num:=1){
-	if(longPress(key)){
-		send +{%key%}		
-		return
-	}
-	IfWinActive, ahk_group IDE
-		send +{%key%}
-	else
-	{
-		Clipboard := ""
-		Send ^{c}
-		ClipWait 0.1
-		if ErrorLevel
-			Send,+{%key% %num%}
-		else{
-			Send, ^{c}
-			Send,+{%key% 2}{left}			
-			Send, ^{v}
-		}
-	}
+	send +{%key%}		
+	; if(hLongPress(key)){
+	; 	send +{%key%}		
+	; 	return
+	; }
+	; IfWinActive, ahk_group IDE
+	; 	send +{%key%}
+	; else
+	; {
+	; 	Clipboard := ""
+	; 	Send ^{c}
+	; 	ClipWait 0.1
+	; 	if ErrorLevel
+	; 		Send,+{%key% %num%}
+	; 	else{
+	; 		Send, ^{c}
+	; 		Send,+{%key% 2}{left}			
+	; 		Send, ^{v}
+	; 	}
+	; }
 }
 
 ;================================== | mouse move |========================================
@@ -121,28 +123,31 @@ else
  	Send, ^{w}
 return
 
-space & F1::
-send #!^{F1}
-convertTypeWriter("E")
-return
+
 ;
 Space & F2:: 
-CoordMode, mouse, Screen
+CoordMode, mouse, Relative
 MouseGetPos, xpos, ypos 
-Clipboard :=xpos . "," . ypos
-func_tooltip(Clipboard)
+Clipboard :="relative: " . xpos . "," . ypos
+CoordMode, mouse,Screen
+MouseGetPos, xpos, ypos 
+Clipboard :=Clipboard . "`nScreen: " . xpos . "," . ypos
+hToolTip(Clipboard)
 return
 
 Space & F8::
+DetectHiddenWindows, On
 WinGet ,temp0,ProcessPath,A
 WinGet ,temp1,ProcessName,A
 WinGetClass ,temp2,A
 WinGet temp3 ,ID,A
 WinGet temp4,PID,A
 WinGetTitle, temp5, A
+; WinGetText, text, A
 Clipboard :="path """ .  temp0 . "`nahk_exe " . temp1 . "`nahk_class " . temp2 . "`nahk_id " . temp3
-				. "`npid " . temp4 . "`n" . temp5
-func_tooltip(Clipboard)
+				. "`npid " . temp4 . "`n" . temp5 . "`n" . text
+hToolTip(Clipboard,3000)
+DetectHiddenWindows, off
 return
 
 ;TODO 更加全屏
@@ -177,7 +182,7 @@ IfMsgBox Yes
 return
 ;实现win 短按查看,  长按 
 ; *Lwin::
-; if (!longPress("Lwin")){
+; if (!hLongPress("Lwin")){
 ; 	MouseGetPos x, y
 ; 	send #{b}
 ; 	; MouseMove 735,1079, 100

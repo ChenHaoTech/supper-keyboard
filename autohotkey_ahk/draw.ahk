@@ -125,7 +125,7 @@ FOXITREADER(x,y){
 		; click 注释格式
 		; MsgBox %areaHightLIght%
 		click 1026,67
-		func_tooltip("in hightLight mode")
+		hToolTip("in hightLight mode")
 	}
 	
 	Click %x%,%y%
@@ -150,12 +150,12 @@ $esc::
 if (areaHightLIght == true)
 {
 	areaHightLIght := False
-	func_tooltip("textHightLight")
+	hToolTip("textHightLight")
 }
 else
 {
 	areaHightLIght := true
-	func_tooltip("aeraHightLight")
+	hToolTip("aeraHightLight")
 }
 FOXITREADER_signal := False
 return
@@ -222,7 +222,7 @@ func_oneNote3(x,y,addAction:=1,addAction2:=1){
 	!CapsLock::
 	MouseGetPos, xpos, ypos
 	signStateOneNote := 1
-	func_tooltip("in write mode")
+	hToolTip("in write mode")
 	Click 126,90
 	MouseMove xpos, ypos
 	return 
@@ -241,7 +241,7 @@ func_oneNote2(x,y){
 		!CapsLock::
 		MouseGetPos, xpos, ypos
 		signStateOneNote := 0
-		func_tooltip("in draw mode")
+		hToolTip("in draw mode")
 		Click 288,87
 		MouseMove xpos, ypos
 		return
