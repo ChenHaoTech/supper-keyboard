@@ -218,41 +218,31 @@ hWinActiveHide(key, ways,programPath,hideMode:=True)
 		; 窗口已激活
 		IfWinActive, %ways% 
 			{
-				; 将当前界面的title存储
-				WinGetTitle, titileWinActive, %ways%
-				IniWrite, %titileWinActive%,%A_ScriptDir%/config.ini, title, %key%				
 				Send !{ESC}
 				if (hideMode == 0)
 					WinMinimize
 				else
-					WinHide,  %titileWinActive% %ways%
+					WinHide,  %ways%
 			}
 		; 窗口未激活
 		else 
 		{
-    		IniRead titileWinActive,%A_ScriptDir%/config.ini,title, %key%
-			; MsgBox %titileWinActive%
-			MsgBox %ways%
 			if(hideMode == False)
 				WinMaximize
 			else
-				WinShow,%titileWinActive% %ways% 
-			WinActivate, %titileWinActive% %ways%
+				WinShow, %ways% 
+			WinActivate, %ways%
 		}
 	}
 	; 窗口不存在
 	else{
-		; 将当前界面的title存储
-		IniRead titileWinActive,%A_ScriptDir%/config.ini,title, %key%		
-		WinShow %titileWinActive% %ways% 
-		WinActivate, %titileWinActive% %ways%
-		IfWinNotActive, %titileWinActive% %ways% 
+		WinShow, %ways%
+		WinActivate,  %ways%
+		IfWinNotActive,  %ways% 
 		{
-			WinGetTitle, titileWinActive, %ways%
-			IniWrite, %titileWinActive%,%A_ScriptDir%/config.ini, title, %key%	
 			hToolTip("wait a moment",2000)
 			run %programPath%
-			WinActivate %titileWinActive% %ways%
+			WinActivate  %ways%
 		}
 	}
 }
