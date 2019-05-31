@@ -48,23 +48,38 @@ IfWinActive, DevTools
     send, ^+{p}
     return
 }
-send, {F10}
-Sleep 100
-send {space} 
-Sleep 100
-send {s}
+; 若在 扩展程序 - Google Chrome 上, 激活扩展快捷键
+IfWinActive,扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_WidgetWin_1 
+{
+    send, ^{t}
+    send, chrome://extensions/shortcuts
+    Sleep, 300
+    send, {Enter}
+; 若不在 扩展程序 - Google Chrome 上, 激活设置
+}else{
+    send, {F10}
+    Sleep 100
+    send {space} 
+    Sleep 100
+    send {s}
+}
 return
 
 ; 激活扩展
 ^+a:: 
-run https://chrome.google.com/webstore/category/extensions?utm_source=chrome-ntp-icon
-; send, {F10}
-; Sleep 1000
-; send {space} 
-; Sleep 100
-; send {l}
-; Sleep 1000
-; send {e}
+; run https://chrome.google.com/webstore/category/extensions?utm_source=chrome-ntp-icon
+IfWinActive 扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_WidgetWin_1
+{
+    ; 若在 扩展程序 - Google Chrome 上
+    run, https://chrome.google.com/webstore/category/extensions?hl=zh-CN
+    return
+}else{
+    ; 若不是在 扩展程序 - Google Chrome 
+    send, ^{t}
+    send, chrome://extensions/
+    Sleep, 300
+    send, {Enter}
+}
 return
 
 ^j:: run D:\download\chrome
