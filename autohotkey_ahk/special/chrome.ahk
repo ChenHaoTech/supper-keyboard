@@ -57,11 +57,10 @@ IfWinActive,扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_Wid
     send, {Enter}
 ; 若不在 扩展程序 - Google Chrome 上, 激活设置
 }else{
-    send, {F10}
-    Sleep 100
-    send {space} 
-    Sleep 100
-    send {s}
+    send, ^{t}
+    send, chrome://settings/
+    Sleep, 300
+    send, {Enter}
 }
 return
 

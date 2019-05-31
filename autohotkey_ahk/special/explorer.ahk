@@ -28,7 +28,7 @@ Sleep 300
 send {esc}
 return
 <!-::MouseMove 328,597
-
+; 打开新便签页
 ^t::send ^{t}^{l}
 ; TODO 在新标签页打开
 !a::
@@ -46,10 +46,23 @@ return
 ; [1/1] Cmder
 +^o::
 var := Explorer_GetPath()
-; Run,"D:\Program Portable\cmder\vendor\conemu-maximus5\ConEmu64.exe" , %var%
+; run D:\Program Portable\cmder\vendor\conemu-maximus5\ConEmu64.exe  %var%"
+; run D:\Program Portable\cmder\vendor\conemu-maximus5\ConEmu64.exe -? 
+; run D:\Program Portable\cmder\vendor\conemu-maximus5\ConEmu64.exe -new_console d:%var% 
 Run powershell.exe ,%var%
 return
+; 使用code 打开当前文件夹
++^c::
+var := Explorer_GetPath()
+run, C:\Program Files\Microsoft VS Code\Code.exe %var%
+return
+; 使用notepad++ 打开C:\Program Files (x86)\Notepad++\notepad++.exe
++^n::
+var := Explorer_GetPath()
+Run, C:\Program Files (x86)\Notepad++\notepad++.exe %var%
+return
 
+; 发送到手机qq
 <!q::
 
 ; send, ^{c}
