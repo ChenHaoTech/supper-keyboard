@@ -84,7 +84,7 @@ return
 ^j:: run D:\download\chrome
 ^d:: 
 send, ^{d}
-click 1021,353
+click 946,363
 return
 
 
