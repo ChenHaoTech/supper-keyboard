@@ -15,5 +15,5 @@ return
 #IfWinActive,  ahk_exe ConEmu64.exe
 <!-:: MouseMove, 430,491
 <!=:: MouseMove , 1393,458
-::rr::. $profile{enter}
+::rr:: . $profile{enter}
 #if
