@@ -1,39 +1,5 @@
 ﻿; #Include, ./winA.ahk
 #Include, ./Lib/utility.ahk
-
-
-; do(num,item){
-    
-;     outputString :=  "*" . item . "::" . "winR(" . num . ",""" . item . """,""" . item . """)`n"
-;     Send, %outputString%
-; }
-; do1(num,item,keyup){   
-;     outputString := item . "::" . "winR(" . num . ",""" . keyup . """,""" . item . """)`n"
-;     Send, %outputString%
-;     Sleep,  100
-; }
-; ; #!^+f1::
-; temp1 := StrSplit(allString, "`,")
-; count := temp1._maxIndex()
-; Loop, %count%
-; {
-;     do(A_Index,temp1[A_Index])
-; }
-; currentCount := count
-; Loop, %count%
-; {
-;     outerCount := A_Index
-;     Loop, %count%
-;     {
-;         CountNum := (outerCount-1) * 25 +A_Index + currentCount
-;         If (temp1[outerCount] == temp1[A_index])
-;             Continue
-;         key := temp1[outerCount] . " & " . temp1[A_Index]
-;         do1(countNum,key,temp1[A_index])
-;     }
-; }
-; Return
-
 ; 使用 space + d 进入debug模式 并且有 hToolTip提示, CapsLock 退出, 其余任意按钮也是退出
 
 
@@ -72,6 +38,11 @@ o::
 hToolTip("open ahk codeing")
 Run C:\Program Files\Microsoft VS Code\Code.exe D:\code\AHK\autohotkey_study\autohotkey_ahk
 Sleep 1000
+setDebugSignal()
+return
+
+w::
+run D:\code\AHK\WindowSpy.exe
 setDebugSignal()
 return
 #if

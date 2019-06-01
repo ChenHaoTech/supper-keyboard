@@ -126,7 +126,11 @@ Clipboard :="relative: " . xpos . "," . ypos
 CoordMode, mouse,Screen
 MouseGetPos, xpos, ypos 
 Clipboard :=Clipboard . "`nScreen: " . xpos . "," . ypos
-hToolTip(Clipboard)
+MouseGetPos, , , winID, conID, 2
+Clipboard := Clipboard . "`nHWND:" . " winId: " . winID . " conID: " . conID
+MouseGetPos, , , winID, conID
+Clipboard := Clipboard . "`nClassNN:" . " winId:" . winID . " conID: " . conID
+hToolTip(Clipboard, 2000)
 return
 
 Space & F8::
