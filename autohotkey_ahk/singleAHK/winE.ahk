@@ -2,8 +2,8 @@
 #NoTrayIcon ;不显示托盘图标
 #SingleInstance, force 
 
-path := Object() ; 路径 关联数组实现
 fileFullName := "D:\code\AHK\autohotkey_study\autohotkey_ahk\config\winE.ch"
+path := Object() ; 路径 关联数组实现
 Loop
 {
     FileReadLine, line,  %fileFullName%, %A_Index%
@@ -22,6 +22,7 @@ IfWinActive,winEBox ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
     Winkill, winEBox ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe 
     return
 }Else{
+    path := Object()
     Loop
     {
         FileReadLine, line,  %fileFullName%, %A_Index%
