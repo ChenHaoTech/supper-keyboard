@@ -35,12 +35,12 @@ IfWinActive,winEBox ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
         path[ATmp[1]] := ATmp[2]
     }
     ; 创建含名称和  大小两列的 ListView:
-    Gui, Add, ListView, r20 w200, abbre|path
+    Gui, Add, ListView, r20 w400, abbre|path
     ; 从文件夹中获取文件名列表并把它们放入 ListView:
     for index, element in path
         LV_Add("ColN", index, element)
-    LV_ModifyCol(1, "AutoHdr")  ; 根据内容自动调整每列的大小.
-    Gui, Add, Edit, r1 w200 vinputPath
+    ; LV_ModifyCol(1, "AutoHdr")  ; 根据内容自动调整每列的大小.
+    Gui, Add, Edit, r1 w400 vinputPath
     Gui, Show, , winEBox
     ControlFocus Edit1, A
     send, ^{Space}
