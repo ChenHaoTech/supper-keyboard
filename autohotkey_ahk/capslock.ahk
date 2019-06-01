@@ -32,7 +32,6 @@ capslock & k:: capslock_movtion("k")
 capslock & l:: capslock_movtion("l")
 capslock & Enter:: Send,{Blind}{end}{enter}
 capslock & BackSpace:: Send,{Blind}{End}+{Home}{BackSpace}
-
 capslock & a::
 Send,{Blind}{end}
 Send,{Blind}+{home}
@@ -63,6 +62,7 @@ if ErrorLevel
 Send,{Blind}{End}
 Send,{Blind}+{home}
 Sleep ,200
+
 Send,{Blind}^{x}
 }	
 return
