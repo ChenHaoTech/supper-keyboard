@@ -140,7 +140,7 @@ IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
 #Include, ./special/explorer.ahk
 #Include, ./special/cmder.ahk
 #Include, ./special/eagle.ahk
-
+#Include, ./special/vnote.ahk
 
 ;=======|	若exe未运行就运行	|============================================
 ch_activate(name:="explorer.exe",path := "explorer.exe"){

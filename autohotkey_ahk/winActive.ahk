@@ -77,8 +77,6 @@ Enter & x::
 hWinActiveHide("xortime", "XorTime ahk_class XorTime ahk_exe XorTime.exe","C:\Program Files (x86)\XorTime\XorTime.exe")
 WinHide ahk_class #32770
 return
-;=======|	vnote	|============================================
-enter & v::hWinActiveHide("vnote","VNote ahk_class Qt5QWindowIcon ahk_exe vnote.exe","D:\Program Portable\VNote\VNote.exe")
 
 
 
