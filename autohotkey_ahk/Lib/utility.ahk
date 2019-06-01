@@ -16,12 +16,12 @@ hNormalKey(key)
 	sendInput,{blind}{%key%}
 	return
 }
-hIniRead(key,sectionName,path := "./config.ini"){
+hIniRead(key,sectionName,path := "%A_scriptDir%/config/config.ini"){
     IniRead temp,%path%,%sectionName%,%key%
     Return temp
 }
 
-hIniWrite(key,sectionName, value,path := "./config.ini"){
+hIniWrite(key,sectionName, value,path := "%A_scriptDir%/config/config.ini"){
     IniWrite, %Value%, %path%, %sectionName%, %Key%
     Return
 }

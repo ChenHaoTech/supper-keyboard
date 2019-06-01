@@ -3,16 +3,18 @@
 SetWorkingDir, "D:\code\AHK\autohotkey_study\autohotkey_ahk"
 ; SetCapsLockState, AlwaysOff
 ;========| 变量|===========
+configFilePath := "D:\code\AHK\autohotkey_study\autohotkey_ahk\config\config.ini"
+; configFilePath := "config.ini"
 MyEdit := ""
 searchEnginName := Object()
 searchEnginString := Object()
 searchPrompt :="please input SearchString`n"
-IniRead ,searchEnginDefauleName,./config.ini,SearchEnginName,default
-IniRead ,searchEnginDefaultString,./config.ini,SearchEngin,defaultqqqq
+IniRead ,searchEnginDefauleName,%configFilePath%,SearchEnginName,default
+IniRead ,searchEnginDefaultString,%configFilePath%,SearchEngin,default
 Loop 20{
 	iniKey := "alt" . A_Index
-	IniRead ,temp1,config.ini,SearchEnginName,%iniKey%,%searchEnginDefauleName%
-	IniRead ,temp2,config.ini,SearchEngin,%iniKey%,%searchEnginDefaultString%
+	IniRead ,temp1,%configFilePath%,SearchEnginName,%iniKey%,%searchEnginDefauleName%
+	IniRead ,temp2,%configFilePath%,SearchEngin,%iniKey%,%searchEnginDefaultString%
 	searchEnginName[A_Index] := temp1
 	searchEnginString[A_Index] := temp2
 }

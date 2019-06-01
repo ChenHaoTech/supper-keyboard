@@ -120,12 +120,12 @@ codeWrite(code,fileName:="")
         ; MsgBox %fileName%
         fileName := fileName . "-7days"
         ; 写入当前时间, 用于方才的减
-        IniWrite, %currentDate%, ./config.ini, DATE, Today
+        IniWrite, %currentDate%, %A_scriptDir%/config/config.ini, DATE, Today
         ; 写入当前文件名 
-        IniWrite, %fileName%,./config.ini,DATE,TodayString
+        IniWrite, %fileName%,%A_scriptDir%/config/config.ini,DATE,TodayString
         ; 写入今日文件路径 并配置变量
         fileName := noteFile . fileName . ".md"
-        IniWrite, %fileName%,./config.ini,filePath,todayNotePath
+        IniWrite, %fileName%,%A_scriptDir%/config/config.ini,filePath,todayNotePath
         notePath := fileName
     }Else{
         fileName := lastDateName

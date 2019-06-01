@@ -16,7 +16,7 @@ return
 
 ; 使用qq翻译
 tranlateSimple(word){
-    IniRead, string, ./config.ini, qqTranslate, string     
+    IniRead, string, %A_scriptDir%/config/config.ini, qqTranslate, string     
     url := string . word
     json_str := URLDownloadToVar(url)
     data := json(json_str, "data")
@@ -54,8 +54,8 @@ json(ByRef js, s, v = "") {
 tranlate(word){
     ; URL示例:
     ; http://dict-co.iciba.com/api/dictionary.php?type=json&w=go&key=062DBC6EB9F93872E382D0BEA6C95AA7
-    IniRead, secretKey, ./config.ini, jinshan, key 
-    IniRead, string, ./config.ini, jinshan, string     
+    IniRead, secretKey, %A_scriptDir%/config/config.ini, jinshan, key 
+    IniRead, string, %A_scriptDir%/config/config.ini, jinshan, string     
     url := string . word . "&key=" . secretKey
     ; json_str := "(" . URLDownloadToVar(url) . ")" ; 是否要加 ;
     json_str := URLDownloadToVar(url)

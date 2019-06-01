@@ -32,11 +32,11 @@ UWPedgeSignal := False
 ;=======|	winA mode	|============================================
 noteSignal := False
 codeSignal := False
-IniRead, rootFile,./config.ini,filePath,ROOTFILE
+IniRead, rootFile,%A_scriptDir%/config/config.ini,filePath,ROOTFILE
 noteFile := rootFile . "note\"
-IniRead, lastDate, ./config.ini, DATE, Today, "20190502"
-IniRead, lastDateName, ./config.ini, DATE, TodayString, "2019_05_02"
-IniRead,notePath,./config.ini,filePath,todayNotePath
+IniRead, lastDate, %A_scriptDir%/config/config.ini, DATE, Today, "20190502"
+IniRead, lastDateName, %A_scriptDir%/config/config.ini, DATE, TodayString, "2019_05_02"
+IniRead,notePath,%A_scriptDir%/config/config.ini,filePath,todayNotePath
 ;=======|	debug	|============================================
 allStringWithNum := "1,2,3,4,5,6,7,8,9,0,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
 allString := "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"

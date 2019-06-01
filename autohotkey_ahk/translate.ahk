@@ -14,8 +14,8 @@ h_translate(word){
 Time := A_NowUTC
 EnvSub, UnixTime, 19700101000000, Seconds
 ; 从ini文件中读取appkey和秘钥
-IniRead, appkey, ./config.ini, youdao, appkey ;, 0db48448f0101e58
-IniRead, secretKey, ./config.ini, youdao, secretKey ;, 8Vja0sAvE7VNtGe0mvsu91xMTfKYu7yy
+IniRead, appkey, %A_scriptDir%/config/config.ini, youdao, appkey ;, 0db48448f0101e58
+IniRead, secretKey, %A_scriptDir%/config/config.ini, youdao, secretKey ;, 8Vja0sAvE7VNtGe0mvsu91xMTfKYu7yy
 ; TODO 判断word的长度计算input
 ; input的计算方式为：input=q前10个字符 + q长度 + q后十个字符（当q长度大于20）或 input=q字符串（当q长度小于等于20）
 input := word

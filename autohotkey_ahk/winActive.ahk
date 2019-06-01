@@ -11,8 +11,8 @@ funcwWinActive(id)
 	{
 		WinGet, wid, ID, A
 		WinGet,wpath,ProcessPath,A
-		IniWrite,%wpath%,config.ini,winBind_path,%winID%
-		IniWrite, %wid%, config.ini, winBind_id,  %winID%	
+		IniWrite,%wpath%,%A_ScriptDir%/config/config.ini,winBind_path,%winID%
+		IniWrite, %wid%, %A_ScriptDir%/config/config.ini, winBind_id,  %winID%	
 		keyWinBind[id] := wid
 		keyWinBindPath[id] := wpath
 	}else
@@ -41,8 +41,8 @@ funcwWinActive(id)
 			WinWait, ahk_exe %wpath%
 			WinGet, wid, ID, A
 			WinGet,wpath,ProcessPath,A
-			IniWrite,%wpath%,config.ini,winBind_path,%winID%
-			IniWrite, %wid%, config.ini, winBind_id,  %winID%	
+			IniWrite,%wpath%,%A_ScriptDir%/config/config.ini,winBind_path,%winID%
+			IniWrite, %wid%, %A_ScriptDir%/config/config.ini, winBind_id,  %winID%	
 			keyWinBind[id] := wid
 			keyWinBindPath[id] := wpath
 		}
