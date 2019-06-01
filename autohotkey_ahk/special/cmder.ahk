@@ -15,4 +15,5 @@ return
 #F1::
 <!-:: MouseMove, 430,491
 <!=:: MouseMove , 1393,458
+::rr::. $profile{enter}
 #if
