@@ -64,7 +64,6 @@ return
 
 ; 发送到手机qq
 <!q::
-
 ; send, ^{c}
 ; send, !+^{z}
 ; WinWait, ahk_exe TIM.exe ahk_class TXGuiFoundation
@@ -75,12 +74,19 @@ return
 ; WinWait, ahk_exe TIM.exe ahk_class TXGuiFoundation 我的Android手机
 ; send, ^{v}
 ; send, {enter}
-
 send, {AppsKey 3}
 Sleep 500
 send, {up 9}{Right}
 Sleep 100
 send, {enter}
+return
+
+^+r::
+var := Explorer_GetSelected()
+FileEncoding utf-8
+FileRead, fileContext, %var%
+Clipboard := fileContexte
+; MsgBox %fileContext% 
 return
 #if
 
