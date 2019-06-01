@@ -1,0 +1,1 @@
+Gui, Add, ListBox, vColorChoice, Red|Green|Blue|Black|White

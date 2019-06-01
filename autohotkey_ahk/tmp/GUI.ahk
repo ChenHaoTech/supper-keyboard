@@ -1,3 +1,6 @@
+Gui, Add, ListBox, vColorChoice, Red|Green|Blue|Black|White
+
+
 ;=======|       |============================================
 ; gui 超链接
 Gui, Add, Link,, This is a <a href="http://ahkscript.org">link</a>
@@ -37,12 +40,12 @@ ExitApp
 
 Gui, Add, ComboBox, vColorChoice, Red|Green|Blue|Black|White
 
-path "D:\Program Portable\extrachm_jb51\ExtraChm.exe
+; path "D:\Program Portable\extrachm_jb51\ExtraChm.exe
 
-ahk_class Afx:01060000:8:00010003:00000000:46BE0F19
-ahk_id 0x8f1ee6
-pid 6332
-ahk.chm - ExtraChm
+; ahk_class Afx:01060000:8:00010003:00000000:46BE0F19
+; ahk_id 0x8f1ee6
+; pid 6332
+; ahk.chm - ExtraChm
 F1::
 WinHide, A
 Sleep, 1000

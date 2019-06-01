@@ -1,1 +1,0 @@
-file := FileOpen(keyboard, Flags, [Encoding])

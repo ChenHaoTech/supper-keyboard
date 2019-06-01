@@ -109,6 +109,7 @@ space & w::	send, ^{s}
 space & q:: 
 WinKill,A
 return
+
 Space & x::
 IfWinActive ahk_group IDE
 	send ^{F4}

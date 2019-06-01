@@ -11,7 +11,11 @@ SetTitleMatchMode, 2
 ;===============| run ahk |===============
 ;===================================
 run %A_ScriptDir%\singleAHK\searchBox.ahk
+<<<<<<< HEAD
 run, %A_ScriptDir%\special\powershell.ahk
+=======
+run, %A_ScriptDir%\singleAHK\winE.ahk
+>>>>>>> winE
 ;==================================================================================
 ;==================================================================================
 ;
@@ -128,7 +132,7 @@ IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
 #Include, ./transparent.ahk
 #Include, ./debug.ahk
 #Include, ./winR.ahk
-#Include,  ./winE.ahk
+#Include, ./win.ahk
 #Include, ./shift.ahk
 #Include, ./winA.ahk
 #Include, ./wheel.ahk 
