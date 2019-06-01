@@ -75,7 +75,7 @@ Enter & n::hWinActiveHide("oneNote", "OneNote ahk_exe ONENOTE.EXE ahk_class Fram
 ;=======|	xortime	|============================================
 Enter & x::
 hWinActiveHide("xortime", "XorTime ahk_class XorTime ahk_exe XorTime.exe","C:\Program Files (x86)\XorTime\XorTime.exe")
-WinHide ahk_class #32770
+; WinHide ahk_class #32770
 return
 ;=======|	vnote	|============================================
 enter & v::hWinActiveHide("vnote","VNote ahk_class Qt5QWindowIcon ahk_exe vnote.exe","D:\Program Portable\VNote\VNote.exe")
@@ -219,10 +219,12 @@ hWinActiveHide(key, ways,programPath,hideMode:=True)
 		IfWinActive, %ways% 
 			{
 				Send !{ESC}
-				if (hideMode == 0)
+				if (hideMode == False)
 					WinMinimize
 				else
-					WinHide,  %ways%
+				{
+					WinHide,  %ways%					
+				}
 			}
 		; 窗口未激活
 		else 
