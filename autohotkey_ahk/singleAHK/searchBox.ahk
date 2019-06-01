@@ -1,5 +1,6 @@
 #SingleInstance, force
 #Persistent
+#NoTrayIcon
 SetWorkingDir, "D:\code\AHK\autohotkey_study\autohotkey_ahk"
 ; SetCapsLockState, AlwaysOff
 ;========| 变量|===========

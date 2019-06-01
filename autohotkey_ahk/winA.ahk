@@ -1,13 +1,6 @@
 ; #include ./superkey.ahk
 #Include, ./Lib/utility.ahk
 #a::
-; 窗口已经激活
-; path "D:\code\AHK\AutoHotkey.exe
-; ahk_exe AutoHotkey.exe
-; ahk_class AutoHotkeyGUI
-; ahk_id 0xa4110c
-; pid 18220
-; note
 if WinActive("note ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe")
 {
     Send ^{a}^{c}

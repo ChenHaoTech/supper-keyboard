@@ -1,1 +1,0 @@
-D:\code\AHK\autohotkey_study\autohotkey_ahk
