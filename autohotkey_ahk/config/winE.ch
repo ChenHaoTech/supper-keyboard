@@ -4,3 +4,6 @@ c=D:\code
 c3a=D:\code\AHK\autohotkey_study\autohotkey_ahk
 chy=D:\code\huayu\code_huayu
 chy2=D:\code\huayu
+d=D:\download
+dc=D:\download\chrome
+k=D:\考研
