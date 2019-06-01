@@ -11,8 +11,8 @@ space & F1::
 send #!^{F1}
 convertTypeWriter("E")
 return
+
 #IfWinActive,  ahk_exe ConEmu64.exe
-#F1::
 <!-:: MouseMove, 430,491
 <!=:: MouseMove , 1393,458
 ::rr::. $profile{enter}
