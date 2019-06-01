@@ -1,6 +1,7 @@
 ; C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe
 #SingleInstance, force
 #Persistent
+#NoTrayIcon
 ; MsgBox, hhe
 #IfWinActive, ahk_exe powershell_ise.exe
 <^/::

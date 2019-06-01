@@ -44,6 +44,7 @@ IfWinActive,winEBox ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
     Gui, Show, , winEBox
     ControlFocus Edit1, A
     send, ^{Space}
+    send, ^{A}
 }
 return
 
@@ -58,7 +59,11 @@ Return
 winE(abbre){
     global path
     pathTmp := path[abbre]
-    if(pathTmp == ""){
+    ; if(abbre == "*"){
+    ;     Run, D:\
+    ;     return
+    ; }
+    if(pathTmp == "") and (abbre != ""){
         hTooltip("no path found!", 2000)
         return
     }Else{
@@ -74,11 +79,4 @@ F1::
 Run C:\Program Files (x86)\Notepad++\notepad++.exe %fileFullName%
 Goto, GuiClose
 return
-esc::
-; Goto, GuiClose
-Run, D:\code\AHK\autohotkey_study\autohotkey_ahk\singleAHK\reload.ahk
-reload
-; Goto, readFile
-; Goto, GuiNew
-Return 
 #if
