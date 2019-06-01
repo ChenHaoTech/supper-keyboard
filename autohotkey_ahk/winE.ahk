@@ -1,6 +1,6 @@
-﻿#Include, ./superkey.ahk
+﻿#Include, Lib/utility.ahk
 
-#e::
+#e:: 
 winEsignal := True
 hToolTip("in winE softe")
 return

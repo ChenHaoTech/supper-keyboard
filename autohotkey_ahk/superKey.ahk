@@ -128,6 +128,7 @@ IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
 #Include, ./debug.ahk
 #Include, ./winR.ahk
 #Include,  ./winE.ahk
+#Include, ./win.ahk
 #Include, ./shift.ahk
 #Include, ./winA.ahk
 #Include, ./wheel.ahk 

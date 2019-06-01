@@ -107,15 +107,9 @@ space & `;:: Send,{:}
 space & w::	send, ^{s}
 
 space & q:: 
-; IfWinActive, ahk_group DONOTWANTKILL
-; IfWinActive, ahk_class Chrome_WidgetWin_1
-; {
-; 	; send , !{esc}
-; 	return
-; }else{2
-	send,!{f4} 
-; }
+WinKill,A
 return
+
 Space & x::
 IfWinActive ahk_group IDE
 	send ^{F4}
