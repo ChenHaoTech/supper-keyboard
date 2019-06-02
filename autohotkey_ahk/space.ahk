@@ -185,19 +185,3 @@ IfMsgBox Yes
 	toggleWindows.Remove(toggleWindows.MaxIndex())
 }
 return
-;实现win 短按查看,  长按 
-; *Lwin::
-; if (!hLongPress("Lwin")){
-; 	MouseGetPos x, y
-; 	send #{b}
-; 	; MouseMove 735,1079, 100
-; 	; Sleep, 100
-; 	; MouseMove 735,1079 100
-; 	Sleep 1000
-; 	send !{Esc}
-; 	MouseMove %x%, %y%
-; }else{
-; 	send {Blind}{Lwin}
-; }
-; return
-
