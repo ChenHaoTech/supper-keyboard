@@ -111,8 +111,14 @@ WinGetTitle, title, A
 WinKill, A
 WinWaitClose, %title%, , 0.5
 if (ErrorLevel == 1){ ;未关闭windows
-	WinGet, wpid, PID, A
-	Process, Close, %wpid%
+	MsgBox, 4, , kill: %title% ;确认是否真的关闭
+	IfMsgBox, yes
+	{
+		WinGet, wpid, PID, A
+		Process, Close, %wpid%
+	}else{
+		return
+	}
 }
 return
 

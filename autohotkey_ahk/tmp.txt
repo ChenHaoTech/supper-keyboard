@@ -26,3 +26,28 @@ D:\code\AHK\autohotkey_study\autohotkey_ahk
 >
 >
 
+PS>hgadd
+cd
+=================
+
+git add -A
+=================
+[master 75f929d] auto by powershell
+ 1 file changed, 28 insertions(+)
+ create mode 100644 autohotkey_ahk/tmp.txt
+git commit -m 'auto by powershell'
+=================
+(chenhao)[
+D:\code\AHK\autohotkey_study\autohotkey_ahk
+]##
+2019/6/2 23:22:11
+►
+>
+>
+>
+
+PS>Stop-Transcript
+**********************
+Windows PowerShell 脚本结束
+结束时间: 20190602232226
+**********************
