@@ -107,12 +107,14 @@ space & `;:: Send,{:}
 space & w::	send, ^{s}
 
 space & q:: 
-WinGetTitle, title, A
-MsgBox, 4, , %title%
-IfMsgBox Yes
-{
-	WinKill,A
-}
+; WinGetTitle, title, A
+WinGet, wpid, PID, A
+Process, Close, %wpid%
+; MsgBox, 4, , %title%
+; IfMsgBox Yes
+; {
+; 	WinKill,A
+; }
 return
 
 Space & x::

@@ -42,6 +42,7 @@ IfWinActive,winEBox ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
     ; LV_ModifyCol(1, "AutoHdr")  ; 根据内容自动调整每列的大小.
     Gui, Add, Edit, r1 w400 vinputPath
     Gui, Show, , winEBox
+    WinSet, AlwaysOnTop, on, A
     ControlFocus Edit1, A
     send, ^{Space}
     send, ^{A}
