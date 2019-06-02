@@ -52,14 +52,14 @@ IfWinActive, DevTools
 IfWinActive,扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_WidgetWin_1 
 {
     send, ^{t}
-    send, chrome://extensions/shortcuts
-    Sleep, 300
+    Clipboard := "chrome://extensions/shortcuts"
+    send, ^{v}
     send, {Enter}
 ; 若不在 扩展程序 - Google Chrome 上, 激活设置
 }else{
     send, ^{t}
-    send, chrome://settings/
-    Sleep, 300
+    Clipboard := "chrome://settings/"
+    send, ^{v}    
     send, {Enter}
 }
 return
@@ -75,8 +75,8 @@ IfWinActive 扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_Wid
 }else{
     ; 若不是在 扩展程序 - Google Chrome 
     send, ^{t}
-    send, chrome://extensions/
-    Sleep, 300
+    Clipboard := "chrome://extensions/"
+    send, ^{v}
     send, {Enter}
 }
 return
