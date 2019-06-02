@@ -32,7 +32,7 @@ MoveCurses(key,speed := 100)
 ;=======|	key	|============================================
 ; TODO 不同的IDE的添加, 给此处的使用排错
 $*space::hNormalKey("space")
-capslock & ctrl:: send,{ctrl down}
+; capslock & ctrl:: send,{ctrl down}
 
 Space & u:: Send, {LButton}
 space & o:: Send, {RButton}
@@ -107,14 +107,13 @@ space & `;:: Send,{:}
 space & w::	send, ^{s}
 
 space & q:: 
-; WinGetTitle, title, A
-WinGet, wpid, PID, A
-Process, Close, %wpid%
-; MsgBox, 4, , %title%
-; IfMsgBox Yes
-; {
-; 	WinKill,A
-; }
+WinGetTitle, title, A
+WinKill, A
+WinWaitClose, %title%, , 0.5
+if (ErrorLevel == 1){ ;未关闭windows
+	WinGet, wpid, PID, A
+	Process, Close, %wpid%
+}
 return
 
 Space & x::
