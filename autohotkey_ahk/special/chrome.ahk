@@ -42,12 +42,7 @@ send {Enter}
 return
 
 ; 激活setting
-^+p::
-IfWinActive, DevTools
-{
-    send, ^+{p}
-    return
-}
+!+p::
 ; 若在 扩展程序 - Google Chrome 上, 激活扩展快捷键
 IfWinActive,扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_WidgetWin_1 
 {
@@ -65,7 +60,7 @@ IfWinActive,扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_Wid
 return
 
 ; 激活扩展
-^+a:: 
+!+a:: 
 ; run https://chrome.google.com/webstore/category/extensions?utm_source=chrome-ntp-icon
 IfWinActive 扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_WidgetWin_1
 {
@@ -81,8 +76,8 @@ IfWinActive 扩展程序 - Google Chrome ahk_exe chrome.exe ahk_class Chrome_Wid
 }
 return
 
-^j:: run D:\download\chrome
-^d:: 
+!+j:: run D:\download\chrome
+!+d:: 
 send, ^{d}
 click 946,363
 return
@@ -102,22 +97,7 @@ return
 click 1492,94
 MouseMove 1396,156
 return
-; bookmark
-<!d::
-send ^+{b}
-; KeyWait d
-; KeyWait Lalt
-; send ^+{b}
-return
-; if (bookmarkSignal == False or bookmarkSignal == ""){
-; 	; 不动
-; 	return
-; 	bookmarkSignal := True
-; }else{
-; 	bookmarkSignal := False
-; 	MouseMove 673,116
-; 	return
-; }
+
 ; oneNote
 !a::
 send !{a}
@@ -132,9 +112,9 @@ return
 ; return
 ; $h::hNormalKey("h")
 ; $h::return
-; $*RButton::send,{blind}{RButton}
-; ; TODO 后台打开
+; $*RButton::
+; send, {Blind}{RButton}
+; return
+; ; ; TODO 后台打开
 ; RButton & LButton:: send ^{LButton}
 #if
-
-

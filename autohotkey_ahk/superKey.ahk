@@ -13,6 +13,7 @@ SetTitleMatchMode, 2
 run %A_ScriptDir%\singleAHK\searchBox.ahk
 run, %A_ScriptDir%\special\powershell.ahk
 run, %A_ScriptDir%\singleAHK\winE.ahk
+run, %A_ScriptDir%\singleAHK\hideCurrent.ahk
 ;==================================================================================
 ;==================================================================================
 ;
