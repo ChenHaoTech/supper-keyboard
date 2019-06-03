@@ -109,17 +109,18 @@ space & w::	send, ^{s}
 space & q:: 
 WinGetTitle, title, A
 WinKill, A
-WinWaitClose, %title%, , 0.5
-if (ErrorLevel == 1){ ;未关闭windows
-	MsgBox, 4, , kill: %title% ;确认是否真的关闭
-	IfMsgBox, yes
-	{
-		WinGet, wpid, PID, A
-		Process, Close, %wpid%
-	}else{
-		return
-	}
-}
+; WinWaitClose, %title%, , 2
+; if (ErrorLevel == 1){ ;未关闭windows
+; 	MsgBox, 4, msgbox, kill: %title% ;确认是否真的关闭
+; 	WinSet, AlwaysOnTop, on, msgbox 
+; 	IfMsgBox, yes
+; 	{
+; 		WinGet, wpid, PID, %title%
+; 		Process, Close, %wpid%
+; 	}else{
+; 		return
+; 	}
+; }
 return
 
 Space & x::

@@ -1,4 +1,15 @@
-; #include ./superkey.ahk
+#Persistent ;脚本自动执行
+#NoTrayIcon ;不显示托盘图标
+#SingleInstance, force ;单例模式
+;此处开始写初始化语句:
+iniFileFullName := "D:\code\AHK\autohotkey_study\autohotkey_ahk\singleAHK\config\winA.ini"
+
+IniRead, rootFile,%iniFileFullName%,filePath,ROOTFILE
+noteFile := rootFile . "note\"
+IniRead, lastDate, %iniFileFullName%, DATE, Today, "20190502"
+IniRead, lastDateName, %iniFileFullName%, DATE, TodayString, "2019_05_02"
+IniRead,notePath,%iniFileFullName%,filePath,todayNotePath
+
 #Include, ./Lib/utility.ahk
 #a::
 if WinActive("note ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe")
@@ -40,11 +51,12 @@ Else
 }
 Return
 
-#s:: 
-Run "D:\Program Portable\VNote\VNote.exe",  %notePath%   
-run  %noteFile% 
-; MsgBox %noteFile%
-return
+; #s:: 
+; ; run  %noteFile% 
+; fileFUllName := rootFile . "note\" . notePath . ".md"
+; Run "D:\Program Portable\VNote\VNote.exe"   %fileFUllName%   
+; ; MsgBox %noteFile%
+; return
 
 
 
@@ -120,12 +132,12 @@ codeWrite(code,fileName:="")
         ; MsgBox %fileName%
         fileName := fileName . "-7days"
         ; 写入当前时间, 用于方才的减
-        IniWrite, %currentDate%, ./config.ini, DATE, Today
+        IniWrite, %currentDate%, %iniFileFullName%, DATE, Today
         ; 写入当前文件名 
-        IniWrite, %fileName%,./config.ini,DATE,TodayString
+        IniWrite, %fileName%,%iniFileFullName%,DATE,TodayString 
         ; 写入今日文件路径 并配置变量
         fileName := noteFile . fileName . ".md"
-        IniWrite, %fileName%,./config.ini,filePath,todayNotePath
+        IniWrite, %fileName%,%iniFileFullName%,filePath,todayNotePath
         notePath := fileName
     }Else{
         fileName := lastDateName

@@ -14,6 +14,8 @@ run %A_ScriptDir%\singleAHK\searchBox.ahk
 run, %A_ScriptDir%\special\powershell.ahk
 run, %A_ScriptDir%\singleAHK\winE.ahk
 run, %A_ScriptDir%\singleAHK\hideCurrent.ahk
+run, %A_ScriptDir%\singleAHK\showPic.ahk
+run, %A_ScriptDir%\singleAHK\winA.ahk
 ;==================================================================================
 ;==================================================================================
 ;
@@ -31,14 +33,7 @@ FOXITREADER_signal := False
 areaHightLIght := False
 ;=======|	UWP config 	|============================================
 UWPedgeSignal := False
-;=======|	winA mode	|============================================
-noteSignal := False
-codeSignal := False
-IniRead, rootFile,./config.ini,filePath,ROOTFILE
-noteFile := rootFile . "note\"
-IniRead, lastDate, ./config.ini, DATE, Today, "20190502"
-IniRead, lastDateName, ./config.ini, DATE, TodayString, "2019_05_02"
-IniRead,notePath,./config.ini,filePath,todayNotePath
+
 ;=======|	debug	|============================================
 allStringWithNum := "1,2,3,4,5,6,7,8,9,0,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
 allString := "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
@@ -132,7 +127,6 @@ IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
 #Include, ./winR.ahk
 #Include, ./win.ahk
 #Include, ./shift.ahk
-#Include, ./winA.ahk
 #Include, ./wheel.ahk 
 #Include, ./draw.ahk
 #Include, ./translate2.ahk

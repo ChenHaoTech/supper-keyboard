@@ -1,1 +1,1 @@
-Gui, Add, ListBox, vColorChoice, Red|Green|Blue|Black|White
+MsgBox, 4, , kill: %title% , msgbox ;确认是否真的关闭
