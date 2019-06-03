@@ -1,4 +1,5 @@
 ﻿w=D:\文档
+wa=D:\文档\AHK
 why=D:\文档\huayu
 c=D:\code
 c3a=D:\code\AHK\autohotkey_study\autohotkey_ahk

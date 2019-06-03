@@ -89,9 +89,9 @@ capslock::send {F1}
 <+4::send {F7}
 ^s::send ^{p}
 
-!1:: TTextBoard(246,529)
-!2:: TTextBoard(336,515)
-!3:: TTextBoard(618,524)
+<!1:: TTextBoard(246,529)
+<!2:: TTextBoard(336,515)
+<!3:: TTextBoard(618,524)
 TTextBoard(x,y){
 	MouseGetPos xpos,ypos
 	send {F12}
@@ -105,6 +105,7 @@ FOXITREADER(x,y){
 	global FOXITREADER_signal
 	global areaHightLIght
 	MouseGetPos, xpos, ypos 
+	; MsgBox
 	; not in hightlisgt mode
 	if (FOXITREADER_signal == False)
 	{
@@ -122,9 +123,10 @@ FOXITREADER(x,y){
 			click 152,114
 			FOXITREADER_signal := true
 		}
+		; MsgBox 
 		; click 注释格式
-		; MsgBox %areaHightLIght%
-		click 1026,67
+		click 990,63
+		; click 1026,67
 		hToolTip("in hightLight mode")
 	}
 	
