@@ -125,11 +125,8 @@ IniRead  ahkRunPath, config.ini,AHKPATH, ahkRun
 #Include, ./transparent.ahk
 #Include, ./debug.ahk
 #Include, ./winR.ahk
-#Include, ./win.ahk
-#Include, ./shift.ahk
 #Include, ./wheel.ahk 
 #Include, ./draw.ahk
-#Include, ./translate2.ahk
 ; 特殊 exe的 快捷键配置
 #Include, ./special/mailbox.ahk
 #Include, ./special/chrome.ahk

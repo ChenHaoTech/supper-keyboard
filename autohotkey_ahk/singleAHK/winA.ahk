@@ -1,6 +1,7 @@
 #Persistent ;脚本自动执行
 #NoTrayIcon ;不显示托盘图标
 #SingleInstance, force ;单例模式
+#NoEnv
 ;此处开始写初始化语句:
 iniFileFullName := "D:\code\AHK\autohotkey_study\autohotkey_ahk\singleAHK\config\winA.ini"
 

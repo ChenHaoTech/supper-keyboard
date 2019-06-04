@@ -1,6 +1,7 @@
 ﻿#Persistent 
 #NoTrayIcon ;不显示托盘图标
 #SingleInstance, force 
+#NoEnv
 
 fileFullName := "D:\code\AHK\autohotkey_study\autohotkey_ahk\config\winE.ch"
 path := Object() ; 路径 关联数组实现
