@@ -5,11 +5,11 @@
 picFullName := "D:\code\AHK\autohotkey_study\autohotkey_ahk\resource\image\双拼.png"
 return
 
-*esc::
+#w::
 Gui, Add, Picture, w1000 h-1, %picFullName%
 Gui, Show
 ; MsgBox
 WinSet, Style, -0xC00000, A
-KeyWait, esc
+KeyWait, w
 WinKill,A
 return
